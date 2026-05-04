@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { MOCK_PRODUCTS } from '../../lib/mockData';
 import { useCart } from '../../hooks/useCart';
-import { ShoppingCart, ArrowLeft, ArrowRight, ShieldCheck, Truck, Star, Sparkles, Leaf, Info, Droplets, Minus, Plus, Heart } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, ArrowRight, ShieldCheck, Truck, Star, Sparkles, Leaf, Info, Droplets, Minus, Plus, Heart, CheckCircle2 } from 'lucide-react';
 
 export default function ProductDetail() {
   const router = useRouter();
