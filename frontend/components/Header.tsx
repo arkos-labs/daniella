@@ -129,7 +129,7 @@ function Header() {
           
           {!isDashboard && (
             <button 
-              className="lg:hidden w-14 h-14 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] flex items-center justify-center"
+              className="lg:hidden w-14 h-14 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] flex items-center justify-center mr-3"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

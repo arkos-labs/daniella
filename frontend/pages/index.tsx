@@ -109,7 +109,7 @@ export default function Home() {
       {/* Featured Products - Refined Display */}
       <section className="py-32 bg-[#F8F5EE]">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-20 gap-8 text-center md:text-left">
             <div className="max-w-2xl">
               <span className="section-tag mb-4">La Boutique</span>
               <h2 className="text-5xl md:text-7xl font-serif text-[#2C2C28] leading-tight">
@@ -226,7 +226,7 @@ export default function Home() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-5 gap-20 items-center">
-              <div className="lg:col-span-3 text-white">
+              <div className="lg:col-span-3 text-white flex flex-col items-center text-center lg:items-start lg:text-left">
                 <span className="section-tag text-white/60 mb-6">Consultations</span>
                 <h2 className="text-6xl md:text-7xl font-serif mb-10 leading-tight">
                   Un accompagnement <br /> <span className="italic text-gradient-gold">holistique</span>
@@ -235,8 +235,8 @@ export default function Home() {
                   Bénéficiez d'une expertise naturopathique sur-mesure pour rééquilibrer votre métabolisme, votre peau et votre esprit.
                 </p>
 
-                <div className="space-y-8">
-                  <div className="flex items-center gap-6 group cursor-pointer">
+                <div className="space-y-8 w-full">
+                  <div className="flex flex-col items-center sm:flex-row gap-6 group cursor-pointer">
                     <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all group-hover:bg-[#C9A96E]">
                       <Droplets className="w-7 h-7 text-[#C9A96E] group-hover:text-white" />
                     </div>
@@ -246,7 +246,7 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-6 group cursor-pointer">
+                  <div className="flex flex-col items-center sm:flex-row gap-6 group cursor-pointer">
                     <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all group-hover:bg-[#C9A96E]">
                       <Sun className="w-7 h-7 text-[#C9A96E] group-hover:text-white" />
                     </div>
@@ -256,7 +256,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-6 group cursor-pointer">
+                  <div className="flex flex-col items-center sm:flex-row gap-6 group cursor-pointer">
                     <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all group-hover:bg-[#C9A96E]">
                       <Footprints className="w-7 h-7 text-[#C9A96E] group-hover:text-white" />
                     </div>
@@ -269,7 +269,7 @@ export default function Home() {
               </div>
 
               <div className="lg:col-span-2">
-                <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-12 shadow-2xl relative overflow-hidden group">
+                <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-12 shadow-2xl relative overflow-hidden group text-center lg:text-left">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#C9A96E]/20 rounded-full blur-3xl transition-all duration-700 group-hover:bg-[#C9A96E]/40"></div>
                   
                   <h3 className="text-3xl font-serif text-white mb-6">Réserver votre séance</h3>
