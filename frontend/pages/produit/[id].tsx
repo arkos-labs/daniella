@@ -141,6 +141,8 @@ export default function ProductDetail() {
                         <ShieldCheck className="w-5 h-5 text-[#C9A96E]" />
                         <span className="text-xs font-bold uppercase tracking-widest">Zéro Conservateur</span>
                       </div>
+                    </div>
+                  )}
                 </div>
               </div>
 

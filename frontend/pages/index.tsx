@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { MOCK_PRODUCTS } from '../lib/mockData';
@@ -7,6 +7,11 @@ import { ArrowRight, Leaf, Star, ShoppingCart, Wind, Apple, Droplets, Sun, Footp
 
 export default function Home() {
   const { addItem } = useCart();
+  const [selectedDate, setSelectedDate] = useState<number | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const times = ['09:00', '10:30', '14:00', '15:30', '17:00'];
   const featuredProducts = MOCK_PRODUCTS.slice(0, 4);
 
   return (
@@ -292,9 +297,71 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <Link href="/reservations" className="btn-gold w-full py-5 text-sm">
-                    Ouvrir le calendrier
-                  </Link>
+                  {/* Interactive Mini-Calendar */}
+                  <div className="mb-8">
+                    <div className="flex items-center justify-between mb-4 px-2">
+                      <span className="text-[10px] font-bold text-white uppercase tracking-widest">Mai 2026</span>
+                      <div className="flex gap-4">
+                        <button className="text-white/40 hover:text-white transition-colors"><ArrowLeft className="w-3 h-3" /></button>
+                        <button className="text-white/40 hover:text-white transition-colors"><ArrowRight className="w-3 h-3" /></button>
+                      </div>
+                    </div>
+                    
+                    {/* Days Grid */}
+                    <div className="grid grid-cols-7 gap-2 mb-8">
+                      {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(d => (
+                        <span key={d} className="text-[8px] text-white/20 font-bold text-center mb-2">{d}</span>
+                      ))}
+                      {/* Empty cells for padding if needed, assuming month starts on Friday */}
+                      {[...Array(4)].map((_, i) => <div key={`empty-${i}`} />)}
+                      {days.map(day => (
+                        <button
+                          key={day}
+                          onClick={() => setSelectedDate(day)}
+                          className={`aspect-square rounded-full flex items-center justify-center text-[10px] transition-all ${
+                            selectedDate === day 
+                              ? 'bg-[#C9A96E] text-white shadow-lg shadow-[#C9A96E]/20' 
+                              : 'text-white/60 hover:bg-white/10'
+                          }`}
+                        >
+                          {day}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Time Slots (Conditional) */}
+                    {selectedDate && (
+                      <div className="animate-reveal-up">
+                        <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-4 text-center">Heures disponibles</span>
+                        <div className="flex flex-wrap justify-center gap-3">
+                          {times.map(time => (
+                            <button
+                              key={time}
+                              onClick={() => setSelectedTime(time)}
+                              className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all border ${
+                                selectedTime === time
+                                  ? 'bg-white text-[#2D4A1E] border-white'
+                                  : 'border-white/10 text-white/60 hover:border-white/30'
+                              }`}
+                            >
+                              {time}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <button 
+                    disabled={!selectedDate || !selectedTime}
+                    className={`w-full py-5 text-sm rounded-full font-bold uppercase tracking-widest transition-all duration-500 shadow-xl ${
+                      selectedDate && selectedTime
+                        ? 'bg-[#C9A96E] text-white shadow-[#C9A96E]/20 hover:scale-[1.02]'
+                        : 'bg-white/5 text-white/20 cursor-not-allowed border border-white/5'
+                    }`}
+                  >
+                    {selectedDate && selectedTime ? `Réserver pour le ${selectedDate} Mai à ${selectedTime}` : 'Choisir un créneau'}
+                  </button>
                   
                   <p className="mt-8 text-center text-[10px] text-white/30 uppercase tracking-[0.2em]">
                     Paiement sécurisé par Stripe ou PayPal
