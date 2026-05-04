@@ -87,15 +87,15 @@ export default function Boutique() {
           <div className="h-px bg-[#2D4A1E]/5 flex-1 mx-8"></div>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        {/* Product Grid - 2 per row on mobile, 3 on sm, 4 on lg */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-12">
           {filtered.map((product, idx) => (
             <div 
               key={product.id} 
-              className="card-hover bg-white rounded-[3rem] p-4 flex flex-col h-full group animate-reveal-up"
+              className="card-hover bg-white rounded-[1.5rem] md:rounded-[3rem] p-2 md:p-4 flex flex-col h-full group animate-reveal-up"
               style={{ animationDelay: `${idx * 0.05}s` }}
             >
-              <Link href={`/produit/${product.id}`} className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden mb-8 block group/img">
+              <Link href={`/produit/${product.id}`} className="relative aspect-[4/5] rounded-[1.2rem] md:rounded-[2.5rem] overflow-hidden mb-4 md:mb-8 block group/img">
                 <img
                   src={product.imageUrl}
                   alt={product.name}
@@ -126,7 +126,7 @@ export default function Boutique() {
                 </div>
                 
                 <Link href={`/produit/${product.id}`}>
-                  <h3 className="text-xl font-serif text-[#2C2C28] mb-3 leading-tight group-hover:text-[#2D4A1E] transition-colors line-clamp-2 h-14">
+                  <h3 className="text-sm md:text-xl font-serif text-[#2C2C28] mb-2 md:mb-3 leading-tight group-hover:text-[#2D4A1E] transition-colors line-clamp-2 h-10 md:h-14">
                     {product.name}
                   </h3>
                 </Link>
@@ -135,17 +135,17 @@ export default function Boutique() {
                   {product.description}
                 </p>
                 
-                <div className="mt-auto flex items-center justify-between border-t border-[#2D4A1E]/5 pt-6">
-                  <span className="text-2xl font-serif text-[#2D4A1E]">{product.price.toFixed(2)}€</span>
+                <div className="mt-auto flex flex-col md:flex-row items-center justify-between border-t border-[#2D4A1E]/5 pt-4 md:pt-6 gap-2">
+                  <span className="text-lg md:text-2xl font-serif text-[#2D4A1E]">{product.price.toFixed(2)}€</span>
                   <button
                     onClick={() => handleAdd(product)}
-                    className={`flex items-center gap-3 px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${
+                    className={`flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-500 w-full md:w-auto justify-center ${
                       addedId === product.id
                         ? 'bg-[#7A9E5E] text-white'
                         : 'bg-white border border-[#2D4A1E]/10 text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white hover:border-[#2D4A1E] shadow-sm'
                     }`}
                   >
-                    <ShoppingCart className="w-4 h-4" />
+                    <ShoppingCart className="w-3 h-3 md:w-4 h-4" />
                     {addedId === product.id ? 'Ajouté' : 'Panier'}
                   </button>
                 </div>
