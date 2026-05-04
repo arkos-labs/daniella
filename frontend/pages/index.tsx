@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
 
       {/* Hero Section - Immersive Full Background */}
-      <section className="relative min-h-[80vh] flex items-center pt-10 overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center pt-24 overflow-hidden">
         {/* Full Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
