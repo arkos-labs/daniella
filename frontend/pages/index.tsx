@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { MOCK_PRODUCTS } from '../lib/mockData';
 import { useCart } from '../hooks/useCart';
-import { ArrowRight, Leaf, Star, ShoppingCart, Wind, Apple, Droplets, Sun, Footprints, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Leaf, Star, ShoppingCart, Wind, Apple, Droplets, Sun, Footprints, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
   const { addItem } = useCart();
@@ -17,12 +17,13 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#F8F5EE] overflow-x-hidden">
       <Head>
-        <title>Dany Natural Concept | L'Art de la Beauté Originelle</title>
-        <meta name="description" content="Découvrez Dany Natural Concept par Daniella Adabra. Soins capillaires et corporels 100% naturels, bios et artisanaux. Prenez rendez-vous pour une consultation personnalisée." />
+        <title>Les Cosmétiques Naturels pour Magnifier Votre Beauté Originelle | Dany Natural Concept</title>
+        <meta name="description" content="Découvrez les meilleurs cosmétiques naturels certifiés bio. Ingrédients authentiques, formules exclusives, livraison rapide." />
+        <meta name="keywords" content="cosmétiques naturels, soins naturels cheveux, poudre chébé authentique, naturopathe consultation holistique, beauté holistique africaine" />
       </Head>
 
       {/* Hero Section - Immersive Full Background */}
-      <section className="relative min-h-[80vh] flex items-center pt-24 overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
         {/* Full Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -34,18 +35,16 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/40 to-transparent"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-          <div className="max-w-4xl w-full flex flex-col items-center">
+        <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center text-center">
+          <div className="max-w-5xl w-full flex flex-col items-center">
             <div className="animate-reveal-up">
               
-              <h1 className="text-7xl md:text-9xl font-serif text-[#2C2C28] leading-[0.95] mb-8">
-                Révélez votre <br />
-                <span className="italic-serif text-gradient">beauté</span> <br />
-                <span className="text-[#2D4A1E]">originelle</span>
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif text-[#2C2C28] leading-[1.1] mb-6 drop-shadow-sm">
+                Les <span className="italic text-[#8B7355]">Cosmétiques Naturels</span> pour Magnifier <span className="text-[#2D4A1E]">Votre Beauté Originelle</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-[#2C2C28]/80 font-light max-w-2xl mb-12 leading-relaxed mx-auto">
-                Une fusion rare entre <span className="text-[#2D4A1E] font-medium italic">naturopathie holistique</span> et cosmétique brute pour magnifier votre nature profonde.
+              <p className="text-lg md:text-xl text-[#2C2C28]/80 font-light max-w-3xl mb-20 leading-relaxed mx-auto">
+                Une fusion rare entre <span className="text-[#2D4A1E] font-medium italic">naturopathie holistique</span> et cosmétique brute pour magnifier votre nature profonde avec des ingrédients naturels certifiés.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -236,12 +235,12 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
               <div className="lg:col-span-3 text-white flex flex-col items-center text-center lg:items-start lg:text-left">
-                <span className="section-tag text-white/60 mb-6">Consultations</span>
+                <span className="section-tag text-white/60 mb-6">Naturopathie & Services</span>
                 <h2 className="text-4xl md:text-7xl font-serif mb-10 leading-tight">
-                  Un accompagnement <br /> <span className="italic text-gradient-gold">holistique</span>
+                  Consultation Naturopathe <br /> <span className="italic text-gradient-gold">Holistique</span> Personnalisée
                 </h2>
                 <p className="text-xl text-white/70 font-light mb-16 leading-relaxed">
-                  Bénéficiez d'une expertise naturopathique sur-mesure pour rééquilibrer votre métabolisme, votre peau et votre esprit.
+                  Bénéficiez d'une expertise naturopathique sur-mesure pour rééquilibrer votre métabolisme, votre peau et votre esprit avec notre approche de naturopathie beauté.
                 </p>
 
                 <div className="space-y-8 w-full">

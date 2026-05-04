@@ -50,9 +50,8 @@ function Header() {
   const navLinks = [
     { name: 'Accueil', path: '/' },
     { name: 'Boutique', path: '/boutique' },
-    { name: 'Réservations', path: '/reservations' },
-    { name: 'À Propos', path: '/apropos' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Tarifs', path: '/tarifs' },
+    { name: 'À Propos', path: '/apropos' }
   ];
 
   return (
