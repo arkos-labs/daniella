@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { MOCK_PRODUCTS } from '../lib/mockData';
 import { useCart } from '../hooks/useCart';
-import { ArrowRight, ArrowLeft, Leaf, Star, ShoppingCart, Wind, Apple, Droplets, Sun, Footprints, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Leaf, Star, ShoppingCart, Wind, Apple, Droplets, Sun, Footprints, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
   const { addItem } = useCart();
@@ -301,8 +301,8 @@ export default function Home() {
                     <div className="flex items-center justify-between mb-4 px-2">
                       <span className="text-[10px] font-bold text-white uppercase tracking-widest">Mai 2026</span>
                       <div className="flex gap-4">
-                        <button className="text-white/40 hover:text-white transition-colors"><ArrowLeft className="w-3 h-3" /></button>
-                        <button className="text-white/40 hover:text-white transition-colors"><ArrowRight className="w-3 h-3" /></button>
+                        <button className="text-white/40 hover:text-white transition-colors"><ChevronLeft className="w-3 h-3" /></button>
+                        <button className="text-white/40 hover:text-white transition-colors"><ChevronRight className="w-3 h-3" /></button>
                       </div>
                     </div>
                     
