@@ -4,16 +4,16 @@ import Link from 'next/link';
 import { MOCK_SERVICES, TIME_SLOTS } from '../lib/mockData';
 import { format, addDays } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { CheckCircle, Clock, Euro, ChevronRight, Leaf, Flower2, CalendarDays, User, Sparkles, RefreshCcw } from 'lucide-react';
+import { CheckCircle, Clock, ArrowLeft, ArrowRight, Leaf, Sparkles, Droplets, Sun, Footprints, Calendar, RefreshCcw, CheckCircle2 } from 'lucide-react';
 
 const getServiceIcon = (id: string) => {
   switch (id) {
-    case 's1': return <Leaf className="w-5 h-5" />;
-    case 's2': return <Sparkles className="w-5 h-5" />;
-    case 's3': return <CalendarDays className="w-5 h-5" />;
-    case 's4': return <User className="w-5 h-5" />;
-    case 's5': return <Flower2 className="w-5 h-5" />;
-    default: return <Leaf className="w-5 h-5" />;
+    case 's1': return <Leaf className="w-7 h-7" />;
+    case 's2': return <Sparkles className="w-7 h-7" />;
+    case 's3': return <RefreshCcw className="w-7 h-7" />;
+    case 's4': return <Droplets className="w-7 h-7" />;
+    case 's5': return <Sun className="w-7 h-7" />;
+    default: return <Leaf className="w-7 h-7" />;
   }
 };
 
@@ -28,259 +28,372 @@ export default function Reservations() {
   const [selectedSlot, setSelectedSlot] = useState('');
   const [clientInfo, setClientInfo] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
+  const [viewingMonth, setViewingMonth] = useState(new Date());
 
-  const next14Days = [...Array(14)].map((_, i) => addDays(new Date(), i + 1));
+  const startOfViewingMonth = new Date(viewingMonth.getFullYear(), viewingMonth.getMonth(), 1);
+  const endOfViewingMonth = new Date(viewingMonth.getFullYear(), viewingMonth.getMonth() + 1, 0);
+  
+  // Generate all days for the current viewing month
+  const daysInMonth = [...Array(endOfViewingMonth.getDate())].map((_, i) => {
+    return new Date(viewingMonth.getFullYear(), viewingMonth.getMonth(), i + 1);
+  });
+
+  const maxDate = addDays(new Date(), 180); // 6 months limit
+
+  const handlePrevMonth = () => {
+    const prev = new Date(viewingMonth.getFullYear(), viewingMonth.getMonth() - 1, 1);
+    if (prev >= new Date(new Date().getFullYear(), new Date().getMonth(), 1)) {
+      setViewingMonth(prev);
+    }
+  };
+
+  const handleNextMonth = () => {
+    const next = new Date(viewingMonth.getFullYear(), viewingMonth.getMonth() + 1, 1);
+    if (next <= maxDate) {
+      setViewingMonth(next);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate network request
-    await new Promise(res => setTimeout(res, 1500));
+    await new Promise(res => setTimeout(res, 2000));
     setStep(4);
     setSubmitting(false);
   };
 
-  const steps = ['Service', 'Date & Heure', 'Informations', 'Confirmation'];
+  const steps = ['Prestation', 'Planification', 'Coordonnées', 'Confirmation'];
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] pt-28 pb-20">
+    <main className="min-h-screen bg-[#F8F5EE] pb-32">
       <Head>
-        <title>Réserver une séance | Dany Natural Concept</title>
+        <title>Réservations | Dany Natural Concept</title>
         <meta name="description" content="Réservez votre consultation naturopathique ou soin bien-être avec Daniella Adabra à Valenciennes." />
       </Head>
 
-      <div className="container mx-auto px-4 max-w-4xl">
-        {/* Title */}
-        <div className="text-center mb-12">
-          <span className="inline-block bg-[#39B54A]/10 text-[#39B54A] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">Prise de rendez-vous</span>
-          <h1 className="text-5xl font-serif text-[#2C2C2C]">Réserver votre séance</h1>
+      {/* Header Section */}
+      <section className="relative pt-44 pb-20 overflow-hidden bg-white border-b border-[#2D4A1E]/5">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#3D6228]/5 rounded-full blur-[100px]"></div>
         </div>
+        
+        <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
+          <span className="section-tag mb-6">Expérience Personnalisée</span>
+          <h1 className="text-6xl md:text-8xl font-serif mb-8 text-[#2C2C28] leading-[0.95]">
+            Réserver votre <span className="italic-serif text-gradient">Séance</span>
+          </h1>
+          <p className="text-gray-500 text-xl md:text-2xl max-w-2xl mx-auto font-light leading-relaxed mb-12">
+            Un temps pour vous, un voyage vers l'équilibre profond. Choisissez le soin adapté à vos besoins.
+          </p>
 
-        {/* Progress Bar */}
-        {step < 4 && (
-          <div className="flex items-center justify-center mb-12">
-            {steps.slice(0, 3).map((s, i) => (
-              <React.Fragment key={s}>
-                <div className="flex flex-col items-center gap-2">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all duration-300 ${
-                    step > i + 1 ? 'bg-[#39B54A] border-[#39B54A] text-white' :
-                    step === i + 1 ? 'border-[#39B54A] text-[#39B54A] bg-white' :
-                    'border-gray-200 text-gray-300 bg-white'
+          {/* Progress Stepper */}
+          {step < 4 && (
+            <div className="flex items-center justify-center gap-4 md:gap-12">
+              {steps.slice(0, 3).map((s, i) => (
+                <div key={s} className="flex flex-col items-center gap-3">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 border-2 ${
+                    step > i + 1 ? 'bg-[#2D4A1E] border-[#2D4A1E] text-white' :
+                    step === i + 1 ? 'border-[#C9A96E] text-[#C9A96E] bg-white shadow-xl shadow-[#C9A96E]/20 scale-110' :
+                    'border-gray-100 text-gray-300 bg-white'
                   }`}>
-                    {step > i + 1 ? '✓' : i + 1}
+                    {step > i + 1 ? '✓' : `0${i + 1}`}
                   </div>
-                  <span className={`text-xs font-medium ${step === i + 1 ? 'text-[#39B54A]' : 'text-gray-300'}`}>{s}</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${step === i + 1 ? 'text-[#C9A96E]' : 'text-gray-300'}`}>{s}</span>
                 </div>
-                {i < 2 && <div className={`w-24 h-0.5 mb-5 mx-2 transition-all duration-300 ${step > i + 1 ? 'bg-[#39B54A]' : 'bg-gray-200'}`} />}
-              </React.Fragment>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
-        <div className={step > 1 ? "bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden" : ""}>
-
-          {/* STEP 1 — Service */}
+      <div className="container mx-auto px-6 mt-20 max-w-6xl">
+        <div className={`transition-all duration-700 ${step > 1 && step < 4 ? 'bg-white rounded-[4rem] p-12 md:p-20 shadow-2xl shadow-black/5 border border-[#2D4A1E]/5' : ''}`}>
+          
+          {/* STEP 1 — Service Selection */}
           {step === 1 && (
-            <div className="pb-10">
-              <h2 className="text-3xl font-serif text-[#39B54A] text-center mb-10">Choisissez votre prestation</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {MOCK_SERVICES.map((service, index) => {
-                  const isWide = index === 2; // Suivi Naturopathique spans 2 columns
-                  return (
-                    <button
-                      key={service.id}
-                      onClick={() => { setSelectedService(service); setStep(2); }}
-                      className={`bg-white border border-gray-200 rounded-sm p-6 text-left hover:shadow-md transition-all duration-300 flex flex-col justify-between group ${
-                        isWide ? 'md:col-span-2 md:flex-row relative overflow-hidden' : ''
-                      }`}
-                    >
-                      <div className={`flex flex-col h-full ${isWide ? 'md:w-3/5 relative z-10' : 'w-full'}`}>
-                        <div className="flex justify-between items-start w-full mb-4">
-                          <div className="w-10 h-10 rounded-xl bg-[#eef4ef] flex items-center justify-center text-[#39B54A]">
-                            {getServiceIcon(service.id)}
-                          </div>
-                          {!isWide && <span className="text-xl font-serif font-bold text-[#39B54A]">{service.price} €</span>}
-                        </div>
+            <div className="animate-reveal-up">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {MOCK_SERVICES.map((service, index) => (
+                  <button
+                    key={service.id}
+                    onClick={() => { setSelectedService(service); setStep(2); window.scrollTo(0, 0); }}
+                    className="card-hover bg-white p-10 rounded-[3rem] text-left flex flex-col group border border-[#2D4A1E]/5"
+                  >
+                    <div className="w-16 h-16 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#2D4A1E] mb-8 group-hover:bg-[#2D4A1E] group-hover:text-white transition-all duration-500">
+                      {getServiceIcon(service.id)}
+                    </div>
+                    
+                    <h3 className="text-2xl font-serif text-[#2C2C28] mb-4 group-hover:text-[#2D4A1E] transition-colors">
+                      {getCleanTitle(service.title)}
+                    </h3>
+                    <p className="text-gray-400 text-sm font-light mb-10 leading-relaxed flex-1">
+                      {service.description}
+                    </p>
 
-                        <h3 className="text-xl font-serif text-[#2C2C2C] mb-2">{getCleanTitle(service.title)}</h3>
-                        <p className="text-gray-500 text-sm leading-relaxed mb-6">{service.description}</p>
-
-                        <div className="flex items-center gap-6 mt-auto">
-                          <span className="flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                            {isWide ? <RefreshCcw className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
-                            {isWide ? '3 SÉANCES' : `${service.duration} MIN`}
-                          </span>
-                          {isWide && <span className="text-xl font-serif font-bold text-[#39B54A]">{service.price} €</span>}
-                        </div>
+                    <div className="mt-auto flex items-center justify-between border-t border-[#2D4A1E]/5 pt-8">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#C9A96E] mb-1">Prix</span>
+                        <span className="text-2xl font-serif text-[#2D4A1E]">{service.price.toFixed(2)}€</span>
                       </div>
-                      
-                      {isWide && (
-                         <div className="hidden md:flex absolute right-0 top-0 bottom-0 w-2/5 justify-end items-center pr-8 opacity-20 pointer-events-none">
-                            {/* Decorative element resembling screenshot interface */}
-                            <div className="w-48 h-64 bg-white border border-gray-200 rounded-xl shadow-lg translate-x-4 translate-y-8 flex flex-col p-4 opacity-50">
-                              <div className="w-1/2 h-2 bg-gray-200 rounded mb-4 mx-auto"></div>
-                              <div className="w-full h-8 bg-gray-100 rounded mb-2"></div>
-                              <div className="w-full h-8 bg-gray-100 rounded mb-2"></div>
-                              <div className="w-full h-8 bg-gray-100 rounded mb-2"></div>
-                            </div>
-                         </div>
-                      )}
-                    </button>
-                  );
-                })}
+                      <div className="flex flex-col text-right">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-1">Durée</span>
+                        <span className="text-sm font-bold text-gray-400">{service.duration} MIN</span>
+                      </div>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
           )}
 
           {/* STEP 2 — Date & Time */}
           {step === 2 && (
-            <div className="p-10">
-              <button onClick={() => setStep(1)} className="text-[#39B54A] font-bold mb-6 flex items-center gap-1 text-sm hover:underline">← Retour</button>
-              <h2 className="text-2xl font-bold mb-2">Choisissez une date</h2>
-              <p className="text-gray-400 mb-8 text-sm">Prestation : <strong className="text-[#39B54A]">{selectedService?.title}</strong></p>
-
-              {/* Date Picker */}
-              <div className="grid grid-cols-7 gap-2 mb-10">
-                {next14Days.map(date => {
-                  const dayName = format(date, 'EEE', { locale: fr });
-                  const dayNum = format(date, 'd');
-                  const isSelected = selectedDate && format(date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
-                  const isSunday = date.getDay() === 0;
-                  return (
-                    <button
-                      key={date.toISOString()}
-                      disabled={isSunday}
-                      onClick={() => setSelectedDate(date)}
-                      className={`p-3 rounded-2xl text-center transition-all duration-200 ${
-                        isSunday ? 'opacity-30 cursor-not-allowed bg-gray-50' :
-                        isSelected ? 'bg-[#39B54A] text-white shadow-md' :
-                        'bg-[#FAFAF8] hover:bg-[#39B54A]/10 border border-gray-100'
-                      }`}
+            <div className="animate-reveal-up">
+              <button onClick={() => setStep(1)} className="group flex items-center gap-3 text-gray-400 hover:text-[#2D4A1E] transition-colors mb-12 uppercase text-[10px] font-bold tracking-widest">
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour aux prestations
+              </button>
+              
+              <div className="grid lg:grid-cols-2 gap-20">
+                <div>
+                  <h2 className="text-4xl font-serif text-[#2C2C28] mb-4">Choisir une date</h2>
+                  <p className="text-gray-400 font-light mb-10">Consultez nos disponibilités pour votre séance de <span className="text-[#2D4A1E] font-medium italic">{getCleanTitle(selectedService?.title)}</span>.</p>
+                  
+                  <div className="flex items-center justify-between mb-8 bg-white p-4 rounded-3xl border border-[#2D4A1E]/5">
+                    <button 
+                      onClick={handlePrevMonth}
+                      className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-[#F8F5EE] transition-colors disabled:opacity-10"
+                      disabled={viewingMonth.getMonth() === new Date().getMonth() && viewingMonth.getFullYear() === new Date().getFullYear()}
                     >
-                      <div className="text-xs uppercase font-bold opacity-70">{dayName}</div>
-                      <div className="text-xl font-bold mt-1">{dayNum}</div>
+                      <ArrowLeft className="w-4 h-4" />
                     </button>
-                  );
-                })}
-              </div>
-
-              {/* Time Slots */}
-              {selectedDate && (
-                <>
-                  <h3 className="font-bold mb-4">Créneaux disponibles — {format(selectedDate, 'EEEE d MMMM', { locale: fr })}</h3>
-                  <div className="grid grid-cols-4 sm:grid-cols-6 gap-3">
-                    {TIME_SLOTS.map(slot => (
-                      <button
-                        key={slot}
-                        onClick={() => { setSelectedSlot(slot); setStep(3); }}
-                        className={`py-3 rounded-xl text-sm font-bold border-2 transition-all duration-200 ${
-                          selectedSlot === slot ? 'bg-[#39B54A] text-white border-[#39B54A]' :
-                          'border-gray-200 hover:border-[#39B54A] hover:text-[#39B54A]'
-                        }`}
-                      >
-                        {slot}
-                      </button>
-                    ))}
+                    <span className="text-sm font-bold uppercase tracking-[0.2em] text-[#2D4A1E]">
+                      {format(viewingMonth, 'MMMM yyyy', { locale: fr })}
+                    </span>
+                    <button 
+                      onClick={handleNextMonth}
+                      className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-[#F8F5EE] transition-colors disabled:opacity-10"
+                      disabled={viewingMonth >= new Date(maxDate.getFullYear(), maxDate.getMonth(), 1)}
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
                   </div>
-                </>
-              )}
-              {!selectedDate && (
-                <div className="text-center py-8 text-gray-300 italic">Sélectionnez une date ci-dessus pour voir les créneaux.</div>
-              )}
+                  
+                  <div className="grid grid-cols-7 gap-3">
+                    {/* Days of week headers */}
+                    {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, i) => (
+                      <div key={i} className="text-[8px] font-bold text-center text-gray-300 py-2 uppercase tracking-widest">{d}</div>
+                    ))}
+                    
+                    {/* Empty slots for month start offset */}
+                    {[...Array((startOfViewingMonth.getDay() + 6) % 7)].map((_, i) => (
+                      <div key={`empty-${i}`} className="aspect-square"></div>
+                    ))}
+
+                    {daysInMonth.map(date => {
+                      const dayName = format(date, 'EEE', { locale: fr });
+                      const dayNum = format(date, 'd');
+                      const isSelected = selectedDate && format(date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
+                      const isSunday = date.getDay() === 0;
+                      const isPast = date < new Date(new Date().setHours(0,0,0,0));
+                      const isTooFar = date > maxDate;
+                      
+                      return (
+                        <button
+                          key={date.toISOString()}
+                          disabled={isSunday || isPast || isTooFar}
+                          onClick={() => setSelectedDate(date)}
+                          className={`aspect-square rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border ${
+                            isSunday || isPast || isTooFar ? 'opacity-10 cursor-not-allowed bg-gray-50 border-transparent' :
+                            isSelected ? 'bg-[#2D4A1E] text-white border-[#2D4A1E] shadow-xl shadow-[#2D4A1E]/20 scale-105' :
+                            'bg-white border-[#2D4A1E]/5 text-gray-400 hover:border-[#C9A96E] hover:text-[#2D4A1E]'
+                          }`}
+                        >
+                          <span className="text-lg font-serif">{dayNum}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="bg-[#F8F5EE] rounded-[3rem] p-10">
+                  <h3 className="text-2xl font-serif text-[#2C2C28] mb-8">Créneaux horaires</h3>
+                  {selectedDate ? (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {TIME_SLOTS.map(slot => {
+                        // Simulate some booked slots for demonstration
+                        // For example: 10:00 and 15:30 are always booked on Mondays
+                        const isMonday = selectedDate.getDay() === 1;
+                        const isBooked = (isMonday && (slot === '10:00' || slot === '15:30')) || 
+                                         (selectedDate.getDate() % 3 === 0 && slot === '14:00');
+                        
+                        return (
+                          <button
+                            key={slot}
+                            disabled={isBooked}
+                            onClick={() => { setSelectedSlot(slot); setStep(3); window.scrollTo(0, 0); }}
+                            className={`py-4 rounded-xl text-xs font-bold transition-all duration-300 border relative overflow-hidden ${
+                              isBooked
+                                ? 'bg-gray-100 text-gray-300 border-transparent cursor-not-allowed opacity-50'
+                                : selectedSlot === slot 
+                                  ? 'bg-[#C9A96E] text-white border-[#C9A96E] shadow-lg' 
+                                  : 'bg-white text-gray-400 border-transparent hover:border-[#C9A96E] hover:text-[#2D4A1E]'
+                            }`}
+                          >
+                            {slot}
+                            {isBooked && (
+                              <span className="absolute inset-0 flex items-center justify-center bg-gray-100/40 backdrop-blur-[1px] text-[8px] uppercase tracking-tighter text-gray-400 rotate-12">
+                                Complet
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="h-64 flex flex-col items-center justify-center text-center opacity-30">
+                      <Calendar className="w-12 h-12 mb-4" />
+                      <p className="text-xs font-bold uppercase tracking-widest">Sélectionnez une date</p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           )}
 
-          {/* STEP 3 — Form */}
+          {/* STEP 3 — Client Info Form */}
           {step === 3 && (
-            <div className="p-10">
-              <button onClick={() => setStep(2)} className="text-[#39B54A] font-bold mb-6 flex items-center gap-1 text-sm hover:underline">← Retour</button>
-              <h2 className="text-2xl font-bold mb-8">Vos informations</h2>
+            <div className="animate-reveal-up max-w-3xl mx-auto">
+              <button onClick={() => setStep(2)} className="group flex items-center gap-3 text-gray-400 hover:text-[#2D4A1E] transition-colors mb-12 uppercase text-[10px] font-bold tracking-widest">
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour au calendrier
+              </button>
 
-              <div className="bg-[#F5F3EE] rounded-2xl p-6 mb-8 grid grid-cols-3 divide-x divide-gray-200">
-                <div className="text-center px-4">
-                  <div className="text-2xl mb-1">{selectedService?.icon}</div>
-                  <div className="text-xs text-gray-400">Prestation</div>
-                  <div className="font-bold text-sm">{selectedService?.title}</div>
+              <div className="flex items-center gap-10 mb-16 p-8 bg-[#F8F5EE] rounded-[2.5rem] border border-[#2D4A1E]/5">
+                <div className="flex-1">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#C9A96E] mb-2 block">Votre Sélection</span>
+                  <h4 className="text-2xl font-serif text-[#2D4A1E]">{getCleanTitle(selectedService?.title)}</h4>
                 </div>
-                <div className="text-center px-4">
-                  <div className="text-2xl mb-1">📅</div>
-                  <div className="text-xs text-gray-400">Date</div>
-                  <div className="font-bold text-sm">{selectedDate && format(selectedDate, 'dd MMM yyyy', { locale: fr })}</div>
-                </div>
-                <div className="text-center px-4">
-                  <div className="text-2xl mb-1">🕐</div>
-                  <div className="text-xs text-gray-400">Heure</div>
-                  <div className="font-bold text-sm">{selectedSlot}</div>
+                <div className="text-right">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Date & Heure</span>
+                  <p className="text-sm font-bold text-[#2C2C28] uppercase tracking-widest">
+                    {selectedDate && format(selectedDate, 'dd MMMM', { locale: fr })} @ {selectedSlot}
+                  </p>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5 text-gray-700">Prénom & Nom</label>
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Prénom & Nom</label>
                     <input required value={clientInfo.name} onChange={e => setClientInfo({ ...clientInfo, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#39B54A] outline-none text-sm"
-                      placeholder="Daniella Dupont"
+                      className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light"
+                      placeholder="Ex: Daniella Adabra"
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-bold mb-1.5 text-gray-700">Téléphone</label>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Téléphone</label>
                     <input required value={clientInfo.phone} onChange={e => setClientInfo({ ...clientInfo, phone: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#39B54A] outline-none text-sm"
+                      className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light"
                       placeholder="+33 6 00 00 00 00"
                     />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-bold mb-1.5 text-gray-700">Email</label>
+                
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Email de contact</label>
                   <input required type="email" value={clientInfo.email} onChange={e => setClientInfo({ ...clientInfo, email: e.target.value })}
-                    className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#39B54A] outline-none text-sm"
+                    className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light"
                     placeholder="votre@email.com"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-bold mb-1.5 text-gray-700">Message ou précisions (optionnel)</label>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Notes optionnelles</label>
                   <textarea value={clientInfo.message} onChange={e => setClientInfo({ ...clientInfo, message: e.target.value })}
-                    rows={3}
-                    className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#39B54A] outline-none text-sm resize-none"
-                    placeholder="Décrivez brièvement votre situation ou vos attentes..."
+                    rows={4}
+                    className="w-full px-8 py-6 bg-[#F8F5EE] border-none rounded-[2.5rem] focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light resize-none"
+                    placeholder="Précisez ici vos attentes particulières..."
                   />
                 </div>
+
                 <button
                   disabled={submitting}
-                  className="w-full py-4 bg-[#39B54A] text-white rounded-xl font-bold text-base hover:bg-[#3a4a2d] transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+                  className="btn-primary w-full py-6 group"
                 >
-                  {submitting ? 'Confirmation en cours...' : `Confirmer la réservation — ${selectedService?.price} €`}
+                  {submitting ? 'Validation en cours...' : `Confirmer le rendez-vous • ${selectedService?.price.toFixed(2)}€`}
+                  {!submitting && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
                 </button>
               </form>
             </div>
           )}
 
-          {/* STEP 4 — Success */}
+          {/* STEP 4 — Success Confirmation */}
           {step === 4 && (
-            <div className="p-16 text-center">
-              <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8">
-                <CheckCircle className="text-green-500 w-12 h-12" />
+            <div className="py-20 text-center animate-reveal-up max-w-2xl mx-auto">
+              <div className="w-32 h-32 bg-[#2D4A1E] rounded-full flex items-center justify-center mx-auto mb-12 shadow-2xl shadow-[#2D4A1E]/30 text-white animate-float">
+                <CheckCircle2 className="w-16 h-16" />
               </div>
-              <h2 className="text-4xl font-serif text-[#2C2C2C] mb-4">Rendez-vous confirmé !</h2>
-              <p className="text-gray-500 mb-4 text-lg">
-                Merci {clientInfo.name} ! 🎉
+              
+              <h2 className="text-6xl font-serif text-[#2C2C28] mb-6">Séance <br /> <span className="italic text-gradient">Confirmée</span></h2>
+              <p className="text-xl text-gray-500 font-light mb-10 leading-relaxed">
+                Ravie de vous accompagner bientôt, <span className="text-[#2D4A1E] font-medium">{clientInfo.name}</span>. <br />
+                Un récapitulatif complet vient de vous être envoyé à <span className="italic font-medium">{clientInfo.email}</span>.
               </p>
-              <p className="text-gray-400 mb-2">
-                Votre séance <strong className="text-[#4A5C3A]">{selectedService?.title}</strong>
-              </p>
-              <p className="text-gray-400 mb-10">
-                le <strong>{selectedDate && format(selectedDate, 'EEEE d MMMM yyyy', { locale: fr })}</strong> à <strong>{selectedSlot}</strong> est bien enregistrée.
-              </p>
-              <p className="text-gray-400 text-sm mb-12">Un email de confirmation vous a été envoyé à <strong>{clientInfo.email}</strong>.</p>
-              <div className="flex gap-4 justify-center">
-                <Link href="/" className="px-8 py-3 bg-[#4A5C3A] text-white rounded-xl font-bold hover:bg-[#3a4a2d] transition-colors">Retour à l'accueil</Link>
-                <Link href="/boutique" className="px-8 py-3 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold hover:border-[#4A5C3A] transition-colors">Voir la boutique</Link>
+
+              <div className="bg-white p-10 rounded-[3rem] shadow-xl shadow-black/5 border border-[#2D4A1E]/5 mb-16 text-left">
+                <div className="grid grid-cols-2 gap-8">
+                  <div>
+                    <span className="text-[8px] font-bold uppercase tracking-widest text-[#C9A96E] mb-2 block">Prestation</span>
+                    <p className="text-lg font-serif text-[#2C2C28]">{getCleanTitle(selectedService?.title)}</p>
+                  </div>
+                  <div>
+                    <span className="text-[8px] font-bold uppercase tracking-widest text-[#C9A96E] mb-2 block">Horaire</span>
+                    <p className="text-lg font-serif text-[#2C2C28]">
+                      {selectedDate && format(selectedDate, 'EEEE d MMMM', { locale: fr })} à {selectedSlot}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/" className="btn-primary px-12">Retour à l'accueil</Link>
+                <Link href="/boutique" className="btn-outline px-12">Découvrir la boutique</Link>
               </div>
             </div>
           )}
         </div>
       </div>
-    </div>
+
+      {/* Trust Badges */}
+      {step < 4 && (
+        <section className="container mx-auto px-6 mt-32">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#2D4A1E]/5 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#C9A96E]">
+                <Clock className="w-6 h-6" />
+              </div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#2D4A1E]/60 leading-relaxed">
+                Rappel automatique <br /> <span className="text-[#2C2C28]">24h avant la séance</span>
+              </p>
+            </div>
+            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#2D4A1E]/5 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#C9A96E]">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#2D4A1E]/60 leading-relaxed">
+                Expertise certifiée <br /> <span className="text-[#2C2C28]">Naturopathie Holistique</span>
+              </p>
+            </div>
+            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#2D4A1E]/5 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#C9A96E]">
+                <CheckCircle className="w-6 h-6" />
+              </div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#2D4A1E]/60 leading-relaxed">
+                Réservation <br /> <span className="text-[#2C2C28]">Simple & Sécurisée</span>
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+    </main>
   );
 }

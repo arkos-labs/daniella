@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { MOCK_PRODUCTS, CATEGORIES } from '../lib/mockData';
 import { useCart } from '../hooks/useCart';
-import { ShoppingCart, Search, SlidersHorizontal, Star } from 'lucide-react';
+import { ShoppingCart, Search, SlidersHorizontal, Star, Heart, ArrowRight } from 'lucide-react';
 
 export default function Boutique() {
   const [selectedCategory, setSelectedCategory] = useState('Tous');
@@ -24,55 +24,53 @@ export default function Boutique() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FAFAF8] pt-28 pb-20">
+    <main className="min-h-screen bg-[#F8F5EE] pb-32">
       <Head>
         <title>Boutique | Dany Natural Concept</title>
         <meta name="description" content="Découvrez nos soins naturels artisanaux : capillaires, corps, visage, beurres et huiles végétales bio." />
       </Head>
 
-      {/* Premium Header Boutique */}
-      <div className="relative overflow-hidden bg-[#FAFAF8] py-24 mb-16 border-b border-gray-100">
-        <div className="absolute top-0 right-0 w-full h-full pointer-events-none">
-          <div className="absolute -top-[50%] -right-[10%] w-[40%] h-[150%] bg-[#eef4ef] rounded-full blur-[80px] opacity-60"></div>
-          <div className="absolute top-[20%] -left-[10%] w-[30%] h-[100%] bg-[#f5f3ee] rounded-full blur-[60px] opacity-50"></div>
+      {/* Hero Header */}
+      <section className="relative pt-44 pb-24 overflow-hidden bg-white border-b border-[#2D4A1E]/5">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#3D6228]/5 rounded-full blur-[100px]"></div>
+          <div className="absolute bottom-[20%] left-[-10%] w-[400px] h-[400px] bg-[#C9A96E]/10 rounded-full blur-[80px]"></div>
         </div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <span className="inline-flex items-center gap-2 bg-[#39B54A]/10 text-[#39B54A] text-xs uppercase tracking-[0.2em] px-5 py-2 rounded-full mb-6 font-bold border border-[#39B54A]/20">
-            <SlidersHorizontal className="w-3.5 h-3.5" aria-hidden="true" />
-            Boutique en ligne
-          </span>
-          <h1 className="text-5xl md:text-7xl font-serif mb-6 text-[#2C2C2C] tracking-tight">Nos <span className="text-[#39B54A] italic">Créations</span></h1>
-          <p className="text-gray-500 text-xl md:text-2xl max-w-2xl mx-auto font-light leading-relaxed">
-            22 soins formulés avec passion, pour révéler votre beauté naturelle et honorer votre peau.
+        
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <span className="section-tag mb-6">Collection Complète</span>
+          <h1 className="text-6xl md:text-8xl font-serif mb-8 text-[#2C2C28] leading-[0.95]">
+            Nos <span className="italic-serif text-gradient">Créations</span>
+          </h1>
+          <p className="text-gray-500 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed">
+            22 soins d'exception formulés à la main, alliant l'intelligence de la nature à une exigence de pureté absolue.
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-6 mt-16">
         {/* Search & Filters */}
-        <div className="flex flex-col md:flex-row gap-4 mb-10 items-center">
-          <div className="relative flex-grow max-w-md">
-            <label htmlFor="search-products" className="sr-only">Rechercher un produit</label>
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" aria-hidden="true" />
+        <div className="flex flex-col lg:flex-row gap-10 mb-20 items-center justify-between">
+          <div className="relative w-full lg:max-w-md">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
-              id="search-products"
               type="text"
-              placeholder="Rechercher un produit..."
+              placeholder="Rechercher un soin..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-[#39B54A] focus-visible:ring-offset-2"
+              className="w-full pl-14 pr-6 py-5 bg-white border-none rounded-full shadow-lg shadow-black/5 focus:ring-2 focus:ring-[#2D4A1E] transition-all outline-none text-sm"
             />
           </div>
-          <div className="flex gap-2 flex-wrap justify-center">
+          
+          <div className="flex gap-3 flex-wrap justify-center">
             {CATEGORIES.map(cat => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                aria-pressed={selectedCategory === cat}
-                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#39B54A] outline-none ${
+                className={`px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
                   selectedCategory === cat
-                    ? 'bg-[#39B54A] text-white shadow-md'
-                    : 'bg-white border border-gray-200 text-gray-600 hover:border-[#39B54A]'
+                    ? 'bg-[#2D4A1E] text-white shadow-xl'
+                    : 'bg-white text-gray-400 border border-[#2D4A1E]/5 hover:border-[#C9A96E] hover:text-[#2D4A1E]'
                 }`}
               >
                 {cat}
@@ -81,65 +79,113 @@ export default function Boutique() {
           </div>
         </div>
 
-        {/* Count */}
-        <p className="text-gray-400 text-sm mb-8">{filtered.length} produit{filtered.length > 1 ? 's' : ''}</p>
+        {/* Product Count & Info */}
+        <div className="flex items-center justify-between mb-12 px-2">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2D4A1E]/40">
+            {filtered.length} soin{filtered.length > 1 ? 's' : ''} trouvé{filtered.length > 1 ? 's' : ''}
+          </p>
+          <div className="h-px bg-[#2D4A1E]/5 flex-1 mx-8"></div>
+        </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {filtered.map(product => (
-            <div key={product.id} className="group bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <Link href={`/produit/${product.id}`}>
-                <div className="relative h-60 bg-[#F5F3EE] overflow-hidden cursor-pointer">
-                  <img
-                    src={product.imageUrl}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    onError={(e: any) => { e.target.src = 'https://via.placeholder.com/400x400/F5F3EE/4A5C3A?text=DNC'; }}
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="bg-white/90 backdrop-blur-sm text-[#39B54A] text-xs font-bold px-3 py-1 rounded-full">
-                      {product.category}
-                    </span>
+        {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          {filtered.map((product, idx) => (
+            <div 
+              key={product.id} 
+              className="card-hover bg-white rounded-[3rem] p-4 flex flex-col h-full group animate-reveal-up"
+              style={{ animationDelay: `${idx * 0.05}s` }}
+            >
+              <Link href={`/produit/${product.id}`} className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden mb-8 block group/img">
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover/img:scale-110"
+                  onError={(e: any) => { e.target.src = 'https://via.placeholder.com/400x400/F8F5EE/2D4A1E?text=DNC'; }}
+                />
+                
+                
+                {product.stock < 10 && (
+                  <div className="absolute top-5 right-5">
+                    <span className="bg-[#C9A96E] text-white text-[8px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Édition Limitée</span>
                   </div>
-                  {product.stock < 20 && (
-                    <div className="absolute top-3 right-3">
-                      <span className="bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">Bientôt épuisé</span>
-                    </div>
-                  )}
+                )}
+                
+                <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-all duration-500 flex items-center justify-center gap-4 opacity-0 group-hover/img:opacity-100">
+                  <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white transition-all shadow-xl">
+                    <Heart className="w-5 h-5" />
+                  </button>
                 </div>
               </Link>
 
-              <div className="p-5">
-                <div className="flex items-center gap-1 mb-2" aria-label="5 étoiles sur 5">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" aria-hidden="true" />)}
-                  <span className="text-xs text-gray-400 ml-1">(12)</span>
+              <div className="px-4 pb-4 flex flex-col flex-1">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3 h-3 fill-[#C9A96E] text-[#C9A96E]" />
+                  ))}
+                  <span className="text-[10px] text-gray-400 ml-2 font-bold">(24)</span>
                 </div>
-                <Link href={`/produit/${product.id}`} className="focus-visible:ring-2 focus-visible:ring-[#39B54A] outline-none rounded-sm">
-                  <h3 className="font-bold text-[#2C2C2C] mb-1 leading-tight hover:text-[#39B54A] transition-colors cursor-pointer text-sm">
+                
+                <Link href={`/produit/${product.id}`}>
+                  <h3 className="text-xl font-serif text-[#2C2C28] mb-3 leading-tight group-hover:text-[#2D4A1E] transition-colors line-clamp-2 h-14">
                     {product.name}
                   </h3>
                 </Link>
-                <p className="text-gray-400 text-xs mb-4 line-clamp-2">{product.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xl font-bold text-[#39B54A]">{product.price.toFixed(2)} €</span>
+                
+                <p className="text-gray-400 text-sm font-light mb-8 line-clamp-2 leading-relaxed">
+                  {product.description}
+                </p>
+                
+                <div className="mt-auto flex items-center justify-between border-t border-[#2D4A1E]/5 pt-6">
+                  <span className="text-2xl font-serif text-[#2D4A1E]">{product.price.toFixed(2)}€</span>
                   <button
                     onClick={() => handleAdd(product)}
-                    aria-label={`Ajouter ${product.name} au panier`}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#39B54A] outline-none ${
+                    className={`flex items-center gap-3 px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-500 ${
                       addedId === product.id
-                        ? 'bg-green-500 text-white scale-95'
-                        : 'bg-[#39B54A] text-white hover:bg-[#278E35] active:scale-95'
+                        ? 'bg-[#7A9E5E] text-white'
+                        : 'bg-white border border-[#2D4A1E]/10 text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white hover:border-[#2D4A1E] shadow-sm'
                     }`}
                   >
-                    <ShoppingCart className="w-4 h-4" aria-hidden="true" />
-                    {addedId === product.id ? 'Ajouté\u00A0!' : 'Ajouter'}
+                    <ShoppingCart className="w-4 h-4" />
+                    {addedId === product.id ? 'Ajouté' : 'Panier'}
                   </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
+        
+        {/* Empty State */}
+        {filtered.length === 0 && (
+          <div className="py-32 text-center">
+            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
+              <Search className="w-10 h-10 text-gray-200" />
+            </div>
+            <h2 className="text-3xl font-serif mb-4">Aucun soin trouvé</h2>
+            <p className="text-gray-400 font-light mb-10">Essayez de modifier vos critères de recherche ou de catégorie.</p>
+            <button onClick={() => { setSelectedCategory('Tous'); setSearchQuery(''); }} className="btn-outline px-10 py-4">
+              Réinitialiser
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* CTA Section */}
+      <section className="container mx-auto px-6 mt-32">
+        <div className="bg-[#2D4A1E] rounded-[4rem] p-16 md:p-24 text-center relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-10 noise-bg pointer-events-none"></div>
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-[100px]"></div>
+          
+          <h2 className="text-5xl md:text-6xl font-serif text-white mb-8 relative z-10 leading-tight">
+            Besoin d'un conseil <br /> <span className="italic text-gradient-gold">personnalisé ?</span>
+          </h2>
+          <p className="text-white/60 text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto relative z-10 leading-relaxed">
+            Daniella vous accompagne dans votre transition vers le naturel avec un diagnostic complet de vos besoins.
+          </p>
+          <Link href="/reservations" className="btn-gold relative z-10 px-12 py-5 text-sm">
+            Prendre rendez-vous <ArrowRight className="w-4 h-4 ml-2" />
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }

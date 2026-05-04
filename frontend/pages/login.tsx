@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Mail, Lock, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Mail, Lock, ArrowRight, ArrowLeft, Sparkles, Quote } from 'lucide-react';
 
 export default function Login() {
   const router = useRouter();
@@ -14,68 +14,84 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate login request
     setTimeout(() => {
       setIsLoading(false);
-      // Fake redirect to a dashboard (could be /admin or /compte based on user role later)
-      alert("Connexion réussie ! (Simulation)");
-      router.push('/');
+      localStorage.setItem('dnc_auth_token', 'mock_token_123');
+      localStorage.setItem('user_role', email.includes('admin') ? 'admin' : 'client');
+      window.dispatchEvent(new Event('storage')); // Notify other components
+      router.push(email.includes('admin') ? '/admin' : '/client');
     }, 1500);
   };
 
+  const handleQuickLogin = (role: 'admin' | 'client') => {
+    localStorage.setItem('dnc_auth_token', 'mock_token_123');
+    localStorage.setItem('user_role', role);
+    window.dispatchEvent(new Event('storage'));
+    router.push(`/${role}`);
+  };
+
   return (
-    <div className="min-h-screen bg-[#FAFAF8] flex items-center justify-center p-4">
+    <main className="min-h-screen bg-[#F8F5EE] flex items-center justify-center p-6 relative overflow-hidden">
       <Head>
         <title>Connexion | Dany Natural Concept</title>
       </Head>
 
-      <div className="w-full max-w-5xl bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-100 min-h-[600px]">
+      {/* Decorative Blur */}
+      <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#3D6228]/5 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#C9A96E]/10 rounded-full blur-[80px]"></div>
+
+      <div className="w-full max-w-6xl bg-white rounded-[4rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-[#2D4A1E]/5 relative z-10 min-h-[700px]">
         
-        {/* Left Side: Branding / Image */}
-        <div className="md:w-5/12 bg-gradient-to-br from-[#39B54A] to-[#278E35] p-12 text-white flex flex-col justify-between relative overflow-hidden hidden md:flex">
-          <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-black opacity-10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3"></div>
+        {/* Left Side: Brand Narrative */}
+        <div className="md:w-1/2 bg-[#2D4A1E] p-16 md:p-24 text-white flex flex-col justify-between relative overflow-hidden hidden md:flex">
+          <div className="absolute inset-0 opacity-10 noise-bg pointer-events-none"></div>
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-[100px]"></div>
           
           <div className="relative z-10">
-            <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
-              <img src="/logo.png" alt="DNC Logo" className="h-16 mb-8 drop-shadow-md brightness-0 invert" />
+            <Link href="/" className="inline-block mb-16">
+              <span className="text-3xl font-serif text-white tracking-tight">
+                Dany<span className="italic text-[#C9A96E] font-light">Natural</span>
+              </span>
             </Link>
-            <h2 className="text-4xl font-serif mb-6 leading-tight">
-              Bienvenue dans <br /> votre espace.
+            <h2 className="text-5xl md:text-6xl font-serif mb-10 leading-[1.1]">
+              Votre univers <br /> <span className="italic text-gradient-gold">Holistique.</span>
             </h2>
-            <p className="text-white/80 text-lg leading-relaxed">
-              Gérez vos commandes, suivez vos réservations naturopathiques et accédez à vos conseils personnalisés.
+            <p className="text-white/60 text-xl font-light leading-relaxed max-w-sm">
+              Accédez à vos rituels personnalisés, suivez vos commandes et gérez vos prochaines séances avec Daniella.
             </p>
           </div>
 
-          <div className="relative z-10 mt-12">
-            <div className="p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-              <p className="italic text-white/90">
-                "La nature possède toutes les réponses, il suffit de savoir l'écouter."
+          <div className="relative z-10">
+            <div className="p-10 bg-white/5 backdrop-blur-md rounded-[3rem] border border-white/10">
+              <Quote className="w-8 h-8 text-[#C9A96E]/40 mb-4" />
+              <p className="italic text-white/80 font-serif text-lg leading-relaxed">
+                "La nature possède toutes les réponses, il suffit de savoir l'écouter en conscience."
               </p>
             </div>
           </div>
         </div>
 
-        {/* Right Side: Login Form */}
-        <div className="md:w-7/12 p-8 md:p-16 flex flex-col justify-center bg-white relative">
-          <button onClick={() => router.push('/')} className="absolute top-8 left-8 flex items-center gap-2 text-gray-400 hover:text-[#39B54A] transition-colors md:hidden">
-            <ArrowLeft className="w-4 h-4" /> Retour
-          </button>
+        {/* Right Side: Auth Form */}
+        <div className="md:w-1/2 p-12 md:p-24 flex flex-col justify-center bg-white relative">
+          <Link href="/" className="absolute top-12 left-12 flex items-center gap-3 text-gray-400 hover:text-[#2D4A1E] transition-colors group uppercase text-[10px] font-bold tracking-widest">
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour à l'accueil
+          </Link>
 
           <div className="max-w-md w-full mx-auto">
-            <div className="text-center md:text-left mb-10 mt-8 md:mt-0">
-              <h1 className="text-3xl md:text-4xl font-bold text-[#2C2C2C] mb-2">Se connecter</h1>
-              <p className="text-gray-500">Accédez à votre tableau de bord client ou administrateur.</p>
+            <div className="mb-12">
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#C9A96E] mb-4 block">Espace Membre</span>
+              <h1 className="text-4xl font-serif text-[#2C2C28] mb-4">Se Connecter</h1>
+              <p className="text-gray-400 font-light leading-relaxed">
+                Ravis de vous revoir parmi nous. Connectez-vous pour continuer votre voyage.
+              </p>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-6">
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2" htmlFor="email">Adresse Email</label>
+            <form onSubmit={handleLogin} className="space-y-8">
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-6" htmlFor="email">Adresse Email</label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Mail className="h-5 w-5 text-gray-400" />
+                  <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+                    <Mail className="h-4 w-4 text-gray-400" />
                   </div>
                   <input
                     id="email"
@@ -83,20 +99,20 @@ export default function Login() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-11 pr-4 py-4 bg-[#FAFAF8] border border-gray-200 rounded-2xl text-gray-900 focus:ring-2 focus:ring-[#39B54A] focus:border-transparent transition-all outline-none"
-                    placeholder="vous@exemple.com"
+                    className="block w-full pl-14 pr-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light transition-all"
+                    placeholder="votre@email.com"
                   />
                 </div>
               </div>
 
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-bold text-gray-700" htmlFor="password">Mot de passe</label>
-                  <a href="#" className="text-sm font-bold text-[#39B54A] hover:underline">Oublié ?</a>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between mb-1 px-6">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400" htmlFor="password">Mot de passe</label>
+                  <a href="#" className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-widest hover:underline">Oublié ?</a>
                 </div>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Lock className="h-5 w-5 text-gray-400" />
+                  <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+                    <Lock className="h-4 w-4 text-gray-400" />
                   </div>
                   <input
                     id="password"
@@ -104,7 +120,7 @@ export default function Login() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="block w-full pl-11 pr-4 py-4 bg-[#FAFAF8] border border-gray-200 rounded-2xl text-gray-900 focus:ring-2 focus:ring-[#39B54A] focus:border-transparent transition-all outline-none"
+                    className="block w-full pl-14 pr-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -113,35 +129,40 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex items-center justify-center gap-2 bg-[#39B54A] text-white py-4 rounded-2xl font-bold text-lg hover:bg-[#278E35] hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed mt-4"
+                className="btn-primary w-full py-5 group mt-4 shadow-xl shadow-[#2D4A1E]/20"
               >
                 {isLoading ? (
                   <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                 ) : (
-                  <>Se connecter <ArrowRight className="w-5 h-5" /></>
+                  <>Se connecter <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" /></>
                 )}
               </button>
             </form>
 
-            <div className="mt-10 text-center">
-              <p className="text-gray-500 mb-6">
-                Nouveau sur Dany Natural Concept ?{' '}
-                <a href="#" className="font-bold text-[#39B54A] hover:underline">Créer un compte</a>
+            <div className="mt-12 text-center">
+              <p className="text-sm font-light text-gray-400 mb-8">
+                Pas encore de compte ?{' '}
+                <a href="#" className="font-bold text-[#2D4A1E] hover:underline uppercase tracking-widest text-[10px] ml-2">S'inscrire</a>
               </p>
               
-              {/* Test Buttons for Dev */}
-              <div className="pt-6 border-t border-gray-100 flex gap-4 justify-center">
-                <button onClick={() => router.push('/admin')} className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-lg font-bold transition-colors">
-                  🔧 Test Admin
+              <div className="flex items-center gap-4 mb-8">
+                <div className="h-px bg-gray-100 flex-1"></div>
+                <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-gray-300">Test Modes</span>
+                <div className="h-px bg-gray-100 flex-1"></div>
+              </div>
+
+              <div className="flex gap-4 justify-center">
+                <button onClick={() => handleQuickLogin('admin')} className="text-[9px] font-bold uppercase tracking-widest border border-gray-100 text-gray-400 hover:border-[#2D4A1E] hover:text-[#2D4A1E] px-6 py-3 rounded-full transition-all">
+                  Admin
                 </button>
-                <button onClick={() => router.push('/client')} className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-600 px-4 py-2 rounded-lg font-bold transition-colors">
-                  👤 Test Client
+                <button onClick={() => handleQuickLogin('client')} className="text-[9px] font-bold uppercase tracking-widest border border-gray-100 text-gray-400 hover:border-[#2D4A1E] hover:text-[#2D4A1E] px-6 py-3 rounded-full transition-all">
+                  Client
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

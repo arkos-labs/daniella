@@ -1,27 +1,72 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, ArrowRight, ShoppingBag, Mail, Star } from 'lucide-react';
 
 export default function Confirmation() {
   return (
-    <div className="min-h-screen pt-40 pb-20 text-center">
+    <main className="min-h-screen bg-[#F8F5EE] pt-44 pb-32 flex items-center justify-center">
       <Head><title>Commande Confirmée | Dany Natural Concept</title></Head>
-      <div className="container mx-auto px-4 max-w-xl">
-        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
-          <CheckCircle className="text-green-600 w-12 h-12" />
+      
+      <div className="container mx-auto px-6 max-w-2xl text-center">
+        <div className="relative inline-block mb-12">
+          <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mx-auto shadow-2xl relative z-10 animate-float">
+            <CheckCircle className="text-[#C9A96E] w-14 h-14" />
+          </div>
+          <div className="absolute -inset-6 bg-[#C9A96E]/20 rounded-full blur-2xl animate-pulse"></div>
         </div>
-        <h1 className="text-4xl mb-6">Merci pour votre commande !</h1>
-        <p className="text-gray-600 text-lg mb-12">
-          Votre commande a été enregistrée avec succès. Vous recevrez un e-mail de confirmation d'ici quelques minutes.
+
+        <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#C9A96E] mb-6 block">Succès</span>
+        <h1 className="text-5xl md:text-7xl font-serif text-[#2C2C28] mb-8 leading-tight">Merci pour votre <span className="italic text-gradient">Confiance</span></h1>
+        
+        <p className="text-lg font-light text-gray-500 leading-relaxed mb-12 italic-serif-container">
+          Votre commande a été enregistrée avec le plus grand soin. <br />
+          Un e-mail de confirmation vient de vous être envoyé.
         </p>
-        <div className="bg-cream p-8 rounded-2xl mb-12 text-left space-y-4">
-          <p><strong>Numéro de commande :</strong> #DNC-2026-458</p>
-          <p><strong>Statut :</strong> En attente de traitement</p>
-          <p><strong>Délai estimé :</strong> 3-5 jours ouvrés</p>
+
+        <div className="bg-white p-12 rounded-[3.5rem] border border-[#2D4A1E]/5 shadow-2xl shadow-black/5 mb-16 text-left relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#F8F5EE] rounded-full translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
+          
+          <div className="relative z-10 space-y-6">
+            <div className="flex justify-between items-center pb-6 border-b border-[#2D4A1E]/5">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-gray-300">Numéro de commande</span>
+              <span className="text-sm font-serif text-[#2D4A1E]">#DNC-2026-458</span>
+            </div>
+            <div className="flex justify-between items-center pb-6 border-b border-[#2D4A1E]/5">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-gray-300">Statut actuel</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#7A9E5E] bg-[#7A9E5E]/10 px-4 py-1 rounded-full">Confirmée</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-gray-300">Expédition prévue</span>
+              <span className="text-sm font-serif text-[#2C2C28]">Sous 48h ouvrées</span>
+            </div>
+          </div>
         </div>
-        <Link href="/" className="btn-primary">Retour à l'accueil</Link>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <Link href="/" className="btn-primary px-12 group w-full sm:w-auto">
+            Retour à l'accueil <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          <Link href="/client" className="btn-outline px-12 w-full sm:w-auto">
+            Suivre ma commande
+          </Link>
+        </div>
+
+        <div className="mt-24 grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="flex flex-col items-center gap-3">
+            <Mail className="w-5 h-5 text-[#C9A96E]" />
+            <p className="text-[8px] font-bold uppercase tracking-widest text-gray-400">Confirmation par mail</p>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <ShoppingBag className="w-5 h-5 text-[#C9A96E]" />
+            <p className="text-[8px] font-bold uppercase tracking-widest text-gray-400">Suivi en temps réel</p>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <Star className="w-5 h-5 text-[#C9A96E]" />
+            <p className="text-[8px] font-bold uppercase tracking-widest text-gray-400">Programme Fidélité</p>
+          </div>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

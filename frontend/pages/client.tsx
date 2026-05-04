@@ -1,208 +1,193 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Package, MessageSquare, ArrowLeft, Star, ShoppingBag } from 'lucide-react';
+import { Package, MessageSquare, ArrowLeft, ArrowRight, Star, ShoppingBag, User, Heart, Settings, Clock, ChevronRight, LogOut, Gift, HelpCircle } from 'lucide-react';
 import { MOCK_PRODUCTS } from '../lib/mockData';
 
 export default function ClientDashboard() {
-  const [activeTab, setActiveTab] = useState<'commandes' | 'avis'>('commandes');
-  const [hasOrdered, setHasOrdered] = useState(true); // Toggle this to test states
+  const [activeTab, setActiveTab] = useState<'commandes' | 'avis' | 'profil'>('commandes');
+  const [hasOrdered, setHasOrdered] = useState(true);
 
-  // Fake past order
   const pastOrders = hasOrdered ? [
     {
       id: "CMD-2026-89A",
       date: "10 Mai 2026",
       total: 62.90,
       status: "Livrée",
-      items: [MOCK_PRODUCTS[0], MOCK_PRODUCTS[1]] // Example products
+      items: [MOCK_PRODUCTS[0], MOCK_PRODUCTS[1]]
     }
   ] : [];
 
   return (
-    <main className="min-h-screen bg-[#FAFAF8] pb-24">
+    <main className="min-h-screen bg-[#F8F5EE]">
       <Head>
-        <title>Mon Espace Client | DNC</title>
+        <title>Mon Espace Bien-être | Dany Natural Concept</title>
       </Head>
 
-      {/* Premium Client Header */}
-      <div className="relative overflow-hidden bg-white border-b border-gray-100 pt-28 pb-16">
-        <div className="absolute top-0 right-0 w-full h-full pointer-events-none">
-          <div className="absolute -top-[50%] -right-[10%] w-[40%] h-[150%] bg-[#eef4ef] rounded-full blur-[80px] opacity-60"></div>
-          <div className="absolute top-[20%] -left-[10%] w-[30%] h-[100%] bg-[#f5f3ee] rounded-full blur-[60px] opacity-50"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-[#39B54A] transition-colors mb-6 text-sm font-bold focus-visible:ring-2 focus-visible:ring-[#39B54A] outline-none rounded-md px-2 py-1 -ml-2">
-            <ArrowLeft className="w-4 h-4" /> Retour à la boutique
-          </Link>
-          
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div className="flex items-center gap-6">
-              <div className="w-20 h-20 bg-[#39B54A]/10 text-[#39B54A] rounded-full flex items-center justify-center text-3xl font-serif">
-                M
+      {/* Premium Profile Header */}
+      <section className="relative pt-44 pb-20 overflow-hidden bg-white border-b border-[#2D4A1E]/5">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#2D4A1E]/5 -skew-x-12 translate-x-1/2"></div>
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-10">
+            <div className="flex flex-col md:flex-row items-center md:items-end gap-10">
+              <div className="relative group">
+                <div className="w-32 h-32 rounded-[3rem] overflow-hidden border-4 border-white shadow-2xl relative z-10">
+                  <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80" className="w-full h-full object-cover" alt="Marie" />
+                </div>
+                <div className="absolute -inset-4 bg-[#C9A96E]/20 rounded-[3.5rem] blur-2xl group-hover:bg-[#C9A96E]/30 transition-all duration-700"></div>
               </div>
-              <div>
-                <h1 className="text-4xl md:text-5xl font-serif text-[#2C2C2C] mb-2 tracking-tight">Bonjour, Marie</h1>
-                <p className="text-gray-500 text-lg">Bienvenue dans votre espace bien-être personnel.</p>
+              
+              <div className="text-center md:text-left">
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#C9A96E] mb-3 block">Bienvenue</span>
+                <h1 className="text-5xl md:text-6xl font-serif text-[#2C2C28] mb-4">Marie <span className="italic font-light">Lemaire</span></h1>
+                <div className="flex items-center gap-6">
+                  <span className="text-xs font-bold text-[#2D4A1E]/40 uppercase tracking-widest flex items-center gap-2">
+                    <User className="w-3.5 h-3.5" /> Client Privilège
+                  </span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]"></div>
+                  <span className="text-xs font-bold text-[#2D4A1E]/40 uppercase tracking-widest flex items-center gap-2">
+                    <Clock className="w-3.5 h-3.5" /> Membre depuis 2024
+                  </span>
+                </div>
               </div>
             </div>
-            
-            {/* Dev toggle purely for demonstration */}
-            <button 
-              onClick={() => setHasOrdered(!hasOrdered)} 
-              className="text-xs bg-gray-100 text-gray-500 px-4 py-2 rounded-full hover:bg-gray-200 transition-colors focus-visible:ring-2 focus-visible:ring-gray-300 outline-none font-medium border border-gray-200"
-              title="Cliquer pour simuler un compte sans commande"
-            >
-              Mode Test : {hasOrdered ? 'Actif (Avec commandes)' : 'Inactif (Sans commandes)'}
-            </button>
+
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto px-4 mt-12 relative z-10">
-        
-        {/* Navigation Pills */}
-        <div className="flex gap-3 mb-10 overflow-x-auto pb-2 scrollbar-hide">
-          <button 
-            onClick={() => setActiveTab('commandes')}
-            aria-pressed={activeTab === 'commandes'}
-            className={`flex items-center gap-2 px-6 py-3.5 rounded-full font-bold transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#39B54A] outline-none ${
-              activeTab === 'commandes' 
-                ? 'bg-[#2C2C2C] text-white shadow-md' 
-                : 'bg-white border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-[#2C2C2C]'
-            }`}
-          >
-            <Package className="w-5 h-5" /> Mes Commandes
-          </button>
-          <button 
-            onClick={() => setActiveTab('avis')}
-            aria-pressed={activeTab === 'avis'}
-            className={`flex items-center gap-2 px-6 py-3.5 rounded-full font-bold transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#39B54A] outline-none ${
-              activeTab === 'avis' 
-                ? 'bg-[#2C2C2C] text-white shadow-md' 
-                : 'bg-white border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-[#2C2C2C]'
-            }`}
-          >
-            <MessageSquare className="w-5 h-5" /> Mes Avis
-          </button>
-        </div>
-
-        {/* Tab Content: Commandes */}
-        {activeTab === 'commandes' && (
-          <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden">
-            <div className="p-8 md:p-10 border-b border-gray-50">
-              <h2 className="text-2xl font-bold text-[#2C2C2C]">Historique d'achats</h2>
-              <p className="text-gray-500 mt-1">Retrouvez et suivez toutes vos commandes passées.</p>
-            </div>
+      <div className="container mx-auto px-6 max-w-7xl py-16">
+        <div className="flex flex-col lg:flex-row gap-16">
+          
+          {/* Dashboard Navigation */}
+          <aside className="lg:w-1/4 space-y-4">
+            {[
+              { id: 'commandes', icon: Package, label: 'Mes Commandes' },
+              { id: 'avis', icon: MessageSquare, label: 'Mes Avis' },
+              { id: 'profil', icon: Heart, label: 'Mes Favoris' }
+            ].map(tab => (
+              <button 
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`w-full flex items-center justify-between p-6 rounded-[2rem] transition-all duration-500 border ${
+                  activeTab === tab.id 
+                    ? 'bg-[#2D4A1E] text-white border-[#2D4A1E] shadow-2xl shadow-[#2D4A1E]/20' 
+                    : 'bg-white text-[#2D4A1E]/40 border-transparent hover:border-[#2D4A1E]/10 hover:text-[#2D4A1E]'
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <tab.icon className="w-5 h-5" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest">{tab.label}</span>
+                </div>
+                <ChevronRight className={`w-4 h-4 transition-transform ${activeTab === tab.id ? 'translate-x-1' : 'opacity-0'}`} />
+              </button>
+            ))}
             
-            <div className="p-8 md:p-10 bg-[#FAFAF8]/50">
-              {pastOrders.length > 0 ? (
-                <div className="space-y-6">
-                  {pastOrders.map(order => (
-                    <div key={order.id} className="bg-white border border-gray-100 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow group">
-                      <div className="flex flex-col md:flex-row justify-between md:items-center gap-6 border-b border-gray-100 pb-6 mb-6">
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 bg-[#39B54A]/10 text-[#39B54A] rounded-2xl flex items-center justify-center">
+            <button 
+              className="w-full flex items-center gap-4 p-6 rounded-[2rem] text-[#2D4A1E]/40 hover:bg-[#F8F5EE] hover:text-[#2D4A1E] transition-all duration-300 border border-transparent hover:border-[#2D4A1E]/10 mt-4"
+            >
+              <HelpCircle className="w-5 h-5" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Aide & Support</span>
+            </button>
+
+            <div className="mt-12 bg-[#C9A96E] p-8 rounded-[3rem] text-white relative overflow-hidden group cursor-pointer shadow-xl shadow-[#C9A96E]/20">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
+              <Gift className="w-8 h-8 mb-6" />
+              <h4 className="text-xl font-serif mb-2">Programme Fidélité</h4>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-white/60">Vous avez 120 points</p>
+            </div>
+          </aside>
+
+          {/* Tab Content */}
+          <section className="lg:w-3/4 animate-reveal-up">
+            {activeTab === 'commandes' && (
+              <div className="space-y-8">
+                <div className="flex items-center justify-between mb-4 px-4">
+                  <h3 className="text-3xl font-serif text-[#2C2C28]">Historique <span className="italic text-gradient">d'achats</span></h3>
+                </div>
+
+                {pastOrders.length > 0 ? (
+                  pastOrders.map(order => (
+                    <div key={order.id} className="bg-white rounded-[3rem] p-10 border border-[#2D4A1E]/5 shadow-xl shadow-black/5 hover:shadow-2xl transition-all group">
+                      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-10 pb-10 border-b border-[#2D4A1E]/5">
+                        <div className="flex items-center gap-6">
+                          <div className="w-14 h-14 bg-[#F8F5EE] rounded-2xl flex items-center justify-center text-[#2D4A1E]">
                             <Package className="w-6 h-6" />
                           </div>
                           <div>
-                            <span className="text-sm font-bold text-gray-400 block mb-1 uppercase tracking-wider">Commande {order.id}</span>
-                            <strong className="text-lg text-[#2C2C2C]">Passée le {order.date}</strong>
+                            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-300 mb-1">Réf: {order.id}</p>
+                            <p className="text-xl font-serif text-[#2C2C28]">Passée le {order.date}</p>
                           </div>
                         </div>
-                        <div className="flex flex-row md:flex-col items-center md:items-end justify-between gap-2">
-                          <span className="bg-green-50 border border-green-100 text-green-700 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
-                            {order.status}
-                          </span>
-                          <strong className="text-[#2C2C2C] text-xl font-serif">{order.total.toFixed(2)} €</strong>
+                        <div className="flex items-center gap-8">
+                          <div className="text-right">
+                            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-1">Statut</p>
+                            <span className="text-xs font-bold uppercase tracking-widest text-[#7A9E5E] bg-[#7A9E5E]/10 px-4 py-1.5 rounded-full">{order.status}</span>
+                          </div>
+                          <div className="h-10 w-px bg-[#2D4A1E]/5"></div>
+                          <div className="text-right">
+                            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-300 mb-1">Total</p>
+                            <p className="text-2xl font-serif text-[#2D4A1E]">{order.total.toFixed(2)}€</p>
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
-                        <div className="flex gap-4 overflow-x-auto pb-2 flex-grow">
-                          {order.items.map((item, idx) => (
-                            <div key={idx} className="flex-shrink-0 w-20 h-20 bg-[#FAFAF8] rounded-2xl border border-gray-100 overflow-hidden relative group-hover:border-gray-200 transition-colors" title={item.name}>
-                              <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+
+                      <div className="flex flex-wrap gap-6">
+                        {order.items.map((item, idx) => (
+                          <Link key={idx} href={`/produit/${item.id}`} className="group/item relative">
+                            <div className="w-20 h-20 bg-[#F8F5EE] rounded-2xl overflow-hidden border border-transparent group-hover/item:border-[#2D4A1E]/20 transition-all shadow-sm">
+                              <img src={item.imageUrl} className="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-700" alt={item.name} />
                             </div>
-                          ))}
-                          <div className="flex items-center justify-center w-20 h-20 rounded-2xl border-2 border-dashed border-gray-200 text-gray-400 font-bold text-sm">
-                            +{order.items.length}
+                            <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#2D4A1E] text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-lg border-2 border-white">1</div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="bg-white rounded-[4rem] p-20 text-center border border-dashed border-[#2D4A1E]/20">
+                    <ShoppingBag className="w-16 h-16 text-[#F8F5EE] mx-auto mb-8" />
+                    <h4 className="text-3xl font-serif text-[#2C2C28] mb-4">Aucune commande</h4>
+                    <p className="text-gray-400 font-light mb-10 max-w-sm mx-auto">Votre historique est encore vierge. Laissez-vous séduire par nos créations botaniques.</p>
+                    <Link href="/boutique" className="btn-primary px-12">Découvrir la collection</Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'avis' && (
+              <div className="space-y-8">
+                <div className="flex items-center justify-between mb-4 px-4">
+                  <h3 className="text-3xl font-serif text-[#2C2C28]">Partager mon <span className="italic text-gradient">Expérience</span></h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {MOCK_PRODUCTS.slice(0, 4).map((item, idx) => (
+                    <div key={idx} className="bg-white p-8 rounded-[3rem] border border-[#2D4A1E]/5 shadow-xl shadow-black/5 flex gap-8 group">
+                      <div className="w-24 h-24 bg-[#F8F5EE] rounded-[2rem] overflow-hidden flex-shrink-0">
+                        <img src={item.imageUrl} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={item.name} />
+                      </div>
+                      <div className="flex-1 flex flex-col justify-between">
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-[#C9A96E] mb-2">{item.category}</p>
+                          <h4 className="text-lg font-serif text-[#2C2C28] mb-4 line-clamp-1">{item.name}</h4>
+                          <div className="flex gap-1 mb-6">
+                            {[...Array(5)].map((_, i) => (
+                              <Star key={i} className="w-4 h-4 text-gray-200 hover:text-[#C9A96E] hover:fill-[#C9A96E] cursor-pointer transition-colors" />
+                            ))}
                           </div>
                         </div>
-                        <button className="whitespace-nowrap px-6 py-3 bg-[#FAFAF8] border border-gray-200 text-[#2C2C2C] font-bold rounded-xl hover:bg-white hover:border-gray-300 transition-all focus-visible:ring-2 focus-visible:ring-gray-200 outline-none">
-                          Voir la facture
+                        <button className="text-[9px] font-bold uppercase tracking-widest text-[#2D4A1E] hover:text-[#C9A96E] transition-colors flex items-center gap-2">
+                          Rédiger un avis <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div className="text-center py-16 bg-white rounded-3xl border-2 border-dashed border-gray-100">
-                  <div className="w-24 h-24 bg-[#39B54A]/5 rounded-full flex items-center justify-center mx-auto mb-6 text-[#39B54A]">
-                    <ShoppingBag className="w-10 h-10" />
-                  </div>
-                  <h3 className="text-2xl font-serif text-[#2C2C2C] mb-3">Votre panier est vide</h3>
-                  <p className="text-gray-500 mb-8 max-w-sm mx-auto">Vous n'avez pas encore passé de commande. Découvrez nos soins naturels et commencez votre routine.</p>
-                  <Link href="/boutique" className="inline-block bg-[#39B54A] text-white px-8 py-4 rounded-full font-bold hover:bg-[#278E35] transition-all hover:shadow-[0_8px_30px_rgb(57,181,74,0.3)] hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-[#39B54A] focus-visible:ring-offset-2 outline-none">
-                    Découvrir la boutique
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Tab Content: Avis */}
-        {activeTab === 'avis' && (
-          <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden">
-            <div className="p-8 md:p-10 border-b border-gray-50">
-              <h2 className="text-2xl font-bold text-[#2C2C2C]">Vos avis produits</h2>
-              <p className="text-gray-500 mt-1">Partagez votre expérience avec la communauté.</p>
-            </div>
-            
-            <div className="p-8 md:p-10 bg-[#FAFAF8]/50">
-              {!hasOrdered ? (
-                <div className="bg-white border-2 border-dashed border-gray-200 p-12 rounded-3xl text-center max-w-2xl mx-auto">
-                  <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6 text-amber-500">
-                    <Star className="w-10 h-10" />
-                  </div>
-                  <h3 className="text-2xl font-serif text-[#2C2C2C] mb-4">Avis vérifiés uniquement</h3>
-                  <p className="text-gray-500 leading-relaxed">
-                    Pour garantir l'authenticité des retours de notre communauté, seuls les clients ayant passé et reçu une commande peuvent laisser un avis.
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {pastOrders[0]?.items.map((item, idx) => (
-                      <div key={idx} className="bg-white border border-gray-100 rounded-3xl p-6 flex flex-col sm:flex-row gap-6 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="w-24 h-24 rounded-2xl overflow-hidden bg-[#FAFAF8] flex-shrink-0">
-                          <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
-                        </div>
-                        <div className="flex-1 flex flex-col justify-between">
-                          <div>
-                            <h4 className="font-bold text-[#2C2C2C] mb-2 line-clamp-2 leading-tight">{item.name}</h4>
-                            <div className="flex gap-1 mb-4" aria-label="Noter le produit">
-                              {[...Array(5)].map((_, i) => (
-                                <button key={i} className="focus-visible:ring-2 focus-visible:ring-[#F2A900] outline-none rounded-full p-1 -m-1">
-                                  <Star className="w-6 h-6 text-gray-200 hover:text-[#F2A900] hover:fill-[#F2A900] cursor-pointer transition-colors" aria-hidden="true" />
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                          <button className="text-sm font-bold text-[#39B54A] hover:text-[#278E35] transition-colors self-start px-4 py-2 bg-[#39B54A]/5 hover:bg-[#39B54A]/10 rounded-lg focus-visible:ring-2 focus-visible:ring-[#39B54A] outline-none">
-                            Rédiger un avis
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+              </div>
+            )}
+          </section>
+        </div>
       </div>
     </main>
   );

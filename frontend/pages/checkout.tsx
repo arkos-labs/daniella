@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useCart } from '../hooks/useCart';
-import { ArrowRight, MapPin, Package, CreditCard, CheckCircle, Lock } from 'lucide-react';
+import { ArrowRight, MapPin, Package, CreditCard, CheckCircle, Lock, ChevronLeft, Truck, Store } from 'lucide-react';
 
 export default function Checkout() {
   const { items } = useCart();
   const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
-  const [step, setStep] = useState(1);
   const [form, setForm] = useState({ name: '', email: '', phone: '', address: '', city: '', postal: '', pickupCity: 'Valenciennes' });
 
   const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
@@ -15,150 +14,194 @@ export default function Checkout() {
   const total = subtotal + shipping;
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] pt-28 pb-20">
+    <main className="min-h-screen bg-[#F8F5EE] pt-44 pb-32">
       <Head>
         <title>Finaliser ma commande | Dany Natural Concept</title>
-        <meta name="description" content="Finalisez votre commande en toute sécurité." />
       </Head>
 
-      <div className="container mx-auto px-4 max-w-6xl">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-12">
-          <Link href="/panier" className="text-gray-400 hover:text-[#4A5C3A] text-sm flex items-center gap-1">← Panier</Link>
-          <span className="text-gray-200">/</span>
-          <span className="font-bold text-[#4A5C3A] text-sm">Paiement</span>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Form */}
-          <div className="lg:col-span-2 space-y-8">
-
-            {/* Delivery Method */}
-            <div className="bg-white rounded-2xl border border-gray-100 p-8">
-              <h2 className="font-bold text-xl mb-6 text-[#2C2C2C] flex items-center gap-3"><Package className="w-5 h-5 text-[#4A5C3A]" /> Mode de livraison</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <button
-                  onClick={() => setDeliveryMethod('delivery')}
-                  className={`p-5 border-2 rounded-2xl text-left transition-all ${deliveryMethod === 'delivery' ? 'border-[#4A5C3A] bg-[#4A5C3A]/5' : 'border-gray-100 hover:border-gray-200'}`}
-                >
-                  <div className="text-2xl mb-2">📦</div>
-                  <h4 className="font-bold text-sm">Livraison à domicile</h4>
-                  <p className="text-xs text-gray-400 mt-1">Colissimo • 3-5 jours</p>
-                  <p className="text-xs font-bold mt-2 text-[#4A5C3A]">{subtotal >= 80 ? 'Gratuit 🎉' : '10 €'}</p>
-                </button>
-                <button
-                  onClick={() => setDeliveryMethod('pickup')}
-                  className={`p-5 border-2 rounded-2xl text-left transition-all ${deliveryMethod === 'pickup' ? 'border-[#4A5C3A] bg-[#4A5C3A]/5' : 'border-gray-100 hover:border-gray-200'}`}
-                >
-                  <div className="text-2xl mb-2">🤝</div>
-                  <h4 className="font-bold text-sm">Remise en main propre</h4>
-                  <p className="text-xs text-gray-400 mt-1">Valenciennes ou Paris</p>
-                  <p className="text-xs font-bold mt-2 text-green-600">Gratuit</p>
-                </button>
-              </div>
-              {deliveryMethod === 'pickup' && (
-                <div className="mt-4">
-                  <label className="block text-sm font-bold mb-2">Ville de retrait</label>
-                  <select value={form.pickupCity} onChange={e => setForm({ ...form, pickupCity: e.target.value })} className="w-full p-3 border border-gray-200 rounded-xl text-sm bg-[#FAFAF8]">
-                    <option>Valenciennes</option>
-                    <option>Paris</option>
-                  </select>
-                </div>
-              )}
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="flex flex-col lg:flex-row gap-20">
+          
+          {/* Checkout Steps & Form */}
+          <div className="lg:w-2/3">
+            <div className="mb-16">
+              <Link href="/panier" className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-[#2D4A1E] transition-all mb-8">
+                <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour au panier
+              </Link>
+              <h1 className="text-5xl font-serif text-[#2C2C28] mb-4">Finaliser la <span className="italic text-gradient">Commande</span></h1>
+              <p className="text-sm font-light text-gray-400">Renseignez vos informations pour recevoir vos soins d'exception.</p>
             </div>
 
-            {/* Personal Info */}
-            <div className="bg-white rounded-2xl border border-gray-100 p-8">
-              <h2 className="font-bold text-xl mb-6 text-[#2C2C2C] flex items-center gap-3"><MapPin className="w-5 h-5 text-[#4A5C3A]" /> Vos coordonnées</h2>
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold mb-1.5 text-gray-500 uppercase tracking-wider">Nom complet</label>
-                    <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Marie Dupont" className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#4A5C3A] outline-none" />
+            <div className="space-y-12">
+              {/* Delivery Choice */}
+              <section className="bg-white rounded-[3.5rem] p-12 border border-[#2D4A1E]/5 shadow-xl shadow-black/5 animate-reveal-up">
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="w-10 h-10 bg-[#C9A96E]/10 rounded-full flex items-center justify-center text-[#C9A96E]">
+                    <Truck className="w-5 h-5" />
                   </div>
-                  <div>
-                    <label className="block text-xs font-bold mb-1.5 text-gray-500 uppercase tracking-wider">Téléphone</label>
-                    <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="+33 6 00 00 00 00" className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#4A5C3A] outline-none" />
+                  <h2 className="text-xl font-serif text-[#2C2C28]">Mode de livraison</h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <button
+                    onClick={() => setDeliveryMethod('delivery')}
+                    className={`group p-8 rounded-[2.5rem] border-2 text-left transition-all duration-500 ${deliveryMethod === 'delivery' ? 'border-[#2D4A1E] bg-[#2D4A1E] text-white shadow-2xl' : 'border-[#2D4A1E]/5 bg-[#F8F5EE] hover:border-[#2D4A1E]/20'}`}
+                  >
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-colors ${deliveryMethod === 'delivery' ? 'bg-white/10 text-white' : 'bg-white text-[#C9A96E]'}`}>
+                      <Truck className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-sm font-bold uppercase tracking-widest mb-2">Expédition</h4>
+                    <p className={`text-[10px] uppercase tracking-widest mb-4 opacity-60 ${deliveryMethod === 'delivery' ? 'text-white' : 'text-gray-400'}`}>À votre domicile via Colissimo</p>
+                    <p className={`text-xl font-serif ${deliveryMethod === 'delivery' ? 'text-[#C9A96E]' : 'text-[#2D4A1E]'}`}>{subtotal >= 80 ? 'Offerte' : '10,00€'}</p>
+                  </button>
+
+                  <button
+                    onClick={() => setDeliveryMethod('pickup')}
+                    className={`group p-8 rounded-[2.5rem] border-2 text-left transition-all duration-500 ${deliveryMethod === 'pickup' ? 'border-[#2D4A1E] bg-[#2D4A1E] text-white shadow-2xl' : 'border-[#2D4A1E]/5 bg-[#F8F5EE] hover:border-[#2D4A1E]/20'}`}
+                  >
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-colors ${deliveryMethod === 'pickup' ? 'bg-white/10 text-white' : 'bg-white text-[#C9A96E]'}`}>
+                      <Store className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-sm font-bold uppercase tracking-widest mb-2">Retrait</h4>
+                    <p className={`text-[10px] uppercase tracking-widest mb-4 opacity-60 ${deliveryMethod === 'pickup' ? 'text-white' : 'text-gray-400'}`}>En main propre (gratuit)</p>
+                    <p className={`text-xl font-serif ${deliveryMethod === 'pickup' ? 'text-[#C9A96E]' : 'text-[#2D4A1E]'}`}>Gratuit</p>
+                  </button>
+                </div>
+
+                {deliveryMethod === 'pickup' && (
+                  <div className="mt-8 pt-8 border-t border-[#2D4A1E]/5 animate-reveal-up">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-4 block">Lieu de rendez-vous</label>
+                    <select value={form.pickupCity} onChange={e => setForm({ ...form, pickupCity: e.target.value })} className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full text-sm font-light focus:ring-2 focus:ring-[#2D4A1E]">
+                      <option>Valenciennes (Cabinet)</option>
+                      <option>Paris (Point de retrait)</option>
+                    </select>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold mb-1.5 text-gray-500 uppercase tracking-wider">Email</label>
-                  <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="votre@email.com" className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#4A5C3A] outline-none" />
-                </div>
-                {deliveryMethod === 'delivery' && (
-                  <>
-                    <div>
-                      <label className="block text-xs font-bold mb-1.5 text-gray-500 uppercase tracking-wider">Adresse</label>
-                      <input value={form.address} onChange={e => setForm({ ...form, address: e.target.value })} placeholder="12 rue de la Paix" className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#4A5C3A] outline-none" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-bold mb-1.5 text-gray-500 uppercase tracking-wider">Code postal</label>
-                        <input value={form.postal} onChange={e => setForm({ ...form, postal: e.target.value })} placeholder="75001" className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#4A5C3A] outline-none" />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-bold mb-1.5 text-gray-500 uppercase tracking-wider">Ville</label>
-                        <input value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} placeholder="Paris" className="w-full px-4 py-3 bg-[#FAFAF8] border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#4A5C3A] outline-none" />
-                      </div>
-                    </div>
-                  </>
                 )}
-              </div>
-            </div>
+              </section>
 
-            {/* Payment */}
-            <div className="bg-white rounded-2xl border border-gray-100 p-8">
-              <h2 className="font-bold text-xl mb-6 text-[#2C2C2C] flex items-center gap-3"><CreditCard className="w-5 h-5 text-[#4A5C3A]" /> Paiement sécurisé</h2>
-              <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center">
-                <Lock className="w-8 h-8 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-400 text-sm italic">Intégration Stripe sécurisée (Phase 3)</p>
-                <p className="text-gray-300 text-xs mt-1">Visa, Mastercard, CB, Apple Pay, Google Pay</p>
-              </div>
-              <button
-                onClick={() => alert('Phase 3 : Intégration Stripe en cours de développement !')}
-                className="w-full flex items-center justify-center gap-3 mt-6 bg-[#4A5C3A] text-white py-4 rounded-xl font-bold text-base hover:bg-[#3a4a2d] transition-all active:scale-95"
-              >
-                <Lock className="w-5 h-5" />
-                Payer {total.toFixed(2)} € en toute sécurité
-              </button>
+              {/* Personal Details */}
+              <section className="bg-white rounded-[3.5rem] p-12 border border-[#2D4A1E]/5 shadow-xl shadow-black/5 animate-reveal-up" style={{ animationDelay: '0.1s' }}>
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="w-10 h-10 bg-[#C9A96E]/10 rounded-full flex items-center justify-center text-[#C9A96E]">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-xl font-serif text-[#2C2C28]">Vos Coordonnées</h2>
+                </div>
+
+                <div className="space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-300 mb-3 block">Nom Complet</label>
+                      <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Ex: Marie Dupont" className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full text-sm font-light focus:ring-2 focus:ring-[#2D4A1E]" />
+                    </div>
+                    <div>
+                      <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-300 mb-3 block">Téléphone</label>
+                      <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="+33 6 00 00 00 00" className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full text-sm font-light focus:ring-2 focus:ring-[#2D4A1E]" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-300 mb-3 block">Adresse Email</label>
+                    <input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="votre@email.com" className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full text-sm font-light focus:ring-2 focus:ring-[#2D4A1E]" />
+                  </div>
+                  
+                  {deliveryMethod === 'delivery' && (
+                    <div className="space-y-8 pt-4 animate-reveal-up">
+                      <div>
+                        <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-300 mb-3 block">Adresse de livraison</label>
+                        <input value={form.address} onChange={e => setForm({ ...form, address: e.target.value })} placeholder="Numéro et nom de rue" className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full text-sm font-light focus:ring-2 focus:ring-[#2D4A1E]" />
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-300 mb-3 block">Code Postal</label>
+                          <input value={form.postal} onChange={e => setForm({ ...form, postal: e.target.value })} placeholder="75001" className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full text-sm font-light focus:ring-2 focus:ring-[#2D4A1E]" />
+                        </div>
+                        <div>
+                          <label className="text-[9px] font-bold uppercase tracking-[0.2em] text-gray-300 mb-3 block">Ville</label>
+                          <input value={form.city} onChange={e => setForm({ ...form, city: e.target.value })} placeholder="Paris" className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full text-sm font-light focus:ring-2 focus:ring-[#2D4A1E]" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </section>
+
+              {/* Payment Info */}
+              <section className="bg-white rounded-[3.5rem] p-12 border border-[#2D4A1E]/5 shadow-xl shadow-black/5 animate-reveal-up" style={{ animationDelay: '0.2s' }}>
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="w-10 h-10 bg-[#C9A96E]/10 rounded-full flex items-center justify-center text-[#C9A96E]">
+                    <CreditCard className="w-5 h-5" />
+                  </div>
+                  <h2 className="text-xl font-serif text-[#2C2C28]">Paiement Sécurisé</h2>
+                </div>
+
+                <div className="border-2 border-dashed border-[#2D4A1E]/10 rounded-[2.5rem] p-12 text-center bg-[#F8F5EE]/50">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                    <Lock className="w-6 h-6 text-gray-300" />
+                  </div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2">Interface de Paiement Sécurisée</p>
+                  <p className="text-xs font-light text-gray-300 italic">Phase d'intégration Stripe en cours de finalisation...</p>
+                </div>
+
+                <button
+                  onClick={() => alert('Phase d\'intégration Stripe : Le paiement sera disponible très bientôt !')}
+                  className="w-full flex items-center justify-center gap-4 mt-10 bg-[#2D4A1E] text-white py-6 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-[#1A1A18] transition-all shadow-2xl shadow-[#2D4A1E]/20"
+                >
+                  <Lock className="w-4 h-4" /> Confirmer et Payer {total.toFixed(2)}€
+                </button>
+              </section>
             </div>
           </div>
 
-          {/* Order Summary */}
-          <div className="h-fit sticky top-32">
-            <div className="bg-white rounded-2xl border border-gray-100 p-6">
-              <h3 className="font-bold text-lg mb-6">Votre commande</h3>
-              <div className="space-y-4 mb-6">
-                {items.map(item => (
-                  <div key={item.productId} className="flex items-center gap-3">
-                    <div className="relative">
-                      <div className="w-14 h-14 bg-[#F5F3EE] rounded-xl overflow-hidden">
-                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+          {/* Right Sidebar - Order Recap */}
+          <div className="lg:w-1/3">
+            <div className="sticky top-44">
+              <div className="bg-white rounded-[3.5rem] p-10 border border-[#2D4A1E]/5 shadow-2xl shadow-black/5">
+                <h3 className="text-2xl font-serif text-[#2C2C28] mb-10 pb-6 border-b border-[#2D4A1E]/5">Votre Commande</h3>
+                
+                <div className="space-y-8 mb-10">
+                  {items.map(item => (
+                    <div key={item.productId} className="flex items-center gap-6">
+                      <div className="relative shrink-0">
+                        <div className="w-16 h-16 bg-[#F8F5EE] rounded-2xl overflow-hidden shadow-sm">
+                          <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+                        </div>
+                        <span className="absolute -top-2 -right-2 w-6 h-6 bg-[#2D4A1E] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
+                          {item.quantity}
+                        </span>
                       </div>
-                      <span className="absolute -top-2 -right-2 w-5 h-5 bg-[#4A5C3A] text-white text-xs rounded-full flex items-center justify-center font-bold">
-                        {item.quantity}
-                      </span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-[#2C2C28] truncate mb-1 uppercase tracking-widest">{item.name}</p>
+                        <p className="text-[10px] text-gray-400 uppercase tracking-widest">{item.price.toFixed(2)}€ / unité</p>
+                      </div>
+                      <span className="text-sm font-serif text-[#2D4A1E]">{(item.price * item.quantity).toFixed(2)}€</span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold truncate">{item.name}</p>
-                      <p className="text-xs text-gray-400">{item.price.toFixed(2)} € / unité</p>
-                    </div>
-                    <span className="text-sm font-bold">{(item.price * item.quantity).toFixed(2)} €</span>
+                  ))}
+                </div>
+
+                <div className="space-y-6 pt-10 border-t border-[#2D4A1E]/5">
+                  <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-300">
+                    <span>Sous-total</span>
+                    <span className="text-sm font-serif text-[#2C2C28]">{subtotal.toFixed(2)}€</span>
                   </div>
-                ))}
-              </div>
-              <div className="border-t pt-4 space-y-3 text-sm">
-                <div className="flex justify-between"><span className="text-gray-400">Sous-total</span><span>{subtotal.toFixed(2)} €</span></div>
-                <div className="flex justify-between"><span className="text-gray-400">Livraison</span><span className={shipping === 0 ? 'text-green-600 font-medium' : ''}>{shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)} €`}</span></div>
-                <div className="flex justify-between items-center border-t pt-3 text-lg font-bold">
-                  <span>Total</span>
-                  <span className="text-[#4A5C3A]">{total.toFixed(2)} €</span>
+                  <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-[#C9A96E]">
+                    <span>Expédition</span>
+                    <span className="text-sm font-serif">{shipping === 0 ? 'Offerte' : `${shipping.toFixed(2)}€`}</span>
+                  </div>
+                  <div className="h-px bg-[#2D4A1E]/5 my-4"></div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#2D4A1E]">Total TTC</span>
+                    <span className="text-4xl font-serif text-[#2D4A1E]">{total.toFixed(2)}€</span>
+                  </div>
+                </div>
+
+                <div className="mt-12 flex items-center justify-center gap-3 text-[8px] font-bold uppercase tracking-[0.3em] text-gray-300">
+                  <CheckCircle className="w-3 h-3 text-[#7A9E5E]" /> Satisfait ou Remboursé sous 14 jours
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

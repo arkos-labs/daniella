@@ -1,68 +1,81 @@
 import React from 'react';
 import Link from 'next/link';
-import { Leaf, Instagram, Facebook, Mail } from 'lucide-react';
+import { Leaf, Instagram, Facebook, Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal text-white pt-24 pb-12">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="col-span-1 md:col-span-2 pr-0 md:pr-12">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white">
-                <Leaf className="w-5 h-5" />
-              </div>
-              <span className="font-serif text-2xl font-bold tracking-tight">Dany Natural Concept</span>
+    <footer className="bg-[#1A1A18] text-white pt-32 pb-12 overflow-hidden relative">
+      {/* Decorative Blur */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#2D4A1E]/20 rounded-full blur-[120px]"></div>
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
+          <div className="md:col-span-5">
+            <Link href="/" className="flex items-center gap-2 mb-8 group">
+              <span className="text-3xl font-serif text-white tracking-tight">
+                Dany<span className="italic text-[#C9A96E] font-light">Natural</span>
+              </span>
             </Link>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
-              Expertise en naturopathie et cosmétique naturelle artisanale. Révélez votre beauté originelle avec nos soins formulés avec passion au cœur de Valenciennes.
+            <p className="text-white/50 text-xl font-light leading-relaxed mb-10 max-w-md">
+              Une expertise rare en <span className="text-white font-medium italic">naturopathie</span> et cosmétique artisanale pour magnifier votre nature profonde au cœur de Valenciennes.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+              <a href="https://www.instagram.com/danynaturalconcept/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C9A96E] hover:border-[#C9A96E] transition-all duration-500">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+              <a href="https://www.facebook.com/soinsnaturelsDNC" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C9A96E] hover:border-[#C9A96E] transition-all duration-500">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="mailto:contact@danynaturalconcept.org" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+              <a href="mailto:naturalconcept.france@yahoo.fr" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C9A96E] hover:border-[#C9A96E] transition-all duration-500">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
           </div>
           
-          <div>
-            <h4 className="text-xl font-bold mb-6 font-serif">Découvrir</h4>
-            <ul className="space-y-4">
-              <li><Link href="/" className="text-gray-400 hover:text-gold transition-colors">Accueil</Link></li>
-              <li><Link href="/boutique" className="text-gray-400 hover:text-gold transition-colors">Boutique & Produits</Link></li>
-              <li><Link href="/reservations" className="text-gray-400 hover:text-gold transition-colors">Prendre Rendez-vous</Link></li>
-              <li><Link href="/apropos" className="text-gray-400 hover:text-gold transition-colors">Notre Philosophie</Link></li>
-              <li><Link href="/contact" className="text-gray-400 hover:text-gold transition-colors">Nous Contacter</Link></li>
+          <div className="md:col-span-2">
+            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#C9A96E]">Navigation</h4>
+            <ul className="space-y-6">
+              <li><Link href="/" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Accueil</Link></li>
+              <li><Link href="/boutique" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Boutique</Link></li>
+              <li><Link href="/reservations" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Rendez-vous</Link></li>
+              <li><Link href="/apropos" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">À Propos</Link></li>
+              <li><Link href="/contact" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Contact</Link></li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-xl font-bold mb-6 font-serif">Informations</h4>
-            <ul className="space-y-4">
-              <li><Link href="/cgu" className="text-gray-400 hover:text-gold transition-colors">Conditions Générales</Link></li>
-              <li><Link href="/mentions-legales" className="text-gray-400 hover:text-gold transition-colors">Mentions Légales</Link></li>
-              <li><Link href="/cookies" className="text-gray-400 hover:text-gold transition-colors">Politique de Cookies</Link></li>
-              <li className="pt-4 mt-4 border-t border-white/10">
-                <p className="text-gray-400 text-sm">
-                  <strong className="text-white block mb-1">Cabinet Naturopathie</strong>
-                  Valenciennes, France<br/>
+          <div className="md:col-span-2">
+            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#C9A96E]">Légal</h4>
+            <ul className="space-y-6">
+              <li><Link href="/cgu" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Conditions</Link></li>
+              <li><Link href="/mentions-legales" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Mentions</Link></li>
+              <li><Link href="/cookies" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Cookies</Link></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-3">
+            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#C9A96E]">Le Cabinet</h4>
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <MapPin className="w-5 h-5 text-[#C9A96E] shrink-0" />
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Valenciennes, France<br />
                   Sur rendez-vous uniquement
                 </p>
-              </li>
-            </ul>
+              </div>
+              <div className="flex gap-4">
+                <Phone className="w-5 h-5 text-[#C9A96E] shrink-0" />
+                <p className="text-white/60 text-sm">+33 6 XX XX XX XX</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Dany Natural Concept. Tous droits réservés.</p>
-          <div className="flex items-center gap-2">
-            <span>Fait avec passion et nature</span>
-            <Leaf className="w-4 h-4 text-primary" />
+        <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-[0.25em] text-white/20">
+          <p>&copy; {new Date().getFullYear()} Dany Natural Concept. Excellence et Nature.</p>
+          <div className="flex items-center gap-4">
+            <span className="hover:text-white transition-colors cursor-pointer">Confidentialité</span>
+            <span className="w-1 h-1 rounded-full bg-[#C9A96E]"></span>
+            <span className="hover:text-white transition-colors cursor-pointer">Accessibilité</span>
           </div>
         </div>
       </div>

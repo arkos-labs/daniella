@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { MOCK_PRODUCTS } from '../../lib/mockData';
 import { useCart } from '../../hooks/useCart';
-import { ShoppingCart, ArrowLeft, ArrowRight, ShieldCheck, Truck, Star, Sparkles, Leaf, Info, Droplets } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, ArrowRight, ShieldCheck, Truck, Star, Sparkles, Leaf, Info, Droplets, Minus, Plus, Heart } from 'lucide-react';
 
 export default function ProductDetail() {
   const router = useRouter();
@@ -17,10 +17,13 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center pt-28">
-        <div className="text-center">
-          <p className="text-gray-400 text-xl mb-6">Produit introuvable.</p>
-          <Link href="/boutique" className="inline-block bg-[#39B54A] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#278E35] transition-colors">Retour à la boutique</Link>
+      <div className="min-h-screen bg-[#F8F5EE] flex items-center justify-center pt-28">
+        <div className="text-center animate-reveal-up">
+          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
+            <Info className="w-10 h-10 text-gray-200" />
+          </div>
+          <h2 className="text-4xl font-serif text-[#2C2C28] mb-6">Soin Introuvable</h2>
+          <Link href="/boutique" className="btn-outline px-10">Retour à la collection</Link>
         </div>
       </div>
     );
@@ -35,192 +38,202 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] pt-32 pb-24">
+    <main className="min-h-screen bg-[#F8F5EE] pb-32">
       <Head>
         <title>{product.name} | Dany Natural Concept</title>
         <meta name="description" content={product.description} />
       </Head>
 
-      <div className="container mx-auto px-4 max-w-7xl">
-        <button onClick={() => router.push('/boutique')} className="inline-flex items-center gap-2 text-gray-500 hover:text-[#39B54A] mb-10 transition-colors group bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-bold uppercase tracking-wider">Retour à la boutique</span>
-        </button>
+      {/* Product Hero Section */}
+      <section className="relative pt-44 pb-20 overflow-hidden bg-white border-b border-[#2D4A1E]/5">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <button onClick={() => router.push('/boutique')} className="group flex items-center gap-3 text-gray-400 hover:text-[#2D4A1E] transition-colors mb-16 uppercase text-[10px] font-bold tracking-widest">
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour à la boutique
+          </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 mb-24">
-          
-          {/* Image Section (Left) */}
-          <div className="lg:col-span-5 relative">
-            <div className="bg-white rounded-[3rem] overflow-hidden aspect-[4/5] shadow-2xl p-4 border border-gray-100">
-              <div className="w-full h-full rounded-[2.5rem] overflow-hidden bg-[#FAFAF8] relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+            
+            {/* Image Showcase */}
+            <div className="lg:col-span-5 relative animate-reveal-up">
+              <div className="bg-[#F8F5EE] rounded-[4rem] overflow-hidden aspect-[4/5] shadow-2xl relative group">
                 <img
                   src={product.imageUrl}
                   alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  onError={(e: any) => { e.target.src = 'https://via.placeholder.com/600x800/FAFAF8/39B54A?text=DNC'; }}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  onError={(e: any) => { e.target.src = 'https://via.placeholder.com/600x800/F8F5EE/2D4A1E?text=DNC'; }}
                 />
-                <div className="absolute top-6 left-6">
-                  <span className="bg-white/90 backdrop-blur-md text-[#39B54A] text-sm font-bold px-4 py-1.5 rounded-full shadow-sm">
+                <div className="absolute top-10 left-10">
+                  <span className="bg-white/90 backdrop-blur-md text-[#2D4A1E] text-[10px] font-bold uppercase tracking-widest px-6 py-2.5 rounded-full shadow-xl">
                     {product.category}
                   </span>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Details Section (Right) */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#2C2C2C] mb-6 leading-tight">
-              {product.name}
-            </h1>
-
-            <div className="flex items-center gap-4 mb-8 pb-8 border-b border-gray-200">
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-[#F2A900] text-[#F2A900]" />)}
-              </div>
-              <span className="text-sm font-bold text-[#39B54A] bg-[#39B54A]/10 px-3 py-1 rounded-full">100% Naturel</span>
-              {product.stock < 10 && <span className="text-sm font-bold text-red-500 bg-red-50 px-3 py-1 rounded-full">Stock Limité</span>}
-            </div>
-
-            {/* Product Tabs */}
-            <div className="mb-10">
-              <div className="flex gap-6 mb-6 border-b border-gray-200">
-                <button 
-                  onClick={() => setActiveTab('description')}
-                  className={`pb-4 text-lg font-bold transition-colors relative ${activeTab === 'description' ? 'text-[#39B54A]' : 'text-gray-400 hover:text-gray-600'}`}
-                >
-                  Description
-                  {activeTab === 'description' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#39B54A]"></div>}
+                <button className="absolute bottom-10 right-10 w-14 h-14 bg-white rounded-full flex items-center justify-center text-[#2D4A1E] hover:bg-[#C9A96E] hover:text-white transition-all shadow-2xl">
+                  <Heart className="w-6 h-6" />
                 </button>
-                <button 
-                  onClick={() => setActiveTab('utilisation')}
-                  className={`pb-4 text-lg font-bold transition-colors relative ${activeTab === 'utilisation' ? 'text-[#39B54A]' : 'text-gray-400 hover:text-gray-600'}`}
-                >
-                  Conseils d'utilisation
-                  {activeTab === 'utilisation' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#39B54A]"></div>}
-                </button>
-                <button 
-                  onClick={() => setActiveTab('composition')}
-                  className={`pb-4 text-lg font-bold transition-colors relative ${activeTab === 'composition' ? 'text-[#39B54A]' : 'text-gray-400 hover:text-gray-600'}`}
-                >
-                  Composition
-                  {activeTab === 'composition' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#39B54A]"></div>}
-                </button>
-              </div>
-
-              <div className="min-h-[120px] text-lg text-gray-600 leading-relaxed">
-                {activeTab === 'description' && (
-                  <p className="animate-in fade-in slide-in-from-bottom-2">{product.description} Conçu avec amour dans notre atelier à Valenciennes, ce soin est un véritable concentré d'actifs naturels pour revitaliser votre corps en douceur.</p>
-                )}
-                {activeTab === 'utilisation' && (
-                  <div className="animate-in fade-in slide-in-from-bottom-2 flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <Sparkles className="w-8 h-8 text-[#F2A900] flex-shrink-0 mt-1" />
-                    <p>
-                      <strong>L'astuce de la naturopathe :</strong> Appliquez une noisette sur une peau propre et légèrement humide pour faciliter la pénétration. Massez en mouvements circulaires doux pour activer la micro-circulation.
-                    </p>
-                  </div>
-                )}
-                {activeTab === 'composition' && (
-                  <ul className="animate-in fade-in slide-in-from-bottom-2 space-y-2">
-                    <li className="flex items-center gap-3"><Leaf className="w-5 h-5 text-[#39B54A]" /> Beurres végétaux bruts non raffinés</li>
-                    <li className="flex items-center gap-3"><Droplets className="w-5 h-5 text-[#39B54A]" /> Huiles végétales pressées à froid</li>
-                    <li className="flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-[#39B54A]" /> Zéro paraben, zéro silicone</li>
-                  </ul>
-                )}
               </div>
             </div>
 
-            {/* Add to cart block */}
-            <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-lg border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
-              <div className="flex flex-col items-center md:items-start w-full md:w-auto">
-                <span className="text-4xl font-bold text-[#39B54A] mb-1">{product.price.toFixed(2)} €</span>
-                <span className="text-sm text-gray-400">TTC - Livraison gratuite dès 80€</span>
+            {/* Product Meta & Actions */}
+            <div className="lg:col-span-7 flex flex-col justify-center animate-reveal-up" style={{ animationDelay: '0.1s' }}>
+              <div className="flex items-center gap-2 mb-6">
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-[#C9A96E] text-[#C9A96E]" />)}
+                <span className="text-[10px] font-bold text-gray-400 ml-2 uppercase tracking-widest">Avis Clients (24)</span>
               </div>
               
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
-                <div className="flex items-center gap-4 bg-[#FAFAF8] rounded-2xl p-2 w-full sm:w-auto justify-center">
-                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-12 h-12 flex items-center justify-center text-2xl font-light text-gray-500 hover:text-[#39B54A] bg-white rounded-xl shadow-sm">−</button>
-                  <span className="w-8 text-center font-bold text-xl text-[#2C2C2C]">{quantity}</span>
-                  <button onClick={() => setQuantity(q => q + 1)} className="w-12 h-12 flex items-center justify-center text-2xl font-light text-gray-500 hover:text-[#39B54A] bg-white rounded-xl shadow-sm">+</button>
+              <h1 className="text-5xl md:text-7xl font-serif text-[#2C2C28] mb-8 leading-[1.1]">
+                {product.name}
+              </h1>
+
+              <div className="flex items-center gap-10 mb-12 pb-12 border-b border-[#2D4A1E]/5">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#C9A96E] mb-2">Prix unitaire</span>
+                  <span className="text-4xl font-serif text-[#2D4A1E]">{product.price.toFixed(2)}€</span>
                 </div>
+                <div className="h-12 w-px bg-[#2D4A1E]/10"></div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-2">Statut</span>
+                  <span className={`text-xs font-bold uppercase tracking-widest ${product.stock > 0 ? 'text-[#7A9E5E]' : 'text-red-400'}`}>
+                    {product.stock > 0 ? 'Disponible en Stock' : 'Épuisé'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Tabs Integration */}
+              <div className="mb-12">
+                <div className="flex gap-10 mb-8 border-b border-[#2D4A1E]/5">
+                  {['description', 'utilisation', 'composition'].map((tab) => (
+                    <button 
+                      key={tab}
+                      onClick={() => setActiveTab(tab as any)}
+                      className={`pb-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all relative ${activeTab === tab ? 'text-[#2D4A1E]' : 'text-gray-300 hover:text-gray-500'}`}
+                    >
+                      {tab}
+                      {activeTab === tab && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C9A96E]"></div>}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="min-h-[160px] text-lg font-light text-gray-500 leading-relaxed italic-serif-container">
+                  {activeTab === 'description' && (
+                    <p className="animate-reveal-up">{product.description} Formulée au cœur de Valenciennes, cette création artisanale puise sa force dans la pureté des actifs végétaux non raffinés pour offrir une régénération profonde et respectueuse.</p>
+                  )}
+                  {activeTab === 'utilisation' && (
+                    <div className="animate-reveal-up flex items-start gap-8 bg-[#F8F5EE] p-8 rounded-[2.5rem]">
+                      <div className="w-12 h-12 rounded-full bg-[#C9A96E] flex items-center justify-center text-white shrink-0 shadow-lg">
+                        <Sparkles className="w-6 h-6" />
+                      </div>
+                      <p className="text-sm">
+                        <strong className="text-[#2D4A1E] block mb-2 font-bold uppercase tracking-widest text-[10px]">L'Art du Soin :</strong> Appliquez une noisette sur une peau propre et légèrement humide. Massez délicatement en mouvements circulaires ascendants pour favoriser la synergie des actifs avec votre épiderme.
+                      </p>
+                    </div>
+                  )}
+                  {activeTab === 'composition' && (
+                    <div className="animate-reveal-up grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#2D4A1E]/5">
+                        <Leaf className="w-5 h-5 text-[#C9A96E]" />
+                        <span className="text-xs font-bold uppercase tracking-widest">Beurres Bruts</span>
+                      </div>
+                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#2D4A1E]/5">
+                        <Droplets className="w-5 h-5 text-[#C9A96E]" />
+                        <span className="text-xs font-bold uppercase tracking-widest">Huiles Pressées à froid</span>
+                      </div>
+                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#2D4A1E]/5">
+                        <ShieldCheck className="w-5 h-5 text-[#C9A96E]" />
+                        <span className="text-xs font-bold uppercase tracking-widest">Zéro Conservateur</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Purchase Box */}
+              <div className="bg-[#2D4A1E] p-8 md:p-12 rounded-[4rem] flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl shadow-[#2D4A1E]/30 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 noise-bg pointer-events-none"></div>
+                
+                <div className="flex items-center gap-6 bg-white/10 backdrop-blur-md rounded-full p-2 w-full md:w-auto border border-white/10">
+                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-all border border-white/5">
+                    <Minus className="w-4 h-4" />
+                  </button>
+                  <span className="w-8 text-center font-serif text-2xl text-white">{quantity}</span>
+                  <button onClick={() => setQuantity(q => q + 1)} className="w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-all border border-white/5">
+                    <Plus className="w-4 h-4" />
+                  </button>
+                </div>
+
                 <button
                   onClick={handleAdd}
-                  className={`flex-1 w-full flex items-center justify-center gap-3 py-5 px-8 rounded-2xl font-bold text-lg transition-all duration-300 shadow-md ${
-                    added ? 'bg-green-500 text-white scale-[0.98]' : 'bg-[#39B54A] text-white hover:bg-[#278E35] hover:shadow-xl hover:-translate-y-1'
+                  disabled={product.stock <= 0}
+                  className={`w-full md:flex-1 flex items-center justify-center gap-4 py-6 rounded-full font-bold uppercase tracking-widest text-[10px] transition-all duration-500 shadow-xl ${
+                    added 
+                      ? 'bg-[#7A9E5E] text-white' 
+                      : 'bg-[#C9A96E] text-white hover:bg-white hover:text-[#2D4A1E]'
                   }`}
                 >
-                  <ShoppingCart className="w-6 h-6" />
-                  {added ? 'Ajouté !' : 'Ajouter'}
+                  <ShoppingCart className="w-5 h-5" />
+                  {added ? 'Ajouté au panier' : 'Ajouter à la routine'}
                 </button>
               </div>
-            </div>
-
-            {/* Trust badges (Grid layout) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[
-                { icon: Truck, label: 'Livraison offerte', sub: 'Dès 80€ d\'achat' },
-                { icon: ShieldCheck, label: 'Paiement', sub: '100% Sécurisé' },
-                { icon: Leaf, label: 'Fait main', sub: 'À Valenciennes' },
-              ].map(({ icon: Icon, label, sub }) => (
-                <div key={label} className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-4 hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-[#39B54A]/10 rounded-full flex items-center justify-center flex-shrink-0 text-[#39B54A]">
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <strong className="block text-sm text-[#2C2C2C]">{label}</strong>
-                    <span className="text-xs text-gray-500">{sub}</span>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Related Products */}
-        {related.length > 0 && (
-          <div className="pt-16 border-t border-gray-200">
-            <div className="flex items-center justify-between mb-12">
-              <h2 className="text-4xl font-serif text-[#2C2C2C]">Complétez votre routine</h2>
-              <Link href="/boutique" className="hidden md:flex items-center gap-2 text-[#39B54A] font-bold hover:underline">
-                Voir toute la boutique <ArrowRight className="w-4 h-4" />
-              </Link>
+      {/* Trust & Details Section */}
+      <section className="container mx-auto px-6 py-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white p-10 rounded-[3rem] border border-[#2D4A1E]/5 flex flex-col items-center text-center shadow-sm">
+            <Truck className="w-8 h-8 text-[#C9A96E] mb-6" />
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#2D4A1E] mb-2">Expédition Soignée</h4>
+            <p className="text-sm font-light text-gray-400">Offerte dès 80€ d'achat en France Métropolitaine.</p>
+          </div>
+          <div className="bg-white p-10 rounded-[3rem] border border-[#2D4A1E]/5 flex flex-col items-center text-center shadow-sm">
+            <ShieldCheck className="w-8 h-8 text-[#C9A96E] mb-6" />
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#2D4A1E] mb-2">Paiement Sécurisé</h4>
+            <p className="text-sm font-light text-gray-400">Transactions cryptées et protection de vos données.</p>
+          </div>
+          <div className="bg-white p-10 rounded-[3rem] border border-[#2D4A1E]/5 flex flex-col items-center text-center shadow-sm">
+            <Leaf className="w-8 h-8 text-[#C9A96E] mb-6" />
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#2D4A1E] mb-2">Artisanat Français</h4>
+            <p className="text-sm font-light text-gray-400">Formulé et fabriqué avec passion à Valenciennes.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Products */}
+      {related.length > 0 && (
+        <section className="container mx-auto px-6 pt-16">
+          <div className="flex items-end justify-between mb-16 px-4">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#C9A96E] mb-4 block">Découvrir plus</span>
+              <h2 className="text-5xl font-serif text-[#2C2C28]">Complétez votre <span className="italic text-gradient">Rituel</span></h2>
             </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {related.map(p => (
-                <div key={p.id} className="group bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+            <Link href="/boutique" className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-[#2D4A1E] hover:text-[#C9A96E] transition-all">
+              Toute la collection <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            {related.map(p => (
+              <div key={p.id} className="card-hover bg-white rounded-[3rem] p-4 flex flex-col group animate-reveal-up">
+                <Link href={`/produit/${p.id}`} className="relative aspect-square rounded-[2.5rem] overflow-hidden mb-8 block">
+                  <img src={p.imageUrl} alt={p.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                </Link>
+                <div className="px-4 pb-4">
                   <Link href={`/produit/${p.id}`}>
-                    <div className="relative h-64 bg-[#FAFAF8] overflow-hidden cursor-pointer p-4">
-                      <div className="w-full h-full rounded-2xl overflow-hidden relative">
-                        <img src={p.imageUrl} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      </div>
-                    </div>
+                    <h4 className="text-xl font-serif text-[#2C2C28] mb-3 group-hover:text-[#2D4A1E] transition-colors truncate">{p.name}</h4>
                   </Link>
-                  <div className="p-6">
-                    <Link href={`/produit/${p.id}`}>
-                      <h4 className="text-lg font-bold text-[#2C2C2C] mb-2 truncate group-hover:text-[#39B54A] transition-colors">{p.name}</h4>
-                    </Link>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[#39B54A] font-bold text-xl">{p.price.toFixed(2)} €</span>
-                      <button 
-                        onClick={(e) => {
-                          e.preventDefault();
-                          addItem({ productId: p.id, name: p.name, price: p.price, quantity: 1, imageUrl: p.imageUrl });
-                          alert('Ajouté au panier');
-                        }}
-                        className="w-10 h-10 rounded-full bg-[#FAFAF8] flex items-center justify-center text-gray-400 hover:bg-[#39B54A] hover:text-white transition-colors"
-                      >
-                        <ShoppingCart className="w-4 h-4" />
-                      </button>
-                    </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-serif text-[#2D4A1E]">{p.price.toFixed(2)}€</span>
+                    <button className="w-10 h-10 rounded-full bg-[#F8F5EE] flex items-center justify-center text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white transition-all">
+                      <ShoppingCart className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )}
-      </div>
-    </div>
+        </section>
+      )}
+    </main>
   );
 }

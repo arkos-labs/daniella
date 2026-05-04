@@ -1,87 +1,138 @@
 import React from 'react';
 import Head from 'next/head';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Instagram, Facebook, Clock } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <div className="min-h-screen pt-32 pb-20">
+    <main className="min-h-screen bg-[#F8F5EE] pb-32">
       <Head>
         <title>Contact | Dany Natural Concept</title>
+        <meta name="description" content="Une question ? Un conseil personnalisé ? Contactez l'équipe Dany Natural Concept à Valenciennes." />
       </Head>
 
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl mb-4">Contactez-nous</h1>
-          <p className="text-gray-600 text-xl">Une question ? Un conseil ? Nous sommes à votre écoute.</p>
+      {/* Hero Header */}
+      <section className="relative pt-44 pb-24 overflow-hidden bg-white border-b border-[#2D4A1E]/5">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#3D6228]/5 rounded-full blur-[100px]"></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
+          <span className="section-tag mb-6">Dialogue & Écoute</span>
+          <h1 className="text-6xl md:text-8xl font-serif mb-8 text-[#2C2C28] leading-[0.95]">
+            Nous <span className="italic-serif text-gradient">Contacter</span>
+          </h1>
+          <p className="text-gray-500 text-xl md:text-2xl max-w-2xl mx-auto font-light leading-relaxed">
+            Une interrogation sur nos soins ou besoin d'un accompagnement spécifique ? Notre équipe est à votre entière disposition.
+          </p>
+        </div>
+      </section>
+
+      <div className="container mx-auto px-6 mt-20 max-w-7xl">
+        {/* Info Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+          <div className="bg-white p-12 rounded-[3rem] shadow-xl shadow-black/5 border border-[#2D4A1E]/5 text-center group hover:-translate-y-2 transition-all duration-500">
+            <div className="w-16 h-16 bg-[#F8F5EE] rounded-2xl flex items-center justify-center mx-auto mb-8 text-[#C9A96E] group-hover:bg-[#C9A96E] group-hover:text-white transition-all duration-500">
+              <Mail className="w-7 h-7" />
+            </div>
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#2D4A1E]/40 mb-3">Email</h3>
+            <p className="text-xl font-serif text-[#2C2C28]">contact@danynaturalconcept.org</p>
+          </div>
+
+          <div className="bg-white p-12 rounded-[3rem] shadow-xl shadow-black/5 border border-[#2D4A1E]/5 text-center group hover:-translate-y-2 transition-all duration-500">
+            <div className="w-16 h-16 bg-[#F8F5EE] rounded-2xl flex items-center justify-center mx-auto mb-8 text-[#C9A96E] group-hover:bg-[#C9A96E] group-hover:text-white transition-all duration-500">
+              <Phone className="w-7 h-7" />
+            </div>
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#2D4A1E]/40 mb-3">Téléphone</h3>
+            <p className="text-xl font-serif text-[#2C2C28]">+33 6 XX XX XX XX</p>
+          </div>
+
+          <div className="bg-white p-12 rounded-[3rem] shadow-xl shadow-black/5 border border-[#2D4A1E]/5 text-center group hover:-translate-y-2 transition-all duration-500">
+            <div className="w-16 h-16 bg-[#F8F5EE] rounded-2xl flex items-center justify-center mx-auto mb-8 text-[#C9A96E] group-hover:bg-[#C9A96E] group-hover:text-white transition-all duration-500">
+              <MapPin className="w-7 h-7" />
+            </div>
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#2D4A1E]/40 mb-3">Localisation</h3>
+            <p className="text-xl font-serif text-[#2C2C28]">Valenciennes, France</p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center">
-            <div className="w-16 h-16 bg-cream rounded-full flex items-center justify-center mx-auto mb-6">
-              <Mail className="text-primary w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Email</h3>
-            <p className="text-gray-600">contact@danynaturalconcept.org</p>
-          </div>
-
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center">
-            <div className="w-16 h-16 bg-cream rounded-full flex items-center justify-center mx-auto mb-6">
-              <Phone className="text-primary w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Téléphone</h3>
-            <p className="text-gray-600">+33 6 XX XX XX XX</p>
-          </div>
-
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center">
-            <div className="w-16 h-16 bg-cream rounded-full flex items-center justify-center mx-auto mb-6">
-              <MapPin className="text-primary w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold mb-2">Localisation</h3>
-            <p className="text-gray-600">Valenciennes, France</p>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
-          <div className="md:w-1/2 p-12 md:p-20">
-            <h2 className="text-3xl mb-8">Envoyez-nous un message</h2>
-            <form className="space-y-6">
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-bold mb-2">Nom</label>
-                  <input type="text" className="w-full p-4 bg-cream border-none rounded-xl focus:ring-2 focus:ring-primary" />
+        {/* Form & Sidebar */}
+        <div className="bg-white rounded-[4rem] overflow-hidden shadow-2xl shadow-black/5 border border-[#2D4A1E]/5 flex flex-col lg:flex-row">
+          <div className="lg:w-2/3 p-12 md:p-20">
+            <h2 className="text-4xl font-serif text-[#2C2C28] mb-12">Envoyez-nous un message</h2>
+            <form className="space-y-10">
+              <div className="grid md:grid-cols-2 gap-10">
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-6">Votre Nom</label>
+                  <input type="text" className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light transition-all" placeholder="Daniella Adabra" />
                 </div>
-                <div>
-                  <label className="block text-sm font-bold mb-2">Email</label>
-                  <input type="email" className="w-full p-4 bg-cream border-none rounded-xl focus:ring-2 focus:ring-primary" />
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-6">Votre Email</label>
+                  <input type="email" className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light transition-all" placeholder="votre@email.com" />
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-bold mb-2">Sujet</label>
-                <select className="w-full p-4 bg-cream border-none rounded-xl focus:ring-2 focus:ring-primary">
-                  <option>Question sur un produit</option>
+              
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-6">Sujet de la demande</label>
+                <select className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light transition-all appearance-none cursor-pointer">
+                  <option>Conseil sur un soin</option>
                   <option>Demande de rendez-vous</option>
-                  <option>Suivi de commande</option>
-                  <option>Autre</option>
+                  <option>Suivi de ma commande</option>
+                  <option>Autre demande</option>
                 </select>
               </div>
-              <div>
-                <label className="block text-sm font-bold mb-2">Message</label>
-                <textarea rows={5} className="w-full p-4 bg-cream border-none rounded-xl focus:ring-2 focus:ring-primary"></textarea>
+
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-6">Message</label>
+                <textarea rows={6} className="w-full px-8 py-6 bg-[#F8F5EE] border-none rounded-[2.5rem] focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light transition-all resize-none" placeholder="Comment pouvons-nous vous aider ?"></textarea>
               </div>
-              <button className="btn-primary w-full">Envoyer le message</button>
+
+              <button className="btn-primary px-12 py-5 group">
+                Envoyer le message <Send className="w-4 h-4 ml-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </button>
             </form>
           </div>
-          <div className="md:w-1/2 bg-primary p-20 text-white flex flex-col justify-center">
-            <h3 className="text-2xl mb-6 font-serif">Horaires du cabinet</h3>
-            <div className="space-y-4 opacity-90">
-              <p>Lundi - Mercredi : 10h00 - 19h00</p>
-              <p>Jeudi - Vendredi : 09h00 - 17h00</p>
-              <p>Samedi : 14h00 - 19h00</p>
-              <p className="text-gold font-bold">Dimanche : Fermé</p>
+
+          <div className="lg:w-1/3 bg-[#2D4A1E] p-16 md:p-20 text-white relative overflow-hidden flex flex-col justify-between">
+            <div className="absolute top-0 left-0 w-full h-full opacity-10 noise-bg pointer-events-none"></div>
+            
+            <div className="relative z-10">
+              <h3 className="text-3xl font-serif mb-12 flex items-center gap-4">
+                <Clock className="w-8 h-8 text-[#C9A96E]" /> Horaires
+              </h3>
+              <div className="space-y-8">
+                <div className="flex justify-between border-b border-white/10 pb-4">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Lun - Mer</span>
+                  <span className="text-sm font-light">10:00 — 19:00</span>
+                </div>
+                <div className="flex justify-between border-b border-white/10 pb-4">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Jeu - Ven</span>
+                  <span className="text-sm font-light">09:00 — 17:00</span>
+                </div>
+                <div className="flex justify-between border-b border-white/10 pb-4">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Samedi</span>
+                  <span className="text-sm font-light">14:00 — 19:00</span>
+                </div>
+                <div className="flex justify-between border-b border-white/10 pb-4">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#C9A96E]">Dimanche</span>
+                  <span className="text-sm font-bold text-[#C9A96E]">Fermé</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative z-10 pt-20">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-8">Réseaux Sociaux</h4>
+              <div className="flex gap-4">
+                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C9A96E] hover:border-[#C9A96E] transition-all duration-500">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C9A96E] hover:border-[#C9A96E] transition-all duration-500">
+                  <Facebook className="w-5 h-5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
