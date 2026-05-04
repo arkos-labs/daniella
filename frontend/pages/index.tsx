@@ -149,15 +149,19 @@ export default function Home() {
                   <h3 className="text-xl font-serif text-[#2C2C28] mb-4 line-clamp-2 h-14 hover:text-[#2D4A1E] cursor-pointer transition-colors">
                     <Link href={`/produit/${product.id}`}>{product.name}</Link>
                   </h3>
-                  <div className="mt-auto flex items-center justify-between">
-                    <span className="text-2xl font-serif text-[#2D4A1E]">{product.price.toFixed(2)}€</span>
+                  <div className="mt-auto pt-6 border-t border-[#2D4A1E]/5">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-2xl font-serif text-[#2D4A1E]">{product.price.toFixed(2)}€</span>
+                      <button className="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-[#C9A96E] transition-colors">Détails</button>
+                    </div>
                     <button 
                       onClick={() => {
                         addItem({ productId: product.id, name: product.name, price: product.price, quantity: 1, imageUrl: product.imageUrl });
                       }}
-                      className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-[#C9A96E] transition-colors"
+                      className="w-full py-4 bg-[#2D4A1E] text-white rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg shadow-[#2D4A1E]/20 hover:bg-[#1A1A18] transition-all flex items-center justify-center gap-2"
                     >
-                      Ajouter +
+                      <ShoppingCart className="w-4 h-4" />
+                      Ajouter au panier
                     </button>
                   </div>
                 </div>

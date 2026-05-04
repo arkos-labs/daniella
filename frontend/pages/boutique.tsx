@@ -135,18 +135,24 @@ export default function Boutique() {
                   {product.description}
                 </p>
                 
-                <div className="mt-auto flex flex-col md:flex-row items-center justify-between border-t border-[#2D4A1E]/5 pt-4 md:pt-6 gap-2">
-                  <span className="text-lg md:text-2xl font-serif text-[#2D4A1E]">{product.price.toFixed(2)}€</span>
+                <div className="mt-auto flex flex-col items-stretch border-t border-[#2D4A1E]/5 pt-4 md:pt-6 gap-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg md:text-2xl font-serif text-[#2D4A1E] font-medium">{product.price.toFixed(2)}€</span>
+                    <button className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-[#2D4A1E]/10 flex items-center justify-center text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white transition-all">
+                      <Heart className="w-4 h-4" />
+                    </button>
+                  </div>
+                  
                   <button
                     onClick={() => handleAdd(product)}
-                    className={`flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full text-[8px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-500 w-full md:w-auto justify-center ${
+                    className={`flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-4 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-500 w-full justify-center shadow-lg active:scale-95 ${
                       addedId === product.id
-                        ? 'bg-[#7A9E5E] text-white'
-                        : 'bg-white border border-[#2D4A1E]/10 text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white hover:border-[#2D4A1E] shadow-sm'
+                        ? 'bg-[#7A9E5E] text-white shadow-[#7A9E5E]/20'
+                        : 'bg-[#2D4A1E] text-white hover:bg-[#1A1A18] shadow-[#2D4A1E]/20'
                     }`}
                   >
-                    <ShoppingCart className="w-3 h-3 md:w-4 h-4" />
-                    {addedId === product.id ? 'Ajouté' : 'Panier'}
+                    <ShoppingCart className="w-3.5 h-3.5 md:w-4 h-4" />
+                    {addedId === product.id ? 'Ajouté !' : 'Ajouter au panier'}
                   </button>
                 </div>
               </div>
