@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream text-charcoal font-sans;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif font-bold;
+  }
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-6 py-3 rounded-md font-bold transition-all hover:bg-charcoal;
+}
+
+.btn-outline {
+  @apply border-2 border-charcoal text-charcoal px-6 py-3 rounded-md font-bold transition-all hover:bg-charcoal hover:text-white;
+}
