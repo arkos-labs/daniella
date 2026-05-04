@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
 
       {/* Hero Section - Immersive Full Background */}
-      <section className="relative min-h-[70vh] flex items-center pt-20 overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center pt-10 overflow-hidden">
         {/* Full Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -29,13 +29,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/40 to-transparent"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center -translate-y-12">
+        <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
           <div className="max-w-4xl w-full flex flex-col items-center">
             <div className="animate-reveal-up">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#2D4A1E]/10 backdrop-blur-md border border-[#2D4A1E]/10 rounded-full mb-8">
-                <Sparkles className="w-4 h-4 text-[#C9A96E]" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#2D4A1E]">Collection Artisanale 2026</span>
-              </div>
               
               <h1 className="text-7xl md:text-9xl font-serif text-[#2C2C28] leading-[0.95] mb-8">
                 Révélez votre <br />

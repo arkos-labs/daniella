@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/panier": "pages/panier.js",
-  "/contact": "pages/contact.js",
-  "/apropos": "pages/apropos.js"
+  "/": "pages/index.js",
+  "/boutique": "pages/boutique.js",
+  "/reservations": "pages/reservations.js"
 }

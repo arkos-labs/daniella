@@ -58,17 +58,21 @@ function Header() {
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
       isScrolled 
-        ? 'bg-white/90 backdrop-blur-lg shadow-md py-4' 
-        : 'bg-white/40 backdrop-blur-md border-b border-white/20 py-6'
+        ? 'bg-white/95 backdrop-blur-lg shadow-md h-[121.1px]' 
+        : 'bg-white/60 backdrop-blur-md border-b border-white/10 h-[121.1px]'
     }`}>
-      <div className="container mx-auto px-6 flex items-center justify-between">
+      <div className="w-full h-full px-6 flex items-center justify-between">
         
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-2xl font-serif text-[#2D4A1E] tracking-tight">
-            Dany<span className="italic text-[#C9A96E] font-light">Natural</span>
-          </span>
-        </Link>
+        {/* Logo - Taille XXL fixe et flottante pour ne pas agrandir le header */}
+        <div className="relative z-10 w-48 h-full flex items-center">
+          <Link href="/" className="absolute top-[-19px] left-0 group">
+            <img 
+              src="/logo-dnc.png" 
+              alt="Dany Natural Concept" 
+              className="h-40 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+            />
+          </Link>
+        </div>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-10">
@@ -80,7 +84,7 @@ function Header() {
                 <Link 
                   key={link.name} 
                   href={link.path}
-                  className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 relative group
+                  className={`text-lg font-bold uppercase tracking-[0.1em] transition-all duration-300 relative group
                     ${isActive ? 'text-[#2D4A1E]' : 'text-[#2D4A1E]/60 hover:text-[#2D4A1E]'}
                   `}
                 >
@@ -94,30 +98,30 @@ function Header() {
         {/* Actions */}
         <div className="flex items-center gap-4">
           {!isLoggedIn ? (
-            <Link href="/login" className="hidden md:flex items-center justify-center w-10 h-10 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white transition-all duration-300">
-              <User className="w-4 h-4" />
+            <Link href="/login" className="hidden md:flex items-center justify-center w-14 h-14 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white transition-all duration-300">
+              <User className="w-6 h-6" />
             </Link>
           ) : (
             <div className="flex items-center gap-3">
               <Link 
                 href={userRole === 'admin' ? '/admin' : '/client'} 
-                className="w-10 h-10 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] flex items-center justify-center hover:bg-[#2D4A1E] hover:text-white transition-all duration-300"
+                className="w-14 h-14 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] flex items-center justify-center hover:bg-[#2D4A1E] hover:text-white transition-all duration-300"
               >
-                <User className="w-4 h-4" />
+                <User className="w-6 h-6" />
               </Link>
               <button 
                 onClick={handleLogout}
-                className="w-10 h-10 rounded-full border border-red-100 text-red-300 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all duration-300"
+                className="w-14 h-14 rounded-full border border-red-100 text-red-300 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all duration-300"
               >
-                <LogOut className="w-4 h-4" />
+                <LogOut className="w-6 h-6" />
               </button>
             </div>
           )}
 
-          <Link href="/panier" className="relative w-10 h-10 rounded-full bg-[#2D4A1E] text-white flex items-center justify-center shadow-lg hover:bg-[#1A1A18] transition-all duration-300 hover:-translate-y-0.5">
-            <ShoppingBag className="w-4 h-4" />
+          <Link href="/panier" className="relative w-14 h-14 rounded-full bg-[#2D4A1E] text-white flex items-center justify-center shadow-lg hover:bg-[#1A1A18] transition-all duration-300 hover:-translate-y-0.5">
+            <ShoppingBag className="w-6 h-6" />
             {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#C9A96E] text-white text-[10px] font-bold flex items-center justify-center rounded-full shadow-md animate-pulse">
+              <span className="absolute -top-1 -right-1 w-6 h-6 bg-[#C9A96E] text-white text-[11px] font-bold flex items-center justify-center rounded-full shadow-md animate-pulse">
                 {cartCount}
               </span>
             )}
@@ -125,10 +129,10 @@ function Header() {
           
           {!isDashboard && (
             <button 
-              className="lg:hidden w-10 h-10 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] flex items-center justify-center"
+              className="lg:hidden w-14 h-14 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] flex items-center justify-center"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           )}
         </div>

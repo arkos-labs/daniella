@@ -12,9 +12,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
           <div className="md:col-span-5">
             <Link href="/" className="flex items-center gap-2 mb-8 group">
-              <span className="text-3xl font-serif text-white tracking-tight">
-                Dany<span className="italic text-[#C9A96E] font-light">Natural</span>
-              </span>
+              <img 
+                src="/logo-dnc.png" 
+                alt="Dany Natural Concept" 
+                className="h-48 w-auto object-contain brightness-0 invert"
+              />
             </Link>
             <p className="text-white/50 text-xl font-light leading-relaxed mb-10 max-w-md">
               Une expertise rare en <span className="text-white font-medium italic">naturopathie</span> et cosmétique artisanale pour magnifier votre nature profonde au cœur de Valenciennes.
