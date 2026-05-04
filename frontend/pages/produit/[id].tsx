@@ -141,21 +141,26 @@ export default function ProductDetail() {
                         <ShieldCheck className="w-5 h-5 text-[#C9A96E]" />
                         <span className="text-xs font-bold uppercase tracking-widest">Zéro Conservateur</span>
                       </div>
-                    </div>
-                  )}
                 </div>
               </div>
 
-              {/* Purchase Box */}
-              <div className="bg-[#2D4A1E] p-8 md:p-12 rounded-[4rem] flex flex-col md:flex-row items-center justify-between gap-10 shadow-2xl shadow-[#2D4A1E]/30 relative overflow-hidden">
+              {/* Purchase Box - Refined Glassmorphism */}
+              <div className="bg-[#2D4A1E] p-6 md:p-10 rounded-[3rem] md:rounded-[4rem] flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10 shadow-2xl shadow-[#2D4A1E]/30 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 noise-bg pointer-events-none"></div>
                 
-                <div className="flex items-center gap-6 bg-white/10 backdrop-blur-md rounded-full p-2 w-full md:w-auto border border-white/10">
-                  <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-all border border-white/5">
+                {/* Quantity Selector */}
+                <div className="flex items-center justify-between bg-white/5 backdrop-blur-md rounded-full p-2 w-full md:w-auto border border-white/10">
+                  <button 
+                    onClick={() => setQuantity(q => Math.max(1, q - 1))} 
+                    className="w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-all"
+                  >
                     <Minus className="w-4 h-4" />
                   </button>
-                  <span className="w-8 text-center font-serif text-2xl text-white">{quantity}</span>
-                  <button onClick={() => setQuantity(q => q + 1)} className="w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-all border border-white/5">
+                  <span className="px-6 text-center font-serif text-2xl text-white min-w-[3rem]">{quantity}</span>
+                  <button 
+                    onClick={() => setQuantity(q => q + 1)} 
+                    className="w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-all"
+                  >
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
@@ -163,14 +168,14 @@ export default function ProductDetail() {
                 <button
                   onClick={handleAdd}
                   disabled={product.stock <= 0}
-                  className={`w-full md:flex-1 flex items-center justify-center gap-4 py-6 rounded-full font-bold uppercase tracking-widest text-[10px] transition-all duration-500 shadow-xl ${
+                  className={`w-full md:flex-1 flex items-center justify-center gap-4 py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] md:text-[11px] transition-all duration-500 shadow-xl active:scale-95 ${
                     added 
-                      ? 'bg-[#7A9E5E] text-white' 
-                      : 'bg-[#C9A96E] text-white hover:bg-white hover:text-[#2D4A1E]'
+                      ? 'bg-[#7A9E5E] text-white shadow-[#7A9E5E]/30' 
+                      : 'bg-[#C9A96E] text-white hover:bg-[#B8985D] shadow-[#C9A96E]/30'
                   }`}
                 >
                   <ShoppingCart className="w-5 h-5" />
-                  {added ? 'Ajouté au panier' : 'Ajouter à la routine'}
+                  {added ? 'Ajouté !' : 'Ajouter au panier'}
                 </button>
               </div>
             </div>
