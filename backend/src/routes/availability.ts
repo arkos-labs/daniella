@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { format, parseISO, startOfDay, addMinutes, isAfter, isBefore } from 'date-fns';
+import { Op } from 'sequelize';
 import Appointment from '../models/Appointment';
 
 const router = Router();
@@ -39,7 +40,7 @@ router.get('/', async (req, res) => {
         const existingAppointments = await Appointment.findAll({
             where: {
                 date: {
-                    [sequelize.Op.between]: [
+                    [Op.between]: [
                         startOfDay(selectedDate),
                         addMinutes(startOfDay(selectedDate), 1439)
                     ]
