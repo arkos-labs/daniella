@@ -218,17 +218,17 @@ export default function Home() {
       </section>
 
       {/* Booking Section - Sophisticated Glassmorphism */}
-      <section className="py-32 bg-[#2D4A1E] relative overflow-hidden">
+      <section className="py-16 md:py-32 bg-[#2D4A1E] relative overflow-hidden">
         {/* Background Texture */}
         <div className="absolute inset-0 opacity-10 noise-bg"></div>
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white opacity-[0.03] rounded-full blur-[150px]"></div>
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-5 gap-20 items-center">
+            <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
               <div className="lg:col-span-3 text-white flex flex-col items-center text-center lg:items-start lg:text-left">
                 <span className="section-tag text-white/60 mb-6">Consultations</span>
-                <h2 className="text-6xl md:text-7xl font-serif mb-10 leading-tight">
+                <h2 className="text-4xl md:text-7xl font-serif mb-10 leading-tight">
                   Un accompagnement <br /> <span className="italic text-gradient-gold">holistique</span>
                 </h2>
                 <p className="text-xl text-white/70 font-light mb-16 leading-relaxed">
@@ -268,8 +268,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="lg:col-span-2">
-                <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-12 shadow-2xl relative overflow-hidden group text-center lg:text-left">
+              <div className="lg:col-span-2 w-full">
+                <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-12 shadow-2xl relative overflow-hidden group text-center lg:text-left">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#C9A96E]/20 rounded-full blur-3xl transition-all duration-700 group-hover:bg-[#C9A96E]/40"></div>
                   
                   <h3 className="text-3xl font-serif text-white mb-6">Réserver votre séance</h3>
