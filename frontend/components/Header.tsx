@@ -58,18 +58,18 @@ function Header() {
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
       isScrolled 
-        ? 'bg-white/95 backdrop-blur-lg shadow-md h-[121.1px]' 
-        : 'bg-white/60 backdrop-blur-md border-b border-white/10 h-[121.1px]'
+        ? 'bg-white/95 backdrop-blur-lg shadow-md h-20 md:h-[121.1px]' 
+        : 'bg-white/60 backdrop-blur-md border-b border-white/10 h-20 md:h-[121.1px]'
     }`}>
-      <div className="w-full h-full px-6 flex items-center justify-between">
+      <div className="w-full h-full px-2 md:px-6 flex items-center justify-between">
         
-        {/* Logo - Taille XXL fixe et flottante pour ne pas agrandir le header */}
-        <div className="relative z-10 w-48 h-full flex items-center">
-          <Link href="/" className="absolute top-[-19px] left-0 group">
+        {/* Logo - Taille adaptée pour mobile, XXL pour desktop */}
+        <div className="relative z-10 w-32 md:w-48 h-full flex items-center">
+          <Link href="/" className="absolute top-1 md:top-[-19px] left-0 group">
             <img 
               src="/logo-dnc.png" 
               alt="Dany Natural Concept" 
-              className="h-40 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+              className="h-16 md:h-40 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
             />
           </Link>
         </div>
