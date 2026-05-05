@@ -473,23 +473,23 @@ export default function Home() {
 
               {/* Right Column: Premium Calendar */}
               <div className="lg:col-span-7">
-                <div className="bg-[#242422] rounded-[3.5rem] p-4 md:p-10 border border-white/5 shadow-2xl relative overflow-hidden">
+                <div className="bg-[#242422] rounded-[2.5rem] md:rounded-[3.5rem] p-4 md:p-10 border border-white/5 shadow-2xl relative overflow-hidden">
                   {/* Glassmorphic Header */}
-                  <div className="flex items-center justify-between mb-10 px-4">
-                    <div>
-                      <h3 className="text-2xl font-serif text-white">Disponibilités</h3>
+                  <div className="flex flex-col sm:flex-row items-center justify-between mb-8 md:mb-10 gap-6 px-2">
+                    <div className="text-center sm:text-left">
+                      <h3 className="text-xl md:text-2xl font-serif text-white">Disponibilités</h3>
                       <p className="text-[10px] text-white/40 uppercase tracking-[0.2em] mt-1">Sélectionnez votre créneau</p>
                     </div>
-                    <div className="flex items-center gap-6 bg-white/5 rounded-full px-6 py-3 border border-white/10">
+                    <div className="flex items-center gap-3 md:gap-6 bg-white/5 rounded-full px-4 md:px-6 py-2 md:py-3 border border-white/10">
                       <button className="text-white/40 hover:text-white transition-colors"><ChevronLeft className="w-4 h-4" /></button>
-                      <span className="text-xs font-bold text-white uppercase tracking-widest min-w-[100px] text-center">Mai 2026</span>
+                      <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-widest min-w-[70px] md:min-w-[100px] text-center">Mai 2026</span>
                       <button className="text-white/40 hover:text-white transition-colors"><ChevronRight className="w-4 h-4" /></button>
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-10">
                     {/* Calendar Grid */}
-                    <div className="bg-white/[0.02] rounded-[2.5rem] p-6 border border-white/5">
+                    <div className="bg-white/[0.02] rounded-[2rem] md:rounded-[2.5rem] p-3 md:p-6 border border-white/5">
                       <div className="grid grid-cols-7 gap-1 mb-6">
                         {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(d => (
                           <span key={d} className="text-[9px] text-white/20 font-bold text-center py-2">{d}</span>
@@ -502,15 +502,15 @@ export default function Home() {
                               setSelectedDate(day);
                               setSelectedTime(null);
                             }}
-                            className={`aspect-square rounded-2xl flex flex-col items-center justify-center transition-all duration-300 relative group ${
+                            className={`aspect-square rounded-xl md:rounded-2xl flex flex-col items-center justify-center transition-all duration-300 relative group ${
                               selectedDate === day 
                                 ? 'bg-[#C9A96E] text-white shadow-xl shadow-[#C9A96E]/20' 
                                 : 'text-white/60 hover:bg-white/5 hover:text-white'
                             }`}
                           >
-                            <span className="text-xs font-medium">{day}</span>
+                            <span className="text-[10px] md:text-xs font-medium">{day}</span>
                             {day % 7 === 0 && selectedDate !== day && (
-                              <span className="absolute bottom-1.5 w-1 h-1 bg-[#C9A96E] rounded-full group-hover:bg-white"></span>
+                              <span className="absolute bottom-1 w-0.5 h-0.5 md:w-1 md:h-1 bg-[#C9A96E] rounded-full group-hover:bg-white"></span>
                             )}
                           </button>
                         ))}
