@@ -38,11 +38,11 @@ export default function Footer() {
             <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#C9A96E]">Navigation</h4>
             <ul className="space-y-6">
               <li><Link href="/" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Accueil</Link></li>
-              <li><Link href="/boutique" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Boutique</Link></li>
+              <li><Link href="/collection" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Collection</Link></li>
               <li><Link href="/blog" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Blog</Link></li>
-              <li><Link href="/reservations" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Rendez-vous</Link></li>
+              <li><Link href="/consultations" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Consultations</Link></li>
               <li><Link href="/faq" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">FAQ</Link></li>
-              <li><Link href="/apropos" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">À Propos</Link></li>
+              <li><Link href="/a-propos" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">À Propos</Link></li>
               <li><Link href="/contact" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Contact</Link></li>
             </ul>
           </div>

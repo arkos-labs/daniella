@@ -10,8 +10,13 @@ export default function BlogList() {
   return (
     <main className="min-h-screen bg-[#F8F5EE]">
       <Head>
-        <title>Le Blog Naturel | Dany Natural Concept</title>
-        <meta name="description" content="Découvrez nos conseils de naturopathie, guides de soins naturels et secrets de beauté africains sur le blog DNC." />
+        <title>Blog: Conseils Beauté Naturelle, Soins &amp; Nutrition | Dany Natural</title>
+        <meta name="description" content="Blog beauté holistique: conseils cheveux crépus, soins peau naturels, nutrition beauté, routine holistique. Articles par Daniella naturopathe. Gratuit." />
+        <meta name="keywords" content="beauté naturelle conseils, soins cheveux crépus naturels, routine peau holistique, beauté africaine blog, conseils naturopathe beauté" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://daniella-three.vercel.app/blog" />
+        <meta property="og:title" content="Blog Beauté Naturelle &amp; Holistique | Dany Natural Concept" />
+        <meta property="og:description" content="Conseils cheveux crépus, soins peau naturels, nutrition beauté. Par Daniella Adabra, naturopathe certifiée." />
       </Head>
 
       <Header />
@@ -20,9 +25,9 @@ export default function BlogList() {
         <div className="container mx-auto px-6">
           <div className="text-center mb-24 max-w-3xl mx-auto">
             <span className="section-tag mb-6">L'Atelier des Savoirs</span>
-            <h1 className="text-6xl md:text-7xl font-serif text-[#2C2C28] mb-8">Journal de la <span className="italic text-gradient">Beauté</span> Holistique</h1>
+            <h1 className="text-6xl md:text-7xl font-serif text-[#2C2C28] mb-8">Blog <span className="italic text-gradient">Beauté Naturelle</span>: Conseils Holistiques, Routines &amp; Nutrition</h1>
             <p className="text-xl text-gray-500 font-light leading-relaxed">
-              Plongez dans l'univers de la naturopathie et des soins ancestraux pour nourrir votre corps et votre esprit.
+              Routines cheveux crépus, soins peau naturels, nutrition beauté &amp; conseils naturopathe. Articles gratuits par Daniella Adabra.
             </p>
           </div>
 

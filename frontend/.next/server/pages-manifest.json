@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/blog": "pages/blog.js",
-  "/faq": "pages/faq.js",
-  "/reservations": "pages/reservations.js"
+  "/produit/[id]": "pages/produit/[id].js",
+  "/boutique": "pages/boutique.js",
+  "/collection": "pages/collection.js",
+  "/": "pages/index.js"
 }

@@ -49,9 +49,9 @@ function Header() {
 
   const navLinks = [
     { name: 'Accueil', path: '/' },
-    { name: 'Boutique', path: '/boutique' },
-    { name: 'Tarifs', path: '/tarifs' },
-    { name: 'À Propos', path: '/apropos' }
+    { name: 'Collection', path: '/collection' },
+    { name: 'Consultations', path: '/consultations' },
+    { name: 'À Propos', path: '/a-propos' }
   ];
 
   return (
@@ -76,7 +76,7 @@ function Header() {
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-10">
           {navLinks
-            .filter(link => !isLoggedIn || ['Boutique', 'Réservations', 'Contact'].includes(link.name))
+            .filter(link => !isLoggedIn || ['Collection', 'Consultations', 'Contact'].includes(link.name))
             .map(link => {
               const isActive = router.pathname === link.path;
               return (
@@ -141,7 +141,7 @@ function Header() {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl shadow-2xl border-t border-gray-100 py-10 px-6 flex flex-col gap-6 animate-reveal-up">
           {navLinks
-            .filter(link => !isLoggedIn || ['Boutique', 'Réservations', 'Contact'].includes(link.name))
+            .filter(link => !isLoggedIn || ['Collection', 'Consultations', 'Contact'].includes(link.name))
             .map(link => (
               <Link 
                 key={link.name} 

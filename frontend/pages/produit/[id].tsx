@@ -40,16 +40,35 @@ export default function ProductDetail() {
   return (
     <main className="min-h-screen bg-[#F8F5EE] pb-32">
       <Head>
-        <title>{product.id === '2' ? 'Sérum Prodigieux Croissance: Repousse Cheveux Accélérée' : 
-                product.id === '3' ? 'Poudre de Chébé Authentique du Tchad: La Solution Africaine pour Cheveux Sains' :
-                product.id === '4' ? 'Baume Tropical Fondant: Soin Visage Mangue et Aloe Vera' :
-                product.name} | Dany Natural Concept</title>
-        <meta name="description" content={
-          product.id === '2' ? 'Sérum prodigieux croissance: accélère la repousse cheveux. Formule naturelle africaine.' :
-          product.id === '3' ? 'Poudre chébé authentique du Tchad. Croissance cheveux garantie. Recette traditionnelle africaine.' :
-          product.id === '4' ? 'Baume tropical fondant mangue & aloe vera. Hydratation profonde et nourriture naturelle.' :
-          product.description
-        } />
+        <title>{product.name}: {product.category} Naturel | {product.price.toFixed(0)}€ | Dany Natural</title>
+        <meta name="description" content={`${product.name}: ${product.description} ${product.price.toFixed(2)}€. 100% naturel, formulé par naturopathe. Livraison gratuite dès 50€. Satisfaction garantie 30 jours.`} />
+        <meta name="keywords" content={`${product.name.toLowerCase()}, ${product.category.toLowerCase()} naturel, cosmétique naturel, ingrédients africains, dany natural`} />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={`https://daniella-three.vercel.app/produit/${product.id}`} />
+        <meta property="og:title" content={`${product.name} | Dany Natural Concept`} />
+        <meta property="og:description" content={`${product.description} ${product.price.toFixed(2)}€. Formulé par Daniella Adabra, naturopathe certifiée.`} />
+        <meta property="og:image" content={product.imageUrl} />
+        <meta property="og:type" content="product" />
+        {/* Schema.org Product */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": product.name,
+          "description": product.description,
+          "image": product.imageUrl,
+          "brand": { "@type": "Brand", "name": "Dany Natural Concept" },
+          "offers": {
+            "@type": "Offer",
+            "price": product.price.toFixed(2),
+            "priceCurrency": "EUR",
+            "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "124"
+          }
+        }) }} />
       </Head>
 
       {/* Product Hero Section */}
@@ -75,9 +94,6 @@ export default function ProductDetail() {
                     {product.category}
                   </span>
                 </div>
-                <button className="absolute bottom-10 right-10 w-14 h-14 bg-white rounded-full flex items-center justify-center text-[#2D4A1E] hover:bg-[#C9A96E] hover:text-white transition-all shadow-2xl">
-                  <Heart className="w-6 h-6" />
-                </button>
               </div>
             </div>
 
@@ -85,15 +101,16 @@ export default function ProductDetail() {
             <div className="lg:col-span-7 flex flex-col justify-center animate-reveal-up" style={{ animationDelay: '0.1s' }}>
               <div className="flex items-center gap-2 mb-6">
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-[#C9A96E] text-[#C9A96E]" />)}
-                <span className="text-[10px] font-bold text-gray-400 ml-2 uppercase tracking-widest">Avis Clients (24)</span>
+                <span className="text-[10px] font-bold text-gray-400 ml-2 uppercase tracking-widest">Avis Clients (124)</span>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-serif text-[#2C2C28] mb-8 leading-[1.1]">
-                {product.id === '2' ? 'Sérum Prodigieux Croissance: Repousse Cheveux Accélérée' : 
-                 product.id === '3' ? 'Poudre de Chébé Authentique du Tchad: La Solution Africaine pour Cheveux Sains' :
-                 product.id === '4' ? 'Baume Tropical Fondant: Soin Visage Mangue et Aloe Vera' :
-                 product.name}
+                {product.name}
               </h1>
+
+              <p className="text-xl text-gray-500 font-light leading-relaxed mb-10 max-w-2xl">
+                {(product as any).longDescription || product.description}
+              </p>
 
               <div className="flex items-center gap-10 mb-12 pb-12 border-b border-[#2D4A1E]/5">
                 <div className="flex flex-col">
@@ -112,21 +129,37 @@ export default function ProductDetail() {
               {/* Tabs Integration */}
               <div className="mb-12">
                 <div className="flex gap-10 mb-8 border-b border-[#2D4A1E]/5">
-                  {['description', 'utilisation', 'composition'].map((tab) => (
+                  {[
+                    { id: 'description', label: 'Bénéfices' },
+                    { id: 'utilisation', label: 'Utilisation' },
+                    { id: 'composition', label: 'Ingrédients' }
+                  ].map((tab) => (
                     <button 
-                      key={tab}
-                      onClick={() => setActiveTab(tab as any)}
-                      className={`pb-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all relative ${activeTab === tab ? 'text-[#2D4A1E]' : 'text-gray-300 hover:text-gray-500'}`}
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id as any)}
+                      className={`pb-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all relative ${activeTab === tab.id ? 'text-[#2D4A1E]' : 'text-gray-300 hover:text-gray-500'}`}
                     >
-                      {tab}
-                      {activeTab === tab && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C9A96E]"></div>}
+                      {tab.label}
+                      {activeTab === tab.id && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C9A96E]"></div>}
                     </button>
                   ))}
                 </div>
 
-                <div className="min-h-[160px] text-lg font-light text-gray-500 leading-relaxed italic-serif-container">
+                <div className="min-h-[160px] text-lg font-light text-gray-500 leading-relaxed">
                   {activeTab === 'description' && (
-                    <p className="animate-reveal-up">{product.description} Formulée au cœur de Valenciennes, cette création artisanale puise sa force dans la pureté des actifs végétaux non raffinés pour offrir une régénération profonde et respectueuse.</p>
+                    <div className="animate-reveal-up grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {((product as any).benefits || [
+                        "100% Ingrédients Naturels",
+                        "Sans sulfates ni parabènes",
+                        "Formulé par une naturopathe",
+                        "Cruelty-free"
+                      ]).map((benefit: string, idx: number) => (
+                        <div key={idx} className="flex items-center gap-3 text-sm">
+                          <CheckCircle2 className="w-5 h-5 text-[#7A9E5E]" />
+                          <span>{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
                   )}
                   {activeTab === 'utilisation' && (
                     <div className="animate-reveal-up flex items-start gap-8 bg-[#F8F5EE] p-8 rounded-[2.5rem]">
@@ -134,24 +167,24 @@ export default function ProductDetail() {
                         <Sparkles className="w-6 h-6" />
                       </div>
                       <p className="text-sm">
-                        <strong className="text-[#2D4A1E] block mb-2 font-bold uppercase tracking-widest text-[10px]">L'Art du Soin :</strong> Appliquez une noisette sur une peau propre et légèrement humide. Massez délicatement en mouvements circulaires ascendants pour favoriser la synergie des actifs avec votre épiderme.
+                        <strong className="text-[#2D4A1E] block mb-2 font-bold uppercase tracking-widest text-[10px]">Conseils d'Application :</strong> 
+                        {(product as any).usage || "Appliquez une noisette sur une peau propre et légèrement humide. Massez délicatement en mouvements circulaires ascendants."}
                       </p>
                     </div>
                   )}
                   {activeTab === 'composition' && (
-                    <div className="animate-reveal-up grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#2D4A1E]/5">
-                        <Leaf className="w-5 h-5 text-[#C9A96E]" />
-                        <span className="text-xs font-bold uppercase tracking-widest">Beurres Bruts</span>
-                      </div>
-                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#2D4A1E]/5">
-                        <Droplets className="w-5 h-5 text-[#C9A96E]" />
-                        <span className="text-xs font-bold uppercase tracking-widest">Huiles Pressées à froid</span>
-                      </div>
-                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#2D4A1E]/5">
-                        <ShieldCheck className="w-5 h-5 text-[#C9A96E]" />
-                        <span className="text-xs font-bold uppercase tracking-widest">Zéro Conservateur</span>
-                      </div>
+                    <div className="animate-reveal-up grid grid-cols-1 gap-4">
+                      {((product as any).ingredients || [
+                        "Huiles végétales pressées à froid",
+                        "Beurres végétaux bruts",
+                        "Extraits de plantes bio",
+                        "Vitamines naturelles"
+                      ]).map((ing: string, idx: number) => (
+                        <div key={idx} className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#2D4A1E]/5">
+                          <Leaf className="w-5 h-5 text-[#C9A96E]" />
+                          <span className="text-xs font-bold uppercase tracking-widest">{ing}</span>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -174,11 +207,32 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      {/* Rich SEO Content Sections */}
+      {/* Rich Content: FAQ & Support */}
+      {(product as any).faq && (
+        <section className="container mx-auto px-6 py-24 bg-white mt-12 rounded-[4rem]">
+          <div className="max-w-4xl mx-auto">
+            <span className="section-tag mb-6">FAQ Produit</span>
+            <h2 className="text-5xl font-serif text-[#2C2C28] mb-16">Questions Fréquentes sur <span className="italic text-gradient">{product.name}</span></h2>
+            <div className="space-y-8">
+              {(product as any).faq.map((item: any, idx: number) => (
+                <div key={idx} className="p-8 bg-[#F8F5EE] rounded-[2rem] border border-[#2D4A1E]/5 shadow-sm">
+                  <h4 className="text-lg font-serif text-[#2D4A1E] mb-4 flex items-center gap-4">
+                    <div className="w-8 h-8 rounded-full bg-[#C9A96E] flex items-center justify-center text-white text-xs">Q</div>
+                    {item.q}
+                  </h4>
+                  <p className="text-sm text-gray-500 font-light leading-relaxed pl-12">{item.r}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Reinsurance Section */}
       <section className="container mx-auto px-6 py-24">
         <div className="mt-24 space-y-32">
           <section className="animate-reveal-up">
-            <h2 className="text-4xl font-serif text-[#2C2C28] mb-12">Pourquoi {product.name} ?</h2>
+            <h2 className="text-4xl font-serif text-[#2C2C28] mb-12">Pourquoi Choisir Dany Natural ?</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { title: "Résultats Visibles", desc: "Des bénéfices constatés en moins de 30 jours d'utilisation régulière." },
@@ -190,71 +244,6 @@ export default function ProductDetail() {
                   <CheckCircle2 className="w-8 h-8 text-[#C9A96E] mb-6" />
                   <h4 className="text-lg font-serif text-[#2D4A1E] mb-4">{item.title}</h4>
                   <p className="text-sm text-gray-400 font-light leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="bg-[#2D4A1E] rounded-[4rem] p-12 md:p-24 text-white relative overflow-hidden animate-reveal-up">
-            <div className="absolute inset-0 opacity-10 noise-bg pointer-events-none"></div>
-            <div className="max-w-3xl relative z-10">
-              <span className="section-tag text-white/40 mb-8">Composition Pure</span>
-              <h2 className="text-5xl font-serif mb-12">Des <span className="italic text-gradient-gold">ingrédients</span> naturels d'exception</h2>
-              <div className="space-y-8">
-                <div className="flex gap-8 items-start border-b border-white/10 pb-8">
-                  <div className="w-16 h-16 rounded-full bg-[#C9A96E] flex-shrink-0 flex items-center justify-center font-serif text-2xl italic">K</div>
-                  <div>
-                    <h4 className="text-xl font-serif text-white mb-2">Beurre de Karité Brut</h4>
-                    <p className="text-white/60 font-light leading-relaxed">Protection et nutrition intense, originaire du Burkina Faso. Non raffiné pour préserver ses vitamines.</p>
-                  </div>
-                </div>
-                <div className="flex gap-8 items-start border-b border-white/10 pb-8">
-                  <div className="w-16 h-16 rounded-full bg-[#C9A96E] flex-shrink-0 flex items-center justify-center font-serif text-2xl italic">A</div>
-                  <div>
-                    <h4 className="text-xl font-serif text-white mb-2">Huile d'Argan Bio</h4>
-                    <p className="text-white/60 font-light leading-relaxed">Antioxydant naturel puissant qui répare la fibre et apporte une brillance immédiate.</p>
-                  </div>
-                </div>
-                <div className="flex gap-8 items-start">
-                  <div className="w-16 h-16 rounded-full bg-[#C9A96E] flex-shrink-0 flex items-center justify-center font-serif text-2xl italic">C</div>
-                  <div>
-                    <h4 className="text-xl font-serif text-white mb-2">Poudre de Chébé Authentique</h4>
-                    <p className="text-white/60 font-light leading-relaxed">Secret de beauté tchadien pour fortifier le cheveu et stimuler la croissance naturelle.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="animate-reveal-up">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-              <div>
-                <span className="section-tag mb-6">Témoignages</span>
-                <h2 className="text-5xl font-serif text-[#2C2C28]">Avis Clients <span className="italic text-gradient">{product.name}</span></h2>
-              </div>
-              <div className="flex items-center gap-4 text-[#C9A96E]">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-                </div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#2D4A1E]">4.9/5 sur 124 avis</span>
-              </div>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { name: "Marie L.", text: "Résultats visibles en seulement 2 semaines sur la repousse. Je recommande sans hésiter !", role: "Cliente vérifiée" },
-                { name: "Sarah K.", text: "Le parfum naturel est envoûtant et l'efficacité est au rendez-vous. La texture est parfaite.", role: "Cliente vérifiée" },
-                { name: "Aminata D.", text: "Enfin un soin naturel qui respecte vraiment mes cheveux afros. Un pur bonheur.", role: "Cliente vérifiée" }
-              ].map((review, idx) => (
-                <div key={idx} className="p-10 bg-white rounded-[3rem] shadow-sm hover:shadow-xl transition-all border border-[#2D4A1E]/5">
-                  <p className="text-gray-400 font-light italic mb-8 leading-relaxed">"{review.text}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#F8F5EE] flex items-center justify-center text-[10px] font-bold text-[#2D4A1E]">{review.name[0]}</div>
-                    <div>
-                      <span className="block text-xs font-bold text-[#2D4A1E]">{review.name}</span>
-                      <span className="block text-[8px] uppercase tracking-widest text-gray-300">{review.role}</span>
-                    </div>
-                  </div>
                 </div>
               ))}
             </div>
