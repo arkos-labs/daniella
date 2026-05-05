@@ -34,43 +34,45 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center overflow-hidden bg-[#1A1A18]">
         {/* Advanced Background Layers */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#2D4A1E] opacity-90"></div>
+          {/* Main Background Image */}
+          <img 
+            src="/hero-concept .jpg" 
+            alt="Dany Natural Concept Atmosphere" 
+            className="w-full h-full object-cover scale-105"
+            onError={(e: any) => { e.target.src = '/hero-concept.jpg'; }}
+          />
+          
+          {/* Overlays for legibility */}
+          <div className="absolute inset-0 bg-black/30 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2D4A1E]/40 via-transparent to-[#1A1A18]/60 z-10"></div>
           
           {/* Gradient Mesh & Grain */}
-          <div className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none">
+          <div className="absolute inset-0 opacity-30 mix-blend-overlay pointer-events-none z-20">
             <div className="absolute top-[-20%] left-[-10%] w-[80%] h-[80%] bg-[#C9A96E]/20 rounded-full blur-[150px] animate-pulse"></div>
             <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#F8F5EE]/10 rounded-full blur-[120px]"></div>
           </div>
           
-          <div className="absolute inset-0 opacity-[0.03] noise-bg pointer-events-none"></div>
-          
-          <img 
-            src="/hero-concept.jpg" 
-            alt="Dany Natural Concept Atmosphere" 
-            className="w-full h-full object-cover opacity-40 scale-105"
-            onError={(e: any) => { e.target.src = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=2000'; }}
-          />
-          
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A18] via-[#1A1A18]/40 to-transparent"></div>
+          <div className="absolute inset-0 opacity-[0.03] noise-bg pointer-events-none z-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A18]/80 via-[#1A1A18]/20 to-transparent z-20"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 pt-16 pb-10">
+        <div className="container mx-auto px-6 relative z-30 pt-32 md:pt-48 pb-10">
           <div className="max-w-5xl mx-auto text-center">
             
-            <h1 className="text-4xl md:text-[5.5rem] font-serif text-white leading-[1.1] mb-6 tracking-tight animate-reveal-up opacity-0" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+            <h1 className="text-4xl md:text-7xl font-serif text-white leading-[1.2] mb-10 tracking-tight" style={{ animationFillMode: 'forwards' }}>
               Les Cosmétiques Naturels pour <br />
               <span className="italic-serif text-gradient-gold">Magnifier Votre</span> <br />
-              <span className="relative inline-block">
+              <span className="relative inline-block mt-4">
                 Beauté Originelle
-                <div className="absolute -bottom-4 left-1/4 right-1/4 h-1 bg-gradient-gold opacity-40"></div>
+                <div className="absolute -bottom-4 left-1/4 right-1/4 h-1 bg-gradient-gold opacity-60"></div>
               </span>
             </h1>
             
-            <p className="text-white/80 text-xl md:text-2xl font-light mb-6 max-w-3xl mx-auto leading-relaxed animate-reveal-up opacity-0" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+            <p className="text-white/90 text-xl md:text-2xl font-light mb-6 max-w-3xl mx-auto leading-relaxed">
               Expertise naturopathe en cosmétiques naturels. Ingrédients africains authentiques. Formules holistiques, résultats visibles. Depuis Valenciennes.
             </p>
 
-            <p className="text-[#C9A96E] text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-8 animate-reveal-up opacity-0" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+            <p className="text-[#E8C98A] text-sm md:text-base font-bold uppercase tracking-[0.4em] mt-24 mb-12 drop-shadow-md animate-reveal-up" style={{ animationFillMode: 'forwards' }}>
               Bienvenue chez Dany Natural Concept | Formulé par Daniella Adabra, naturopathe
             </p>
             
@@ -87,10 +89,10 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-[10px] md:text-xs text-white/40 font-medium animate-reveal-up opacity-0" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
-              <span className="flex items-center gap-2 tracking-[0.1em] uppercase">✓ Livraison gratuite dès 50€</span>
-              <span className="flex items-center gap-2 tracking-[0.1em] uppercase">✓ Satisfaction 30 jours</span>
-              <span className="flex items-center gap-2 tracking-[0.1em] uppercase">✓ Support gratuit</span>
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-[10px] md:text-xs text-white/80 font-bold animate-reveal-up opacity-0" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
+              <span className="flex items-center gap-2 tracking-[0.2em] uppercase">✓ Livraison gratuite dès 50€</span>
+              <span className="flex items-center gap-2 tracking-[0.2em] uppercase">✓ Satisfaction 30 jours</span>
+              <span className="flex items-center gap-2 tracking-[0.2em] uppercase">✓ Support gratuit</span>
             </div>
           </div>
         </div>

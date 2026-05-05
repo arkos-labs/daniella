@@ -57,10 +57,10 @@ function Header() {
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
       isScrolled 
-        ? 'bg-white/95 backdrop-blur-lg shadow-md h-20 md:h-[121.1px]' 
-        : 'bg-white/60 backdrop-blur-md border-b border-white/10 h-20 md:h-[121.1px]'
+        ? 'bg-white shadow-md h-20 md:h-[121.1px]' 
+        : 'bg-white border-b border-gray-100 h-20 md:h-[121.1px]'
     }`}>
-      <div className="w-full h-full px-2 md:px-6 flex items-center justify-between">
+      <div className="w-full h-full px-8 md:px-12 flex items-center justify-between">
         
         {/* Logo - Taille adaptée pour mobile, XXL pour desktop */}
         <div className="relative z-10 w-32 md:w-48 h-full flex items-center">
@@ -74,7 +74,7 @@ function Header() {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-10">
+        <nav className="hidden lg:flex items-center gap-16">
           {navLinks
             .filter(link => !isLoggedIn || ['Collection', 'Consultations', 'Contact'].includes(link.name))
             .map(link => {
@@ -83,7 +83,7 @@ function Header() {
                 <Link 
                   key={link.name} 
                   href={link.path}
-                  className={`text-lg font-bold uppercase tracking-[0.1em] transition-all duration-300 relative group
+                  className={`text-lg font-bold uppercase tracking-[0.2em] transition-all duration-300 relative group
                     ${isActive ? 'text-[#2D4A1E]' : 'text-[#2D4A1E]/60 hover:text-[#2D4A1E]'}
                   `}
                 >
@@ -139,7 +139,7 @@ function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl shadow-2xl border-t border-gray-100 py-10 px-6 flex flex-col gap-6 animate-reveal-up">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-2xl border-t border-gray-100 py-10 px-6 flex flex-col gap-6 animate-reveal-up">
           {navLinks
             .filter(link => !isLoggedIn || ['Collection', 'Consultations', 'Contact'].includes(link.name))
             .map(link => (
