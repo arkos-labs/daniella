@@ -31,7 +31,7 @@ export default function Home() {
       </Head>
 
       {/* Hero Section - Elevated Design Experience */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#1A1A18]">
+      <section className="relative min-h-[80vh] md:min-h-screen flex items-center overflow-hidden bg-[#1A1A18]">
         {/* Advanced Background Layers */}
         <div className="absolute inset-0 z-0">
           {/* Main Background Image */}
@@ -56,10 +56,10 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A18]/80 via-[#1A1A18]/20 to-transparent z-20"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-30 pt-32 md:pt-48 pb-10">
+        <div className="container mx-auto px-6 relative z-30 pt-20 md:pt-48 pb-10">
           <div className="max-w-5xl mx-auto text-center">
             
-            <h1 className="text-4xl md:text-7xl font-serif text-white leading-[1.2] mb-10 tracking-tight" style={{ animationFillMode: 'forwards' }}>
+            <h1 className="text-3xl md:text-7xl font-serif text-white leading-[1.2] mb-8 md:mb-10 tracking-tight" style={{ animationFillMode: 'forwards' }}>
               Les Cosmétiques Naturels pour <br />
               <span className="italic-serif text-gradient-gold">Magnifier Votre</span> <br />
               <span className="relative inline-block mt-4">
