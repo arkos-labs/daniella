@@ -31,7 +31,7 @@ export default function Home() {
       </Head>
 
       {/* Hero Section - Elevated Design Experience */}
-      <section className="relative h-screen md:min-h-screen flex items-center overflow-hidden bg-[#1A1A18]">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#1A1A18]">
         {/* Advanced Background Layers */}
         <div className="absolute inset-0 z-0">
           {/* Main Background Image */}
@@ -56,35 +56,35 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A18]/80 via-[#1A1A18]/20 to-transparent z-20"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-30 pt-16 md:pt-48 pb-6">
+        <div className="container mx-auto px-6 relative z-30 pt-32 md:pt-48 pb-10">
           <div className="max-w-5xl mx-auto text-center">
             
-            <h1 className="text-2xl md:text-7xl font-serif text-white leading-tight md:leading-[1.2] mb-4 md:mb-10 tracking-tight" style={{ animationFillMode: 'forwards' }}>
+            <h1 className="text-4xl md:text-7xl font-serif text-white leading-[1.2] mb-10 tracking-tight" style={{ animationFillMode: 'forwards' }}>
               Les Cosmétiques Naturels pour <br />
               <span className="italic-serif text-gradient-gold">Magnifier Votre</span> <br />
-              <span className="relative inline-block mt-1 md:mt-4">
+              <span className="relative inline-block mt-4">
                 Beauté Originelle
-                <div className="absolute -bottom-1 md:bottom-[-1rem] left-1/4 right-1/4 h-0.5 md:h-1 bg-gradient-gold opacity-60"></div>
+                <div className="absolute -bottom-4 left-1/4 right-1/4 h-1 bg-gradient-gold opacity-60"></div>
               </span>
             </h1>
             
-            <p className="text-white/90 text-base md:text-2xl font-light mb-4 md:mb-6 max-w-3xl mx-auto leading-relaxed">
-              Expertise naturopathe en cosmétiques naturels. Ingrédients africains authentiques. Formules holistiques, résultats visibles.
+            <p className="text-white/80 text-xl md:text-2xl font-light mb-8 md:mb-6 max-w-3xl mx-auto leading-relaxed">
+              Expertise naturopathe en cosmétiques naturels. Ingrédients africains authentiques. Formules holistiques, résultats visibles. Depuis Valenciennes.
             </p>
 
-            <p className="text-[#E8C98A] text-[9px] md:text-base font-bold uppercase tracking-[0.2em] md:tracking-[0.4em] mt-4 md:mt-24 mb-6 md:mb-12 drop-shadow-md animate-reveal-up" style={{ animationFillMode: 'forwards' }}>
-              Bienvenue chez Dany Natural Concept | Daniella Adabra, naturopathe
+            <p className="text-[#E8C98A] text-sm md:text-base font-bold uppercase tracking-[0.4em] mt-24 mb-12 drop-shadow-md animate-reveal-up" style={{ animationFillMode: 'forwards' }}>
+              Bienvenue chez Dany Natural Concept | Formulé par Daniella Adabra, naturopathe
             </p>
             
-            <div className="flex flex-col md:flex-row gap-3 md:gap-6 justify-center items-center mb-4">
-              <Link href="/boutique" className="group relative px-6 md:px-10 py-3 md:py-6 bg-white text-[#1A1A18] rounded-full font-bold uppercase tracking-widest text-[9px] md:text-xs overflow-hidden transition-all shadow-2xl w-full md:w-auto min-w-[240px]">
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  DÉCOUVRIR NOS PRODUITS <ArrowRight className="w-3.5 h-3.5 md:w-5 md:h-5" />
+            <div className="flex flex-col md:flex-row gap-6 justify-center items-center mb-8">
+              <Link href="/boutique" className="group relative px-10 py-6 bg-white text-[#1A1A18] rounded-full font-bold uppercase tracking-widest text-xs overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl w-full md:w-auto min-w-[280px]">
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  DÉCOUVRIR NOS PRODUITS <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </span>
               </Link>
               
-              <Link href="/reservations" className="group px-6 md:px-10 py-3 md:py-6 border border-white/20 rounded-full flex items-center justify-center gap-3 text-white hover:bg-white hover:text-[#1A1A18] transition-all text-[9px] md:text-xs font-bold uppercase tracking-widest backdrop-blur-sm w-full md:w-auto">
-                <Droplets className="w-3.5 h-3.5 md:w-5 md:h-5 text-[#C9A96E]" />
+              <Link href="/reservations" className="group px-10 py-6 border border-white/20 rounded-full flex items-center justify-center gap-4 text-white hover:bg-white hover:text-[#1A1A18] transition-all duration-300 text-xs font-bold uppercase tracking-widest backdrop-blur-sm w-full md:w-auto">
+                <Droplets className="w-5 h-5 text-[#C9A96E] group-hover:text-[#1A1A18] transition-colors" />
                 <span>RÉSERVER MA CONSULTATION</span>
               </Link>
             </div>
