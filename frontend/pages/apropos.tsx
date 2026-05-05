@@ -12,18 +12,18 @@ export default function Apropos() {
       </Head>
 
       {/* Hero Header */}
-      <section className="relative pt-44 pb-32 overflow-hidden bg-white border-b border-[#3fad28]/5">
+      <section className="relative pt-32 md:pt-44 pb-20 md:pb-32 overflow-hidden bg-white border-b border-[#3fad28]/5">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#2D5A27]/5 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#D4A373]/10 rounded-full blur-[80px]"></div>
+          <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#e68d15]/10 rounded-full blur-[80px]"></div>
         </div>
         
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
           <span className="section-tag mb-6">Manifeste & Vision</span>
-          <h1 className="text-6xl md:text-8xl font-serif mb-8 text-[#1a1a1a] leading-[0.95]">
+          <h1 className="text-5xl md:text-8xl font-serif mb-8 text-[#1a1a1a] leading-[0.95]">
             Réconcilier Beauté <br /> <span className="italic-serif text-gradient">& Santé</span>
           </h1>
-          <p className="text-gray-500 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-gray-500 text-lg md:text-2xl max-w-3xl mx-auto font-light leading-relaxed">
             Née d'une passion pour la naturopathie et les rituels ancestraux, Dany Natural Concept est un hommage à la force régénératrice de la nature.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function Apropos() {
             
             {/* Image Column */}
             <div className="lg:col-span-5 relative">
-              <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl aspect-[4/5] group">
+              <div className="relative z-10 rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-2xl aspect-[4/5] group">
                 <img 
                   src="/dany_founder.jpg" 
                   alt="Daniella Adabra, Fondatrice de DNC" 
@@ -47,14 +47,14 @@ export default function Apropos() {
               </div>
               
               {/* Floating Award */}
-              <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-[2.5rem] shadow-2xl z-20 border border-[#3fad28]/5 animate-float max-w-[240px]">
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 bg-[#e68d15] rounded-full flex items-center justify-center text-white">
-                    <Award className="w-5 h-5" />
+              <div className="absolute -bottom-6 md:-bottom-10 -right-4 md:-right-10 bg-white p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl z-20 border border-[#3fad28]/5 animate-float max-w-[200px] md:max-w-[240px]">
+                <div className="flex items-center gap-3 md:gap-4 mb-2 md:mb-3">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-[#e68d15] rounded-full flex items-center justify-center text-white">
+                    <Award className="w-4 h-4 md:w-5 md:h-5" />
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#3fad28]">Certification</span>
+                  <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-[#3fad28]">Certification</span>
                 </div>
-                <p className="text-sm font-serif text-[#1a1a1a]">Naturopathe Diplômée & Experte en Cosmétique</p>
+                <p className="text-xs md:text-sm font-serif text-[#1a1a1a]">Naturopathe Diplômée & Experte en Cosmétique</p>
               </div>
             </div>
             
@@ -90,41 +90,41 @@ export default function Apropos() {
       </section>
 
       {/* Philosophy Pillars */}
-      <section className="py-32 bg-[#3fad28] rounded-[5rem] mx-6 relative overflow-hidden">
+      <section className="py-20 md:py-32 bg-[#3fad28] rounded-[3rem] md:rounded-[5rem] mx-4 md:mx-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 noise-bg"></div>
-        <div className="container mx-auto px-10 max-w-7xl relative z-10">
-          <div className="text-center mb-24">
+        <div className="container mx-auto px-6 md:px-10 max-w-7xl relative z-10">
+          <div className="text-center mb-16 md:mb-24">
             <span className="text-[#e68d15] font-bold tracking-[0.4em] uppercase text-xs mb-6 block">Notre Éthique</span>
-            <h2 className="text-5xl md:text-6xl font-serif text-white">Les Piliers de l'Excellence</h2>
+            <h2 className="text-4xl md:text-6xl font-serif text-white">Les Piliers de l'Excellence</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="bg-white/5 backdrop-blur-md p-12 rounded-[3.5rem] border border-white/10 flex flex-col items-center text-center group hover:bg-white/10 transition-all duration-500">
-              <div className="w-20 h-20 bg-[#e68d15] rounded-2xl flex items-center justify-center mb-8 text-white rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                <Droplets className="w-10 h-10" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
+            <div className="bg-white/5 backdrop-blur-md p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/10 flex flex-col items-center text-center group hover:bg-white/10 transition-all duration-500">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-[#e68d15] rounded-2xl flex items-center justify-center mb-6 md:mb-8 text-white rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                <Droplets className="w-8 h-8 md:w-10 md:h-10" />
               </div>
-              <h3 className="text-2xl font-serif text-white mb-6">Pureté Absolue</h3>
-              <p className="text-white/60 font-light leading-relaxed">
+              <h3 className="text-xl md:text-2xl font-serif text-white mb-4 md:mb-6">Pureté Absolue</h3>
+              <p className="text-white/80 font-light leading-relaxed text-sm md:text-base">
                 Beurres et huiles végétaux non raffinés, pressés à froid, pour conserver l'intégralité des vitamines et principes actifs.
               </p>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-md p-12 rounded-[3.5rem] border border-white/10 flex flex-col items-center text-center group hover:bg-white/10 transition-all duration-500">
-              <div className="w-20 h-20 bg-[#e68d15] rounded-2xl flex items-center justify-center mb-8 text-white -rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                <Sun className="w-10 h-10" />
+            <div className="bg-white/5 backdrop-blur-md p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/10 flex flex-col items-center text-center group hover:bg-white/10 transition-all duration-500">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-[#e68d15] rounded-2xl flex items-center justify-center mb-6 md:mb-8 text-white -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                <Sun className="w-8 h-8 md:w-10 md:h-10" />
               </div>
-              <h3 className="text-2xl font-serif text-white mb-6">Artisanat Local</h3>
-              <p className="text-white/60 font-light leading-relaxed">
+              <h3 className="text-xl md:text-2xl font-serif text-white mb-4 md:mb-6">Artisanat Local</h3>
+              <p className="text-white/80 font-light leading-relaxed text-sm md:text-base">
                 Chaque baume est formulé, fouetté et conditionné à la main dans notre atelier de Valenciennes, en petites séries.
               </p>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-md p-12 rounded-[3.5rem] border border-white/10 flex flex-col items-center text-center group hover:bg-white/10 transition-all duration-500">
-              <div className="w-20 h-20 bg-[#e68d15] rounded-2xl flex items-center justify-center mb-8 text-white rotate-6 group-hover:rotate-0 transition-transform duration-500">
-                <Globe className="w-10 h-10" />
+            <div className="bg-white/5 backdrop-blur-md p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/10 flex flex-col items-center text-center group hover:bg-white/10 transition-all duration-500">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-[#e68d15] rounded-2xl flex items-center justify-center mb-6 md:mb-8 text-white rotate-6 group-hover:rotate-0 transition-transform duration-500">
+                <Globe className="w-8 h-8 md:w-10 md:h-10" />
               </div>
-              <h3 className="text-2xl font-serif text-white mb-6">Vision Holistique</h3>
-              <p className="text-white/60 font-light leading-relaxed">
+              <h3 className="text-xl md:text-2xl font-serif text-white mb-4 md:mb-6">Vision Holistique</h3>
+              <p className="text-white/80 font-light leading-relaxed text-sm md:text-base">
                 Une approche qui considère l'individu dans sa globalité, alliant bien-être intérieur et éclat extérieur.
               </p>
             </div>
@@ -157,12 +157,12 @@ export default function Apropos() {
 
       {/* Final CTA */}
       <section className="container mx-auto px-6 mt-20">
-        <div className="bg-white rounded-[4rem] p-20 text-center border border-[#3fad28]/5 shadow-2xl shadow-black/5 relative overflow-hidden">
+        <div className="bg-white rounded-[2.5rem] md:rounded-[4rem] p-10 md:p-20 text-center border border-[#3fad28]/5 shadow-2xl shadow-black/5 relative overflow-hidden">
           <div className="absolute -top-12 -left-12 w-48 h-48 bg-[#e68d15]/5 rounded-full blur-[60px]"></div>
-          <h2 className="text-4xl md:text-5xl font-serif text-[#1a1a1a] mb-8">Commençons votre voyage <br /> <span className="italic text-gradient">vers le naturel</span></h2>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link href="/boutique" className="btn-primary px-12">Explorer la boutique</Link>
-            <Link href="/reservations" className="btn-outline px-12 flex items-center justify-center gap-3">
+          <h2 className="text-3xl md:text-5xl font-serif text-[#1a1a1a] mb-8">Commençons votre voyage <br /> <span className="italic text-gradient">vers le naturel</span></h2>
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
+            <Link href="/boutique" className="btn-primary px-8 md:px-12">Explorer la boutique</Link>
+            <Link href="/reservations" className="btn-outline px-8 md:px-12 flex items-center justify-center gap-3">
               Prendre rendez-vous <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

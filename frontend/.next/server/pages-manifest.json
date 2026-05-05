@@ -2,8 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/boutique": "pages/boutique.js",
-  "/login": "pages/login.js",
   "/": "pages/index.js",
-  "/collection": "pages/collection.js"
+  "/a-propos": "pages/a-propos.js"
 }
