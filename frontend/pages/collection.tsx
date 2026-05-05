@@ -73,21 +73,6 @@ export default function Collection() {
             />
           </div>
           
-          <div className="flex gap-3 flex-wrap justify-center">
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
-                  selectedCategory === cat
-                    ? 'bg-[#2D4A1E] text-white shadow-xl'
-                    : 'bg-white text-gray-400 border border-[#2D4A1E]/5 hover:border-[#C9A96E] hover:text-[#2D4A1E]'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Product Count & Info */}
@@ -185,24 +170,6 @@ export default function Collection() {
         )}
       </div>
 
-      {/* SEO Content Block */}
-      <section className="container mx-auto px-6 mt-24 mb-0">
-        <div className="bg-white rounded-[3rem] p-12 md:p-20 border border-[#2D4A1E]/5">
-          <h2 className="text-3xl font-serif text-[#2C2C28] mb-6">Nos Soins Capillaires Naturels</h2>
-          <p className="text-gray-500 font-light leading-relaxed mb-8">
-            Notre collection capillaire comprend 9 produits naturels pour cheveux crépus, naturels ou endommagés. Du shampooing doux sans sulfate à la poudre chébé authentique du Tchad, en passant par nos sérums croissance et bains d'huiles intensifs — chaque soin est formulé pour nourrir, fortifier et sublimer votre chevelure naturellement.
-          </p>
-          <h2 className="text-3xl font-serif text-[#2C2C28] mb-6">Soins Visage &amp; Corps Bio</h2>
-          <p className="text-gray-500 font-light leading-relaxed mb-8">
-            8 soins visage et corps naturels pour tous les types de peau : baumes hydratants, laits jour, huile anti-imperfections, beurres de karité et cacao. Formulés sans parabène, silicone ou produit chimique de synthèse. Résultats visibles en 2 à 6 semaines.
-          </p>
-          <div className="flex flex-wrap gap-4 mt-6">
-            <Link href="/consultations" className="text-[#2D4A1E] font-bold text-sm hover:underline">→ Consultation Naturopathe Personnalisée</Link>
-            <Link href="/a-propos" className="text-[#2D4A1E] font-bold text-sm hover:underline">→ À Propos de Daniella Adabra</Link>
-            <Link href="/blog" className="text-[#2D4A1E] font-bold text-sm hover:underline">→ Blog Beauté Naturelle</Link>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="container mx-auto px-6 mt-16">

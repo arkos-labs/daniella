@@ -468,30 +468,6 @@ export const MOCK_PRODUCTS = [
     ]
   },
   { 
-    id: '19', 
-    name: "Guide Recettes Beauté DIY (Ebook)", 
-    description: "Apprenez à créer vos propres cosmétiques naturels avec nos recettes exclusives.",
-    longDescription: "Devenez l'artisan de votre beauté. Ce guide numérique complet vous donne toutes les clés pour fabriquer vos propres soins à la maison. 50 recettes testées et approuvées pour tous les types de peau et de cheveux.",
-    price: 12.00, 
-    category: "Livres & Guides", 
-    stock: 999, 
-    imageUrl: "https://danynaturalconcept.org/wp-content/uploads/2019/08/elixir-massage-510x510.jpg",
-    benefits: [
-      "50 recettes détaillées et faciles",
-      "Conseils de conservation et d'hygiène",
-      "Économies énormes sur vos soins",
-      "Plaisir de créer soi-même",
-      "Format numérique accessible partout"
-    ],
-    ingredients: [
-      "Savoir-faire de Dany Natural Concept"
-    ],
-    usage: "Téléchargez le PDF après achat et suivez les instructions pas à pas.",
-    faq: [
-      { q: "Faut-il du matériel spécial ?", r: "La plupart des recettes nécessitent des ustensiles de cuisine courants." }
-    ]
-  },
-  { 
     id: '20', 
     name: "Poudre de Chébé (Format 50g)", 
     description: "Format découverte de notre célèbre poudre de Chébé du Tchad.",
@@ -573,7 +549,7 @@ export const MOCK_SERVICES = [
   { id: 's5', title: "Diagnostic Peau + Routine", description: "Diagnostic complet de votre peau et conseils en cosmétique naturelle sur-mesure.", duration: 45, price: 85.00, icon: "🌸", color: "from-rose-50 to-pink-50" }
 ];
 
-export const CATEGORIES = ['Tous', 'Soins capillaires', 'Soins du corps', 'Soins du visage', 'Beurres végétaux', 'Huiles végétales', 'Livres & Guides'];
+export const CATEGORIES = ['Tous', 'Soins capillaires', 'Soins du corps', 'Soins du visage', 'Beurres végétaux', 'Huiles végétales'];
 
 export const TIME_SLOTS = [
   '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',

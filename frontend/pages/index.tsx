@@ -28,11 +28,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#F8F5EE] overflow-x-hidden">
       <Head>
-        <title>Les Cosmétiques Naturels pour Magnifier Votre Beauté Originelle | Dany Natural Concept</title>
+        <title>Cosmétiques naturels africains beauté naturelle et bien-être retrouvés | Dany Natural Concept</title>
         <meta name="description" content="Cosmétiques naturels avec ingrédients africains authentiques. Consultations naturopathe personnalisées. Beauté holistique depuis Valenciennes." />
         <meta name="keywords" content="cosmétiques naturels, naturopathe, beauté originelle, ingrédients africains" />
         {/* Open Graph pour partage réseaux sociaux */}
-        <meta property="og:title" content="Les Cosmétiques Naturels pour Magnifier Votre Beauté Originelle | Dany Natural Concept" />
+        <meta property="og:title" content="Cosmétiques naturels africains beauté naturelle et bien-être retrouvés | Dany Natural Concept" />
         <meta property="og:description" content="Cosmétiques naturels avec ingrédients africains authentiques. Consultations naturopathe personnalisées. Beauté holistique depuis Valenciennes." />
         <meta property="og:image" content="/hero-concept.jpg" />
         <meta property="og:url" content="https://daniella-three.vercel.app/" />
@@ -70,10 +70,10 @@ export default function Home() {
           <div className="max-w-5xl mx-auto text-center flex flex-col">
             
             <h1 className="text-3xl md:text-7xl font-serif text-white leading-tight md:leading-[1.2] mb-4 md:mb-10 tracking-tight order-2 md:order-1" style={{ animationFillMode: 'forwards' }}>
-              Les Cosmétiques Naturels pour <br />
-              <span className="italic-serif text-gradient-gold">Magnifier Votre</span> <br />
+              Cosmétiques naturels africains <br />
+              <span className="italic-serif text-gradient-gold">beauté naturelle</span> <br />
               <span className="relative inline-block mt-2 md:mt-4">
-                Beauté & Bien-être
+                et bien-être retrouvés
                 <div className="absolute -bottom-2 md:bottom-[-1rem] left-1/4 right-1/4 h-0.5 md:h-1 bg-gradient-gold opacity-60"></div>
               </span>
             </h1>

@@ -62,21 +62,6 @@ export default function Boutique() {
             />
           </div>
           
-          <div className="flex gap-3 flex-wrap justify-center">
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-8 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
-                  selectedCategory === cat
-                    ? 'bg-[#2D4A1E] text-white shadow-xl'
-                    : 'bg-white text-gray-400 border border-[#2D4A1E]/5 hover:border-[#C9A96E] hover:text-[#2D4A1E]'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Product Count & Info */}
