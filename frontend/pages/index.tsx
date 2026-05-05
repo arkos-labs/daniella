@@ -17,12 +17,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#F8F5EE] overflow-x-hidden">
       <Head>
-        <title>Cosmétiques Naturels &amp; Consultations Naturopathe | Dany Natural Concept</title>
-        <meta name="description" content="Cosmétiques naturels avec ingrédients africains authentiques. Consultations naturopathe personnalisées. Poudre chébé, sérums, baumes. Beauté holistique depuis Valenciennes." />
-        <meta name="keywords" content="cosmétiques naturels, beauté originelle, ingrédients naturels africains, naturopathie holistique, soins naturels visage cheveux, cosmétiques bio" />
+        <title>Les Cosmétiques Naturels pour Magnifier Votre Beauté Originelle | Dany Natural Concept</title>
+        <meta name="description" content="Cosmétiques naturels avec ingrédients africains authentiques. Consultations naturopathe personnalisées. Beauté holistique depuis Valenciennes." />
+        <meta name="keywords" content="cosmétiques naturels, naturopathe, beauté originelle, ingrédients africains" />
         {/* Open Graph pour partage réseaux sociaux */}
-        <meta property="og:title" content="Cosmétiques Naturels &amp; Consultations Naturopathe | Dany Natural Concept" />
-        <meta property="og:description" content="Cosmétiques naturels avec ingrédients africains authentiques. Consultations naturopathe personnalisées. Poudre chébé, sérums, baumes. Beauté holistique depuis Valenciennes." />
+        <meta property="og:title" content="Les Cosmétiques Naturels pour Magnifier Votre Beauté Originelle | Dany Natural Concept" />
+        <meta property="og:description" content="Cosmétiques naturels avec ingrédients africains authentiques. Consultations naturopathe personnalisées. Beauté holistique depuis Valenciennes." />
         <meta property="og:image" content="/hero-concept.jpg" />
         <meta property="og:url" content="https://daniella-three.vercel.app/" />
         <meta property="og:type" content="website" />
@@ -30,52 +30,77 @@ export default function Home() {
         <link rel="canonical" href="https://daniella-three.vercel.app/" />
       </Head>
 
-      {/* Hero Section - Immersive Premium Experience */}
-      <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-[#2D4A1E]">
-        {/* Abstract Background Elements */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute -top-[10%] -left-[10%] w-[60%] h-[60%] bg-[#C9A96E]/10 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-[#F8F5EE]/5 rounded-full blur-[100px]"></div>
+      {/* Hero Section - Elevated Design Experience */}
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#1A1A18]">
+        {/* Advanced Background Layers */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[#2D4A1E] opacity-90"></div>
+          
+          {/* Gradient Mesh & Grain */}
+          <div className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none">
+            <div className="absolute top-[-20%] left-[-10%] w-[80%] h-[80%] bg-[#C9A96E]/20 rounded-full blur-[150px] animate-pulse"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#F8F5EE]/10 rounded-full blur-[120px]"></div>
+          </div>
+          
+          <div className="absolute inset-0 opacity-[0.03] noise-bg pointer-events-none"></div>
           
           <img 
             src="/hero-concept.jpg" 
             alt="Dany Natural Concept Atmosphere" 
-            className="w-full h-full object-cover opacity-60 mix-blend-overlay"
+            className="w-full h-full object-cover opacity-40 scale-105"
             onError={(e: any) => { e.target.src = 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=2000'; }}
           />
           
-          <div className="absolute inset-0 bg-gradient-to-b from-[#2D4A1E]/80 via-[#2D4A1E]/40 to-[#2D4A1E]"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A18] via-[#1A1A18]/40 to-transparent"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 pt-16 pb-10">
           <div className="max-w-5xl mx-auto text-center">
-            <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 mb-8 animate-reveal-up opacity-0" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-              <span className="w-2 h-2 rounded-full bg-[#C9A96E] animate-ping"></span>
-              <span className="text-[10px] font-bold text-white/80 uppercase tracking-[0.3em]">Depuis 2018 · Valenciennes · 500+ Clientes Satisfaites</span>
-            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-10 animate-reveal-up">
-              <Sparkles className="w-4 h-4 text-[#C9A96E]" />
-              <span className="text-white text-[10px] font-bold uppercase tracking-[0.3em]">L'excellence au naturel</span>
-            </div>
             
-            <h1 className="text-6xl md:text-9xl font-serif text-white mb-10 leading-[0.9] tracking-tight animate-reveal-up" style={{ animationDelay: '0.1s' }}>
-              Révélez votre <br />
-              <span className="italic-serif text-gradient-gold">Beauté Originelle</span>
+            <h1 className="text-4xl md:text-[5.5rem] font-serif text-white leading-[1.1] mb-6 tracking-tight animate-reveal-up opacity-0" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+              Les Cosmétiques Naturels pour <br />
+              <span className="italic-serif text-gradient-gold">Magnifier Votre</span> <br />
+              <span className="relative inline-block">
+                Beauté Originelle
+                <div className="absolute -bottom-4 left-1/4 right-1/4 h-1 bg-gradient-gold opacity-40"></div>
+              </span>
             </h1>
-              
-              <Link href="/reservations" className="group flex items-center gap-4 text-white/80 hover:text-white transition-colors text-[11px] font-bold uppercase tracking-widest">
-                <span className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#C9A96E] group-hover:bg-[#C9A96E] transition-all">
-                  <Droplets className="w-5 h-5" />
+            
+            <p className="text-white/80 text-xl md:text-2xl font-light mb-6 max-w-3xl mx-auto leading-relaxed animate-reveal-up opacity-0" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+              Expertise naturopathe certifiée en cosmétiques naturels. Ingrédients africains authentiques. Formules holistiques, résultats visibles. Depuis Valenciennes.
+            </p>
+
+            <p className="text-[#C9A96E] text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-8 animate-reveal-up opacity-0" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+              Bienvenue chez Dany Natural Concept | Formulé par Daniella Adabra, naturopathe certifiée
+            </p>
+            
+            <div className="flex flex-col md:flex-row gap-6 justify-center items-center animate-reveal-up opacity-0 mb-8" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+              <Link href="/boutique" className="group relative px-10 py-6 bg-white text-[#1A1A18] rounded-full font-bold uppercase tracking-widest text-xs overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl min-w-[280px]">
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  DÉCOUVRIR LES 22 PRODUITS <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </span>
-                Réserver un Soin
               </Link>
+              
+              <Link href="/reservations" className="group flex items-center gap-6 text-white/80 hover:text-white transition-all text-xs font-bold uppercase tracking-widest">
+                <span className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#C9A96E] group-hover:bg-[#C9A96E] group-hover:text-white transition-all duration-500">
+                  <Droplets className="w-8 h-8" />
+                </span>
+                <span>CONSULTER UNE NATUROPATHE</span>
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-[10px] md:text-xs text-white/40 font-medium animate-reveal-up opacity-0" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
+              <span className="flex items-center gap-2 tracking-[0.1em] uppercase">✓ Livraison gratuite dès 50€</span>
+              <span className="flex items-center gap-2 tracking-[0.1em] uppercase">✓ Satisfaction 30 jours</span>
+              <span className="flex items-center gap-2 tracking-[0.1em] uppercase">✓ Support gratuit</span>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-white/30 animate-bounce">
-          <span className="text-[9px] uppercase tracking-[0.4em] rotate-90 mb-8">Scroll</span>
-          <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent"></div>
+        {/* Vertical Scroll Label */}
+        <div className="absolute right-12 bottom-0 h-40 flex flex-col items-center gap-8 text-white/20">
+          <span className="text-[9px] uppercase tracking-[0.6em] font-black rotate-180 [writing-mode:vertical-lr]">Scroll Down</span>
+          <div className="w-[1px] flex-1 bg-gradient-to-b from-white/20 to-transparent"></div>
         </div>
       </section>
 
