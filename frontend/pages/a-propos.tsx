@@ -8,12 +8,12 @@ export default function APropos() {
     <main className="min-h-screen bg-[#F8F5EE] pb-32">
       <Head>
         <title>À Propos: Daniella Adabra, Naturopathe &amp; Créatrice | Dany Natural Concept</title>
-        <meta name="description" content="Découvrez Daniella Adabra: naturopathe, créatrice de cosmétiques naturels depuis 2018. Expertise africaine, approche holistique. Certifiée, bienveillante, passionnée." />
+        <meta name="description" content="Découvrez Daniella Adabra: naturopathe, créatrice de cosmétiques naturels depuis 2018. Expertise africaine, approche holistique. Bienveillante, passionnée." />
         <meta name="keywords" content="Daniella Adabra, naturopathe femme entrepreneuse, beauté naturelle africaine, cosmétiques holistiques, créatrice cosmétiques naturels" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://daniella-three.vercel.app/a-propos" />
         <meta property="og:title" content="À Propos: Daniella Adabra, Naturopathe &amp; Créatrice | Dany Natural" />
-        <meta property="og:description" content="Daniella Adabra, naturopathe certifiée et créatrice de cosmétiques naturels depuis 2018. 500+ clientes transformées. Approche holistique et bienveillante." />
+        <meta property="og:description" content="Daniella Adabra, naturopathe et créatrice de cosmétiques naturels depuis 2018. 500+ clientes transformées. Approche holistique et bienveillante." />
       </Head>
 
       {/* Hero Header */}
@@ -29,7 +29,7 @@ export default function APropos() {
             Daniella Adabra — <br className="hidden md:block" /> <span className="italic-serif text-gradient">Naturopathe &amp; Créatrice</span>
           </h1>
           <p className="text-gray-500 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed mb-8">
-            Fondatrice de Dany Natural Concept depuis 2018. Naturopathe certifiée, elle crée des cosmétiques naturels qui célèbrent la beauté originelle avec des ingrédients africains authentiques.
+            Fondatrice de Dany Natural Concept depuis 2018. Naturopathe, elle crée des cosmétiques naturels qui célèbrent la beauté originelle avec des ingrédients africains authentiques.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-xs font-bold uppercase tracking-widest">
             <span className="text-[#2D4A1E]/60">15 ans d&apos;expérience</span>

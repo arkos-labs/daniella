@@ -67,25 +67,23 @@ export default function Home() {
             </h1>
             
             <p className="text-white/80 text-xl md:text-2xl font-light mb-6 max-w-3xl mx-auto leading-relaxed animate-reveal-up opacity-0" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-              Expertise naturopathe certifiée en cosmétiques naturels. Ingrédients africains authentiques. Formules holistiques, résultats visibles. Depuis Valenciennes.
+              Expertise naturopathe en cosmétiques naturels. Ingrédients africains authentiques. Formules holistiques, résultats visibles. Depuis Valenciennes.
             </p>
 
             <p className="text-[#C9A96E] text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-8 animate-reveal-up opacity-0" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
-              Bienvenue chez Dany Natural Concept | Formulé par Daniella Adabra, naturopathe certifiée
+              Bienvenue chez Dany Natural Concept | Formulé par Daniella Adabra, naturopathe
             </p>
             
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center animate-reveal-up opacity-0 mb-8" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
               <Link href="/boutique" className="group relative px-10 py-6 bg-white text-[#1A1A18] rounded-full font-bold uppercase tracking-widest text-xs overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl min-w-[280px]">
                 <span className="relative z-10 flex items-center justify-center gap-3">
-                  DÉCOUVRIR LES 22 PRODUITS <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                  DÉCOUVRIR NOS PRODUITS <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                 </span>
               </Link>
               
-              <Link href="/reservations" className="group flex items-center gap-6 text-white/80 hover:text-white transition-all text-xs font-bold uppercase tracking-widest">
-                <span className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#C9A96E] group-hover:bg-[#C9A96E] group-hover:text-white transition-all duration-500">
-                  <Droplets className="w-8 h-8" />
-                </span>
-                <span>CONSULTER UNE NATUROPATHE</span>
+              <Link href="/reservations" className="group px-10 py-6 border border-white/20 rounded-full flex items-center gap-4 text-white hover:bg-white hover:text-[#1A1A18] transition-all duration-300 text-xs font-bold uppercase tracking-widest backdrop-blur-sm">
+                <Droplets className="w-5 h-5 text-[#C9A96E] group-hover:text-[#1A1A18] transition-colors" />
+                <span>RÉSERVER MA CONSULTATION</span>
               </Link>
             </div>
 
