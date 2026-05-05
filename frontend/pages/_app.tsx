@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#2D4A1E" />
+        <meta name="theme-color" content="#3fad28" />
         <meta name="author" content="Daniella Adabra - Dany Natural Concept" />
         <script
           type="application/ld+json"

@@ -4,9 +4,9 @@ import { Leaf, Instagram, Facebook, Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1A1A18] text-white pt-32 pb-12 overflow-hidden relative">
+    <footer className="bg-[#000000] text-white pt-32 pb-12 overflow-hidden relative">
       {/* Decorative Blur */}
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#2D4A1E]/20 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#3fad28]/20 rounded-full blur-[120px]"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
@@ -22,20 +22,20 @@ export default function Footer() {
               Une expertise rare en <span className="text-white font-medium italic">naturopathie</span> et cosmétique artisanale pour magnifier votre nature profonde au cœur de Valenciennes.
             </p>
             <div className="flex items-center gap-4">
-              <a href="https://www.instagram.com/danynaturalconcept/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C9A96E] hover:border-[#C9A96E] transition-all duration-500">
+              <a href="https://www.instagram.com/danynaturalconcept/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#e68d15] hover:border-[#e68d15] transition-all duration-500">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="https://www.facebook.com/soinsnaturelsDNC" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C9A96E] hover:border-[#C9A96E] transition-all duration-500">
+              <a href="https://www.facebook.com/soinsnaturelsDNC" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#e68d15] hover:border-[#e68d15] transition-all duration-500">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="mailto:naturalconcept.france@yahoo.fr" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#C9A96E] hover:border-[#C9A96E] transition-all duration-500">
+              <a href="mailto:naturalconcept.france@yahoo.fr" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#e68d15] hover:border-[#e68d15] transition-all duration-500">
                 <Mail className="w-5 h-5" />
               </a>
             </div>
           </div>
           
           <div className="md:col-span-2">
-            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#C9A96E]">Navigation</h4>
+            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#e68d15]">Navigation</h4>
             <ul className="space-y-6">
               <li><Link href="/" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Accueil</Link></li>
               <li><Link href="/collection" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Collection</Link></li>
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#C9A96E]">Légal</h4>
+            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#e68d15]">Légal</h4>
             <ul className="space-y-6">
               <li><Link href="/cgu" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Conditions</Link></li>
               <li><Link href="/mentions-legales" className="text-white/60 hover:text-white transition-colors text-sm uppercase tracking-widest font-bold">Mentions</Link></li>
@@ -57,17 +57,17 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-3">
-            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#C9A96E]">Le Cabinet</h4>
+            <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-10 text-[#e68d15]">Le Cabinet</h4>
             <div className="space-y-6">
               <div className="flex gap-4">
-                <MapPin className="w-5 h-5 text-[#C9A96E] shrink-0" />
+                <MapPin className="w-5 h-5 text-[#e68d15] shrink-0" />
                 <p className="text-white/60 text-sm leading-relaxed">
                   Valenciennes, France<br />
                   Sur rendez-vous uniquement
                 </p>
               </div>
               <div className="flex gap-4">
-                <Phone className="w-5 h-5 text-[#C9A96E] shrink-0" />
+                <Phone className="w-5 h-5 text-[#e68d15] shrink-0" />
                 <p className="text-white/60 text-sm">+33 6 XX XX XX XX</p>
               </div>
             </div>
@@ -78,7 +78,7 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} Dany Natural Concept. Excellence et Nature.</p>
           <div className="flex items-center gap-4">
             <span className="hover:text-white transition-colors cursor-pointer">Confidentialité</span>
-            <span className="w-1 h-1 rounded-full bg-[#C9A96E]"></span>
+            <span className="w-1 h-1 rounded-full bg-[#e68d15]"></span>
             <span className="hover:text-white transition-colors cursor-pointer">Accessibilité</span>
           </div>
         </div>

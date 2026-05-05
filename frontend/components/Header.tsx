@@ -84,11 +84,11 @@ function Header() {
                   key={link.name} 
                   href={link.path}
                   className={`text-lg font-bold uppercase tracking-[0.2em] transition-all duration-300 relative group
-                    ${isActive ? 'text-[#2D4A1E]' : 'text-[#2D4A1E]/60 hover:text-[#2D4A1E]'}
+                    ${isActive ? 'text-[#3fad28]' : 'text-[#3fad28]/60 hover:text-[#3fad28]'}
                   `}
                 >
                   {link.name}
-                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-[#C9A96E] transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                  <span className={`absolute -bottom-1 left-0 h-[1px] bg-[#e68d15] transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
                 </Link>
               );
             })}
@@ -97,14 +97,14 @@ function Header() {
         {/* Actions */}
         <div className="flex items-center gap-4">
           {!isLoggedIn ? (
-            <Link href="/login" className="hidden md:flex items-center justify-center w-14 h-14 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white transition-all duration-300">
+            <Link href="/login" className="hidden md:flex items-center justify-center w-14 h-14 rounded-full border border-[#3fad28]/10 text-[#3fad28] hover:bg-[#3fad28] hover:text-white transition-all duration-300">
               <User className="w-6 h-6" />
             </Link>
           ) : (
             <div className="flex items-center gap-3">
               <Link 
                 href={userRole === 'admin' ? '/admin' : '/client'} 
-                className="w-14 h-14 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] flex items-center justify-center hover:bg-[#2D4A1E] hover:text-white transition-all duration-300"
+                className="w-14 h-14 rounded-full border border-[#3fad28]/10 text-[#3fad28] flex items-center justify-center hover:bg-[#3fad28] hover:text-white transition-all duration-300"
               >
                 <User className="w-6 h-6" />
               </Link>
@@ -117,10 +117,10 @@ function Header() {
             </div>
           )}
 
-          <Link href="/panier" className="relative w-14 h-14 rounded-full bg-[#2D4A1E] text-white flex items-center justify-center shadow-lg hover:bg-[#1A1A18] transition-all duration-300 hover:-translate-y-0.5">
+          <Link href="/panier" className="relative w-14 h-14 rounded-full bg-[#3fad28] text-white flex items-center justify-center shadow-lg hover:bg-[#000000] transition-all duration-300 hover:-translate-y-0.5">
             <ShoppingBag className="w-6 h-6" />
             {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-6 h-6 bg-[#C9A96E] text-white text-[11px] font-bold flex items-center justify-center rounded-full shadow-md animate-pulse">
+              <span className="absolute -top-1 -right-1 w-6 h-6 bg-[#e68d15] text-white text-[11px] font-bold flex items-center justify-center rounded-full shadow-md animate-pulse">
                 {cartCount}
               </span>
             )}
@@ -128,7 +128,7 @@ function Header() {
           
           {!isDashboard && (
             <button 
-              className="lg:hidden w-14 h-14 rounded-full border border-[#2D4A1E]/10 text-[#2D4A1E] flex items-center justify-center mr-3"
+              className="lg:hidden w-14 h-14 rounded-full border border-[#3fad28]/10 text-[#3fad28] flex items-center justify-center mr-3"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -147,7 +147,7 @@ function Header() {
                 key={link.name} 
                 href={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-2xl font-serif text-center ${router.pathname === link.path ? 'text-[#2D4A1E]' : 'text-gray-400'}`}
+                className={`text-2xl font-serif text-center ${router.pathname === link.path ? 'text-[#3fad28]' : 'text-gray-400'}`}
               >
                 {link.name}
               </Link>

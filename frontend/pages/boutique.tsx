@@ -31,15 +31,15 @@ export default function Boutique() {
       </Head>
 
       {/* Hero Header */}
-      <section className="relative pt-44 pb-24 overflow-hidden bg-white border-b border-[#2D4A1E]/5">
+      <section className="relative pt-44 pb-24 overflow-hidden bg-white border-b border-[#3fad28]/5">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#3D6228]/5 rounded-full blur-[100px]"></div>
-          <div className="absolute bottom-[20%] left-[-10%] w-[400px] h-[400px] bg-[#C9A96E]/10 rounded-full blur-[80px]"></div>
+          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#4ec433]/5 rounded-full blur-[100px]"></div>
+          <div className="absolute bottom-[20%] left-[-10%] w-[400px] h-[400px] bg-[#e68d15]/10 rounded-full blur-[80px]"></div>
         </div>
         
         <div className="container mx-auto px-6 relative z-10 text-center">
           <span className="section-tag mb-6">Collection Complète</span>
-          <h1 className="text-6xl md:text-8xl font-serif mb-8 text-[#2C2C28] leading-[0.95]">
+          <h1 className="text-6xl md:text-8xl font-serif mb-8 text-[#1a1a1a] leading-[0.95]">
             Nos <span className="italic-serif text-gradient">Créations</span>
           </h1>
           <p className="text-gray-500 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed">
@@ -58,7 +58,7 @@ export default function Boutique() {
               placeholder="Rechercher un soin..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="w-full pl-14 pr-6 py-5 bg-white border-none rounded-full shadow-lg shadow-black/5 focus:ring-2 focus:ring-[#2D4A1E] transition-all outline-none text-sm"
+              className="w-full pl-14 pr-6 py-5 bg-white border-none rounded-full shadow-lg shadow-black/5 focus:ring-2 focus:ring-[#3fad28] transition-all outline-none text-sm"
             />
           </div>
           
@@ -66,10 +66,10 @@ export default function Boutique() {
 
         {/* Product Count & Info */}
         <div className="flex items-center justify-between mb-12 px-2">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#2D4A1E]/40">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#3fad28]/40">
             {filtered.length} soin{filtered.length > 1 ? 's' : ''} trouvé{filtered.length > 1 ? 's' : ''}
           </p>
-          <div className="h-px bg-[#2D4A1E]/5 flex-1 mx-8"></div>
+          <div className="h-px bg-[#3fad28]/5 flex-1 mx-8"></div>
         </div>
 
         {/* Product Grid - 2 per row on mobile, 3 on sm, 4 on lg */}
@@ -80,38 +80,40 @@ export default function Boutique() {
               className="card-hover bg-white rounded-[1.5rem] md:rounded-[3rem] p-2 md:p-4 flex flex-col h-full group animate-reveal-up"
               style={{ animationDelay: `${idx * 0.05}s` }}
             >
-              <Link href={`/produit/${product.id}`} className="relative aspect-[4/5] rounded-[1.2rem] md:rounded-[2.5rem] overflow-hidden mb-4 md:mb-8 block group/img">
-                <img
-                  src={product.imageUrl}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover/img:scale-110"
-                  onError={(e: any) => { e.target.src = 'https://via.placeholder.com/400x400/F8F5EE/2D4A1E?text=DNC'; }}
-                />
-                
+              <div className="relative aspect-[4/5] rounded-[1.2rem] md:rounded-[2.5rem] overflow-hidden mb-4 md:mb-8 group/img">
+                <Link href={`/produit/${product.id}`} className="absolute inset-0 z-10">
+                  <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover/img:scale-110"
+                    onError={(e: any) => { e.target.src = 'https://via.placeholder.com/400x400/F8F5EE/3fad28?text=DNC'; }}
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-all duration-500"></div>
+                </Link>
                 
                 {product.stock < 10 && (
-                  <div className="absolute top-5 right-5">
-                    <span className="bg-[#C9A96E] text-white text-[8px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Édition Limitée</span>
+                  <div className="absolute top-5 right-5 z-20 pointer-events-none">
+                    <span className="bg-[#e68d15] text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Édition Limitée</span>
                   </div>
                 )}
                 
-                <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-all duration-500 flex items-center justify-center gap-4 opacity-0 group-hover/img:opacity-100">
-                  <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white transition-all shadow-xl">
+                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover/img:opacity-100 transition-all duration-500 z-20 pointer-events-none">
+                  <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#3fad28] shadow-xl">
                     <Heart className="w-5 h-5" />
-                  </button>
+                  </div>
                 </div>
-              </Link>
+              </div>
 
               <div className="px-4 pb-4 flex flex-col flex-1">
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-[#C9A96E] text-[#C9A96E]" />
+                    <Star key={i} className="w-3 h-3 fill-[#e68d15] text-[#e68d15]" />
                   ))}
                   <span className="text-[10px] text-gray-400 ml-2 font-bold">(24)</span>
                 </div>
                 
                 <Link href={`/produit/${product.id}`}>
-                  <h3 className="text-sm md:text-xl font-serif text-[#2C2C28] mb-2 md:mb-3 leading-tight group-hover:text-[#2D4A1E] transition-colors line-clamp-2 h-10 md:h-14">
+                  <h3 className="text-sm md:text-xl font-serif text-[#1a1a1a] mb-2 md:mb-3 leading-tight group-hover:text-[#3fad28] transition-colors line-clamp-2 h-10 md:h-14">
                     {product.name}
                   </h3>
                 </Link>
@@ -120,20 +122,20 @@ export default function Boutique() {
                   {product.description}
                 </p>
                 
-                <div className="mt-auto flex flex-col items-stretch border-t border-[#2D4A1E]/5 pt-4 md:pt-6 gap-4">
+                <div className="mt-auto flex flex-col items-stretch border-t border-[#3fad28]/5 pt-4 md:pt-6 gap-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-lg md:text-2xl font-serif text-[#2D4A1E] font-medium">{product.price.toFixed(2)}€</span>
-                    <button className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-[#2D4A1E]/10 flex items-center justify-center text-[#2D4A1E] hover:bg-[#2D4A1E] hover:text-white transition-all">
+                    <span className="text-lg md:text-2xl font-serif text-[#3fad28] font-medium">{product.price.toFixed(2)}€</span>
+                    <button className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-[#3fad28]/10 flex items-center justify-center text-[#3fad28] hover:bg-[#3fad28] hover:text-white transition-all">
                       <Heart className="w-4 h-4" />
                     </button>
                   </div>
                   
                   <button
                     onClick={() => handleAdd(product)}
-                    className={`flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-4 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all duration-500 w-full justify-center shadow-lg active:scale-95 ${
+                    className={`flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-4 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-500 w-full justify-center shadow-lg active:scale-95 ${
                       addedId === product.id
-                        ? 'bg-[#7A9E5E] text-white shadow-[#7A9E5E]/20'
-                        : 'bg-[#2D4A1E] text-white hover:bg-[#1A1A18] shadow-[#2D4A1E]/20'
+                        ? 'bg-[#7ecb6e] text-white shadow-[#7ecb6e]/20'
+                        : 'bg-[#3fad28] text-white hover:bg-[#000000] shadow-[#3fad28]/20'
                     }`}
                   >
                     <ShoppingCart className="w-3.5 h-3.5 md:w-4 h-4" />
@@ -162,7 +164,7 @@ export default function Boutique() {
 
       {/* CTA Section */}
       <section className="container mx-auto px-6 mt-32">
-        <div className="bg-[#2D4A1E] rounded-[4rem] p-16 md:p-24 text-center relative overflow-hidden">
+        <div className="bg-[#3fad28] rounded-[4rem] p-16 md:p-24 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 noise-bg pointer-events-none"></div>
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-[100px]"></div>
           

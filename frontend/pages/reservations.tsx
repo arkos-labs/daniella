@@ -72,14 +72,14 @@ export default function Reservations() {
       </Head>
 
       {/* Header Section */}
-      <section className="relative pt-44 pb-20 overflow-hidden bg-white border-b border-[#2D4A1E]/5">
+      <section className="relative pt-44 pb-20 overflow-hidden bg-white border-b border-[#3fad28]/5">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#3D6228]/5 rounded-full blur-[100px]"></div>
+          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-[#4ec433]/5 rounded-full blur-[100px]"></div>
         </div>
         
         <div className="container mx-auto px-6 relative z-10 text-center max-w-4xl">
           <span className="section-tag mb-6">Expérience Personnalisée</span>
-          <h1 className="text-6xl md:text-8xl font-serif mb-8 text-[#2C2C28] leading-[0.95]">
+          <h1 className="text-6xl md:text-8xl font-serif mb-8 text-[#1a1a1a] leading-[0.95]">
             Réserver votre <span className="italic-serif text-gradient">Séance</span>
           </h1>
           <p className="text-gray-500 text-xl md:text-2xl max-w-2xl mx-auto font-light leading-relaxed mb-12">
@@ -92,13 +92,13 @@ export default function Reservations() {
               {steps.slice(0, 3).map((s, i) => (
                 <div key={s} className="flex flex-col items-center gap-3">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 border-2 ${
-                    step > i + 1 ? 'bg-[#2D4A1E] border-[#2D4A1E] text-white' :
-                    step === i + 1 ? 'border-[#C9A96E] text-[#C9A96E] bg-white shadow-xl shadow-[#C9A96E]/20 scale-110' :
+                    step > i + 1 ? 'bg-[#3fad28] border-[#3fad28] text-white' :
+                    step === i + 1 ? 'border-[#e68d15] text-[#e68d15] bg-white shadow-xl shadow-[#e68d15]/20 scale-110' :
                     'border-gray-100 text-gray-300 bg-white'
                   }`}>
                     {step > i + 1 ? '✓' : `0${i + 1}`}
                   </div>
-                  <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${step === i + 1 ? 'text-[#C9A96E]' : 'text-gray-300'}`}>{s}</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${step === i + 1 ? 'text-[#e68d15]' : 'text-gray-300'}`}>{s}</span>
                 </div>
               ))}
             </div>
@@ -107,7 +107,7 @@ export default function Reservations() {
       </section>
 
       <div className="container mx-auto px-6 mt-20 max-w-6xl">
-        <div className={`transition-all duration-700 ${step > 1 && step < 4 ? 'bg-white rounded-[4rem] p-12 md:p-20 shadow-2xl shadow-black/5 border border-[#2D4A1E]/5' : ''}`}>
+        <div className={`transition-all duration-700 ${step > 1 && step < 4 ? 'bg-white rounded-[4rem] p-12 md:p-20 shadow-2xl shadow-black/5 border border-[#3fad28]/5' : ''}`}>
           
           {/* STEP 1 — Service Selection */}
           {step === 1 && (
@@ -117,23 +117,23 @@ export default function Reservations() {
                   <button
                     key={service.id}
                     onClick={() => { setSelectedService(service); setStep(2); window.scrollTo(0, 0); }}
-                    className="card-hover bg-white p-10 rounded-[3rem] text-left flex flex-col group border border-[#2D4A1E]/5"
+                    className="card-hover bg-white p-10 rounded-[3rem] text-left flex flex-col group border border-[#3fad28]/5"
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#2D4A1E] mb-8 group-hover:bg-[#2D4A1E] group-hover:text-white transition-all duration-500">
+                    <div className="w-16 h-16 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#3fad28] mb-8 group-hover:bg-[#3fad28] group-hover:text-white transition-all duration-500">
                       {getServiceIcon(service.id)}
                     </div>
                     
-                    <h3 className="text-2xl font-serif text-[#2C2C28] mb-4 group-hover:text-[#2D4A1E] transition-colors">
+                    <h3 className="text-2xl font-serif text-[#1a1a1a] mb-4 group-hover:text-[#3fad28] transition-colors">
                       {getCleanTitle(service.title)}
                     </h3>
                     <p className="text-gray-400 text-sm font-light mb-10 leading-relaxed flex-1">
                       {service.description}
                     </p>
 
-                    <div className="mt-auto flex items-center justify-between border-t border-[#2D4A1E]/5 pt-8">
+                    <div className="mt-auto flex items-center justify-between border-t border-[#3fad28]/5 pt-8">
                       <div className="flex flex-col">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#C9A96E] mb-1">Prix</span>
-                        <span className="text-2xl font-serif text-[#2D4A1E]">{service.price.toFixed(2)}€</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#e68d15] mb-1">Prix</span>
+                        <span className="text-2xl font-serif text-[#3fad28]">{service.price.toFixed(2)}€</span>
                       </div>
                       <div className="flex flex-col text-right">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-1">Durée</span>
@@ -149,16 +149,16 @@ export default function Reservations() {
           {/* STEP 2 — Date & Time */}
           {step === 2 && (
             <div className="animate-reveal-up">
-              <button onClick={() => setStep(1)} className="group flex items-center gap-3 text-gray-400 hover:text-[#2D4A1E] transition-colors mb-12 uppercase text-[10px] font-bold tracking-widest">
+              <button onClick={() => setStep(1)} className="group flex items-center gap-3 text-gray-400 hover:text-[#3fad28] transition-colors mb-12 uppercase text-[10px] font-bold tracking-widest">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour aux prestations
               </button>
               
               <div className="grid lg:grid-cols-2 gap-20">
                 <div>
-                  <h2 className="text-4xl font-serif text-[#2C2C28] mb-4">Choisir une date</h2>
-                  <p className="text-gray-400 font-light mb-10">Consultez nos disponibilités pour votre séance de <span className="text-[#2D4A1E] font-medium italic">{getCleanTitle(selectedService?.title)}</span>.</p>
+                  <h2 className="text-4xl font-serif text-[#1a1a1a] mb-4">Choisir une date</h2>
+                  <p className="text-gray-400 font-light mb-10">Consultez nos disponibilités pour votre séance de <span className="text-[#3fad28] font-medium italic">{getCleanTitle(selectedService?.title)}</span>.</p>
                   
-                  <div className="flex items-center justify-between mb-8 bg-white p-4 rounded-3xl border border-[#2D4A1E]/5">
+                  <div className="flex items-center justify-between mb-8 bg-white p-4 rounded-3xl border border-[#3fad28]/5">
                     <button 
                       onClick={handlePrevMonth}
                       className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-[#F8F5EE] transition-colors disabled:opacity-10"
@@ -166,7 +166,7 @@ export default function Reservations() {
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
-                    <span className="text-sm font-bold uppercase tracking-[0.2em] text-[#2D4A1E]">
+                    <span className="text-sm font-bold uppercase tracking-[0.2em] text-[#3fad28]">
                       {format(viewingMonth, 'MMMM yyyy', { locale: fr })}
                     </span>
                     <button 
@@ -181,7 +181,7 @@ export default function Reservations() {
                   <div className="grid grid-cols-7 gap-3">
                     {/* Days of week headers */}
                     {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d, i) => (
-                      <div key={i} className="text-[8px] font-bold text-center text-gray-300 py-2 uppercase tracking-widest">{d}</div>
+                      <div key={i} className="text-xs font-bold text-center text-gray-300 py-2 uppercase tracking-widest">{d}</div>
                     ))}
                     
                     {/* Empty slots for month start offset */}
@@ -204,8 +204,8 @@ export default function Reservations() {
                           onClick={() => setSelectedDate(date)}
                           className={`aspect-square rounded-2xl flex flex-col items-center justify-center transition-all duration-300 border ${
                             isSunday || isPast || isTooFar ? 'opacity-10 cursor-not-allowed bg-gray-50 border-transparent' :
-                            isSelected ? 'bg-[#2D4A1E] text-white border-[#2D4A1E] shadow-xl shadow-[#2D4A1E]/20 scale-105' :
-                            'bg-white border-[#2D4A1E]/5 text-gray-400 hover:border-[#C9A96E] hover:text-[#2D4A1E]'
+                            isSelected ? 'bg-[#3fad28] text-white border-[#3fad28] shadow-xl shadow-[#3fad28]/20 scale-105' :
+                            'bg-white border-[#3fad28]/5 text-gray-400 hover:border-[#e68d15] hover:text-[#3fad28]'
                           }`}
                         >
                           <span className="text-lg font-serif">{dayNum}</span>
@@ -216,7 +216,7 @@ export default function Reservations() {
                 </div>
 
                 <div className="bg-[#F8F5EE] rounded-[3rem] p-10">
-                  <h3 className="text-2xl font-serif text-[#2C2C28] mb-8">Créneaux horaires</h3>
+                  <h3 className="text-2xl font-serif text-[#1a1a1a] mb-8">Créneaux horaires</h3>
                   {selectedDate ? (
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {TIME_SLOTS.map(slot => {
@@ -235,8 +235,8 @@ export default function Reservations() {
                               isBooked
                                 ? 'bg-gray-100 text-gray-300 border-transparent cursor-not-allowed opacity-50'
                                 : selectedSlot === slot 
-                                  ? 'bg-[#C9A96E] text-white border-[#C9A96E] shadow-lg' 
-                                  : 'bg-white text-gray-400 border-transparent hover:border-[#C9A96E] hover:text-[#2D4A1E]'
+                                  ? 'bg-[#e68d15] text-white border-[#e68d15] shadow-lg' 
+                                  : 'bg-white text-gray-400 border-transparent hover:border-[#e68d15] hover:text-[#3fad28]'
                             }`}
                           >
                             {slot}
@@ -263,18 +263,18 @@ export default function Reservations() {
           {/* STEP 3 — Client Info Form */}
           {step === 3 && (
             <div className="animate-reveal-up max-w-3xl mx-auto">
-              <button onClick={() => setStep(2)} className="group flex items-center gap-3 text-gray-400 hover:text-[#2D4A1E] transition-colors mb-12 uppercase text-[10px] font-bold tracking-widest">
+              <button onClick={() => setStep(2)} className="group flex items-center gap-3 text-gray-400 hover:text-[#3fad28] transition-colors mb-12 uppercase text-[10px] font-bold tracking-widest">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour au calendrier
               </button>
 
-              <div className="flex items-center gap-10 mb-16 p-8 bg-[#F8F5EE] rounded-[2.5rem] border border-[#2D4A1E]/5">
+              <div className="flex items-center gap-10 mb-16 p-8 bg-[#F8F5EE] rounded-[2.5rem] border border-[#3fad28]/5">
                 <div className="flex-1">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#C9A96E] mb-2 block">Votre Sélection</span>
-                  <h4 className="text-2xl font-serif text-[#2D4A1E]">{getCleanTitle(selectedService?.title)}</h4>
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#e68d15] mb-2 block">Votre Sélection</span>
+                  <h4 className="text-2xl font-serif text-[#3fad28]">{getCleanTitle(selectedService?.title)}</h4>
                 </div>
                 <div className="text-right">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Date & Heure</span>
-                  <p className="text-sm font-bold text-[#2C2C28] uppercase tracking-widest">
+                  <span className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 block">Date & Heure</span>
+                  <p className="text-sm font-bold text-[#1a1a1a] uppercase tracking-widest">
                     {selectedDate && format(selectedDate, 'dd MMMM', { locale: fr })} @ {selectedSlot}
                   </p>
                 </div>
@@ -285,14 +285,14 @@ export default function Reservations() {
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Prénom & Nom</label>
                     <input required value={clientInfo.name} onChange={e => setClientInfo({ ...clientInfo, name: e.target.value })}
-                      className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light"
+                      className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#3fad28] outline-none text-sm font-light"
                       placeholder="Ex: Daniella Adabra"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Téléphone</label>
                     <input required value={clientInfo.phone} onChange={e => setClientInfo({ ...clientInfo, phone: e.target.value })}
-                      className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light"
+                      className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#3fad28] outline-none text-sm font-light"
                       placeholder="+33 6 00 00 00 00"
                     />
                   </div>
@@ -301,7 +301,7 @@ export default function Reservations() {
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Email de contact</label>
                   <input required type="email" value={clientInfo.email} onChange={e => setClientInfo({ ...clientInfo, email: e.target.value })}
-                    className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light"
+                    className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#3fad28] outline-none text-sm font-light"
                     placeholder="votre@email.com"
                   />
                 </div>
@@ -310,7 +310,7 @@ export default function Reservations() {
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Notes optionnelles</label>
                   <textarea value={clientInfo.message} onChange={e => setClientInfo({ ...clientInfo, message: e.target.value })}
                     rows={4}
-                    className="w-full px-8 py-6 bg-[#F8F5EE] border-none rounded-[2.5rem] focus:ring-2 focus:ring-[#2D4A1E] outline-none text-sm font-light resize-none"
+                    className="w-full px-8 py-6 bg-[#F8F5EE] border-none rounded-[2.5rem] focus:ring-2 focus:ring-[#3fad28] outline-none text-sm font-light resize-none"
                     placeholder="Précisez ici vos attentes particulières..."
                   />
                 </div>
@@ -329,25 +329,25 @@ export default function Reservations() {
           {/* STEP 4 — Success Confirmation */}
           {step === 4 && (
             <div className="py-20 text-center animate-reveal-up max-w-2xl mx-auto">
-              <div className="w-32 h-32 bg-[#2D4A1E] rounded-full flex items-center justify-center mx-auto mb-12 shadow-2xl shadow-[#2D4A1E]/30 text-white animate-float">
+              <div className="w-32 h-32 bg-[#3fad28] rounded-full flex items-center justify-center mx-auto mb-12 shadow-2xl shadow-[#3fad28]/30 text-white animate-float">
                 <CheckCircle2 className="w-16 h-16" />
               </div>
               
-              <h2 className="text-6xl font-serif text-[#2C2C28] mb-6">Séance <br /> <span className="italic text-gradient">Confirmée</span></h2>
+              <h2 className="text-6xl font-serif text-[#1a1a1a] mb-6">Séance <br /> <span className="italic text-gradient">Confirmée</span></h2>
               <p className="text-xl text-gray-500 font-light mb-10 leading-relaxed">
-                Ravie de vous accompagner bientôt, <span className="text-[#2D4A1E] font-medium">{clientInfo.name}</span>. <br />
+                Ravie de vous accompagner bientôt, <span className="text-[#3fad28] font-medium">{clientInfo.name}</span>. <br />
                 Un récapitulatif complet vient de vous être envoyé à <span className="italic font-medium">{clientInfo.email}</span>.
               </p>
 
-              <div className="bg-white p-10 rounded-[3rem] shadow-xl shadow-black/5 border border-[#2D4A1E]/5 mb-16 text-left">
+              <div className="bg-white p-10 rounded-[3rem] shadow-xl shadow-black/5 border border-[#3fad28]/5 mb-16 text-left">
                 <div className="grid grid-cols-2 gap-8">
                   <div>
-                    <span className="text-[8px] font-bold uppercase tracking-widest text-[#C9A96E] mb-2 block">Prestation</span>
-                    <p className="text-lg font-serif text-[#2C2C28]">{getCleanTitle(selectedService?.title)}</p>
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#e68d15] mb-2 block">Prestation</span>
+                    <p className="text-lg font-serif text-[#1a1a1a]">{getCleanTitle(selectedService?.title)}</p>
                   </div>
                   <div>
-                    <span className="text-[8px] font-bold uppercase tracking-widest text-[#C9A96E] mb-2 block">Horaire</span>
-                    <p className="text-lg font-serif text-[#2C2C28]">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#e68d15] mb-2 block">Horaire</span>
+                    <p className="text-lg font-serif text-[#1a1a1a]">
                       {selectedDate && format(selectedDate, 'EEEE d MMMM', { locale: fr })} à {selectedSlot}
                     </p>
                   </div>
@@ -367,28 +367,28 @@ export default function Reservations() {
       {step < 4 && (
         <section className="container mx-auto px-6 mt-32">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#2D4A1E]/5 shadow-sm">
-              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#C9A96E]">
+            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#3fad28]/5 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#e68d15]">
                 <Clock className="w-6 h-6" />
               </div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#2D4A1E]/60 leading-relaxed">
-                Rappel automatique <br /> <span className="text-[#2C2C28]">24h avant la séance</span>
+              <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#3fad28]/60 leading-relaxed">
+                Rappel automatique <br /> <span className="text-[#1a1a1a]">24h avant la séance</span>
               </p>
             </div>
-            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#2D4A1E]/5 shadow-sm">
-              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#C9A96E]">
+            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#3fad28]/5 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#e68d15]">
                 <Sparkles className="w-6 h-6" />
               </div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#2D4A1E]/60 leading-relaxed">
-                Expertise certifiée <br /> <span className="text-[#2C2C28]">Naturopathie Holistique</span>
+              <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#3fad28]/60 leading-relaxed">
+                Expertise certifiée <br /> <span className="text-[#1a1a1a]">Naturopathie Holistique</span>
               </p>
             </div>
-            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#2D4A1E]/5 shadow-sm">
-              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#C9A96E]">
+            <div className="flex items-center gap-6 p-8 bg-white rounded-[2.5rem] border border-[#3fad28]/5 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#e68d15]">
                 <CheckCircle className="w-6 h-6" />
               </div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#2D4A1E]/60 leading-relaxed">
-                Réservation <br /> <span className="text-[#2C2C28]">Simple & Sécurisée</span>
+              <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#3fad28]/60 leading-relaxed">
+                Réservation <br /> <span className="text-[#1a1a1a]">Simple & Sécurisée</span>
               </p>
             </div>
           </div>
