@@ -98,7 +98,7 @@ export default function Reservations() {
                   }`}>
                     {step > i + 1 ? '✓' : `0${i + 1}`}
                   </div>
-                  <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${step === i + 1 ? 'text-[#e68d15]' : 'text-gray-300'}`}>{s}</span>
+                  <span className={`text-xs font-bold uppercase tracking-[0.2em] ${step === i + 1 ? 'text-[#e68d15]' : 'text-gray-300'}`}>{s}</span>
                 </div>
               ))}
             </div>
@@ -116,7 +116,7 @@ export default function Reservations() {
                 {MOCK_SERVICES.map((service, index) => (
                   <button
                     key={service.id}
-                    onClick={() => { setSelectedService(service); setStep(2); window.scrollTo(0, 0); }}
+                    onClick={() => { setSelectedService(service); setStep(2); }}
                     className="card-hover bg-white p-10 rounded-[3rem] text-left flex flex-col group border border-[#3fad28]/5"
                   >
                     <div className="w-16 h-16 rounded-2xl bg-[#F8F5EE] flex items-center justify-center text-[#3fad28] mb-8 group-hover:bg-[#3fad28] group-hover:text-white transition-all duration-500">
@@ -132,11 +132,11 @@ export default function Reservations() {
 
                     <div className="mt-auto flex items-center justify-between border-t border-[#3fad28]/5 pt-8">
                       <div className="flex flex-col">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-[#e68d15] mb-1">Prix</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-[#e68d15] mb-1">Prix</span>
                         <span className="text-2xl font-serif text-[#3fad28]">{service.price.toFixed(2)}€</span>
                       </div>
                       <div className="flex flex-col text-right">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300 mb-1">Durée</span>
+                        <span className="text-xs font-bold uppercase tracking-widest text-gray-300 mb-1">Durée</span>
                         <span className="text-sm font-bold text-gray-400">{service.duration} MIN</span>
                       </div>
                     </div>
@@ -149,7 +149,7 @@ export default function Reservations() {
           {/* STEP 2 — Date & Time */}
           {step === 2 && (
             <div className="animate-reveal-up">
-              <button onClick={() => setStep(1)} className="group flex items-center gap-3 text-gray-400 hover:text-[#3fad28] transition-colors mb-12 uppercase text-[10px] font-bold tracking-widest">
+              <button onClick={() => setStep(1)} className="group flex items-center gap-3 text-gray-400 hover:text-[#3fad28] transition-colors mb-12 uppercase text-xs font-bold tracking-widest">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour aux prestations
               </button>
               
@@ -218,10 +218,8 @@ export default function Reservations() {
                 <div className="bg-[#F8F5EE] rounded-[3rem] p-10">
                   <h3 className="text-2xl font-serif text-[#1a1a1a] mb-8">Créneaux horaires</h3>
                   {selectedDate ? (
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-3">
                       {TIME_SLOTS.map(slot => {
-                        // Simulate some booked slots for demonstration
-                        // For example: 10:00 and 15:30 are always booked on Mondays
                         const isMonday = selectedDate.getDay() === 1;
                         const isBooked = (isMonday && (slot === '10:00' || slot === '15:30')) || 
                                          (selectedDate.getDate() % 3 === 0 && slot === '14:00');
@@ -230,8 +228,8 @@ export default function Reservations() {
                           <button
                             key={slot}
                             disabled={isBooked}
-                            onClick={() => { setSelectedSlot(slot); setStep(3); window.scrollTo(0, 0); }}
-                            className={`py-4 rounded-xl text-xs font-bold transition-all duration-300 border relative overflow-hidden ${
+                            onClick={() => { setSelectedSlot(slot); setStep(3); }}
+                            className={`py-3 md:py-4 rounded-xl text-[10px] md:text-xs font-bold transition-all duration-300 border relative overflow-hidden ${
                               isBooked
                                 ? 'bg-gray-100 text-gray-300 border-transparent cursor-not-allowed opacity-50'
                                 : selectedSlot === slot 
@@ -240,11 +238,6 @@ export default function Reservations() {
                             }`}
                           >
                             {slot}
-                            {isBooked && (
-                              <span className="absolute inset-0 flex items-center justify-center bg-gray-100/40 backdrop-blur-[1px] text-[8px] uppercase tracking-tighter text-gray-400 rotate-12">
-                                Complet
-                              </span>
-                            )}
                           </button>
                         );
                       })}
@@ -263,18 +256,18 @@ export default function Reservations() {
           {/* STEP 3 — Client Info Form */}
           {step === 3 && (
             <div className="animate-reveal-up max-w-3xl mx-auto">
-              <button onClick={() => setStep(2)} className="group flex items-center gap-3 text-gray-400 hover:text-[#3fad28] transition-colors mb-12 uppercase text-[10px] font-bold tracking-widest">
+              <button onClick={() => setStep(2)} className="group flex items-center gap-3 text-gray-400 hover:text-[#3fad28] transition-colors mb-12 uppercase text-xs font-bold tracking-widest">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Retour au calendrier
               </button>
 
-              <div className="flex items-center gap-10 mb-16 p-8 bg-[#F8F5EE] rounded-[2.5rem] border border-[#3fad28]/5">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10 mb-16 p-6 md:p-8 bg-[#F8F5EE] rounded-[2rem] md:rounded-[2.5rem] border border-[#3fad28]/5">
                 <div className="flex-1">
                   <span className="text-xs font-bold uppercase tracking-widest text-[#e68d15] mb-2 block">Votre Sélection</span>
-                  <h4 className="text-2xl font-serif text-[#3fad28]">{getCleanTitle(selectedService?.title)}</h4>
+                  <h4 className="text-xl md:text-2xl font-serif text-[#3fad28]">{getCleanTitle(selectedService?.title)}</h4>
                 </div>
-                <div className="text-right">
+                <div className="sm:text-right">
                   <span className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2 block">Date & Heure</span>
-                  <p className="text-sm font-bold text-[#1a1a1a] uppercase tracking-widest">
+                  <p className="text-xs md:text-sm font-bold text-[#1a1a1a] uppercase tracking-widest">
                     {selectedDate && format(selectedDate, 'dd MMMM', { locale: fr })} @ {selectedSlot}
                   </p>
                 </div>
@@ -283,14 +276,14 @@ export default function Reservations() {
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Prénom & Nom</label>
+                    <label className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Prénom & Nom</label>
                     <input required value={clientInfo.name} onChange={e => setClientInfo({ ...clientInfo, name: e.target.value })}
                       className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#3fad28] outline-none text-sm font-light"
                       placeholder="Ex: Daniella Adabra"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Téléphone</label>
+                    <label className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Téléphone</label>
                     <input required value={clientInfo.phone} onChange={e => setClientInfo({ ...clientInfo, phone: e.target.value })}
                       className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#3fad28] outline-none text-sm font-light"
                       placeholder="+33 6 00 00 00 00"
@@ -299,7 +292,7 @@ export default function Reservations() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Email de contact</label>
+                  <label className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Email de contact</label>
                   <input required type="email" value={clientInfo.email} onChange={e => setClientInfo({ ...clientInfo, email: e.target.value })}
                     className="w-full px-8 py-5 bg-[#F8F5EE] border-none rounded-full focus:ring-2 focus:ring-[#3fad28] outline-none text-sm font-light"
                     placeholder="votre@email.com"
@@ -307,7 +300,7 @@ export default function Reservations() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Notes optionnelles</label>
+                  <label className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 ml-4">Notes optionnelles</label>
                   <textarea value={clientInfo.message} onChange={e => setClientInfo({ ...clientInfo, message: e.target.value })}
                     rows={4}
                     className="w-full px-8 py-6 bg-[#F8F5EE] border-none rounded-[2.5rem] focus:ring-2 focus:ring-[#3fad28] outline-none text-sm font-light resize-none"
