@@ -77,7 +77,7 @@ export default function Footer() {
         <div className="border-t border-white/5 pt-12 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-[0.25em] text-white/20">
           <p>&copy; {new Date().getFullYear()} Dany Natural Concept. Excellence et Nature.</p>
           <div className="flex items-center gap-4">
-            <span className="hover:text-white transition-colors cursor-pointer">Confidentialité</span>
+            <Link href="/confidentialite" className="hover:text-white transition-colors cursor-pointer">Confidentialité</Link>
             <span className="w-1 h-1 rounded-full bg-[#e68d15]"></span>
             <span className="hover:text-white transition-colors cursor-pointer">Accessibilité</span>
           </div>
