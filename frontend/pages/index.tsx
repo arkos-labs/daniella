@@ -7,11 +7,22 @@ import { ArrowRight, ChevronLeft, ChevronRight, Leaf, Star, ShoppingCart, Wind, 
 
 export default function Home() {
   const { addItem } = useCart();
+  // Date logic for the premium calendar
+  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 4)); // May 2026
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
-  const times = ['09:00', '10:30', '14:00', '15:30', '17:00'];
+  const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+  const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month, 1).getDay();
+  
+  const daysInMonth = getDaysInMonth(currentMonth.getFullYear(), currentMonth.getMonth());
+  const firstDay = (getFirstDayOfMonth(currentMonth.getFullYear(), currentMonth.getMonth()) + 6) % 7; // Adjust for Monday start
+  const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+
+  const times = {
+    matin: ['09:00', '10:30', '11:30'],
+    apresMidi: ['14:00', '15:30', '17:00', '18:30']
+  };
   const featuredProducts = MOCK_PRODUCTS.slice(0, 4);
 
   return (
@@ -36,10 +47,9 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           {/* Main Background Image */}
           <img 
-            src="/hero-concept .jpg" 
+            src="/hero-concept.jpg" 
             alt="Dany Natural Concept Atmosphere" 
             className="w-full h-full object-cover scale-105"
-            onError={(e: any) => { e.target.src = '/hero-concept.jpg'; }}
           />
           
           {/* Overlays for legibility */}
@@ -57,26 +67,26 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-6 relative z-30 pt-20 md:pt-48 pb-6">
-          <div className="max-w-5xl mx-auto text-center">
+          <div className="max-w-5xl mx-auto text-center flex flex-col">
             
-            <p className="text-[#E8C98A] text-[10px] md:text-base font-bold uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 md:mt-24 md:mb-12 drop-shadow-md animate-reveal-up" style={{ animationFillMode: 'forwards' }}>
-              Bienvenue chez Dany Natural Concept | Daniella Adabra, naturopathe
-            </p>
-
-            <h1 className="text-3xl md:text-7xl font-serif text-white leading-tight md:leading-[1.2] mb-4 md:mb-10 tracking-tight" style={{ animationFillMode: 'forwards' }}>
+            <h1 className="text-3xl md:text-7xl font-serif text-white leading-tight md:leading-[1.2] mb-4 md:mb-10 tracking-tight order-2 md:order-1" style={{ animationFillMode: 'forwards' }}>
               Les Cosmétiques Naturels pour <br />
               <span className="italic-serif text-gradient-gold">Magnifier Votre</span> <br />
               <span className="relative inline-block mt-2 md:mt-4">
-                Beauté Originelle
+                Beauté & Bien-être
                 <div className="absolute -bottom-2 md:bottom-[-1rem] left-1/4 right-1/4 h-0.5 md:h-1 bg-gradient-gold opacity-60"></div>
               </span>
             </h1>
             
-            <p className="text-white/80 text-base md:text-2xl font-light mb-6 md:mb-6 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-white/80 text-base md:text-2xl font-light mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed order-3 md:order-2">
               Expertise naturopathe en cosmétiques naturels. Ingrédients africains authentiques. Formules holistiques, résultats visibles.
             </p>
+
+            <p className="text-[#E8C98A] text-[10px] md:text-base font-bold uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 md:mt-16 md:mb-12 drop-shadow-md animate-reveal-up order-1 md:order-3" style={{ animationFillMode: 'forwards' }}>
+              Bienvenue chez Dany Natural Concept | Daniella Adabra, naturopathe
+            </p>
             
-            <div className="flex flex-col md:flex-row gap-3 md:gap-6 justify-center items-center mb-4">
+            <div className="flex flex-col md:flex-row gap-3 md:gap-6 justify-center items-center mb-4 order-4">
               <Link href="/boutique" className="group relative px-8 md:px-10 py-3.5 md:py-6 bg-white text-[#1A1A18] rounded-full font-bold uppercase tracking-widest text-[10px] md:text-xs overflow-hidden transition-all shadow-2xl w-full md:w-auto min-w-[260px]">
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   DÉCOUVRIR NOS PRODUITS <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
@@ -89,19 +99,28 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-[10px] md:text-xs text-white/80 font-bold animate-reveal-up opacity-0" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
-              <span className="flex items-center gap-2 tracking-[0.2em] uppercase">✓ Livraison gratuite dès 50€</span>
-              <span className="flex items-center gap-2 tracking-[0.2em] uppercase">✓ Satisfaction 30 jours</span>
-              <span className="flex items-center gap-2 tracking-[0.2em] uppercase">✓ Support gratuit</span>
-            </div>
           </div>
         </div>
 
-        {/* Vertical Scroll Label */}
-        <div className="absolute right-12 bottom-0 h-40 flex flex-col items-center gap-8 text-white/20">
-          <span className="text-[9px] uppercase tracking-[0.6em] font-black rotate-180 [writing-mode:vertical-lr]">Scroll Down</span>
-          <div className="w-[1px] flex-1 bg-gradient-to-b from-white/20 to-transparent"></div>
+        {/* Bottom Trust Badges */}
+        <div className="absolute bottom-10 left-0 right-0 z-30 px-6">
+          <div className="flex flex-wrap justify-center gap-x-6 md:gap-x-12 gap-y-3 text-[9px] md:text-xs text-white/60 font-bold animate-reveal-up opacity-0" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
+            <span className="flex items-center gap-2 tracking-[0.15em] md:tracking-[0.2em] uppercase">
+              <CheckCircle2 className="w-3 h-3 text-[#C9A96E]" /> 
+              Livraison gratuite dès 50€
+            </span>
+            <span className="flex items-center gap-2 tracking-[0.15em] md:tracking-[0.2em] uppercase">
+              <CheckCircle2 className="w-3 h-3 text-[#C9A96E]" /> 
+              Satisfaction 30 jours
+            </span>
+            <span className="flex items-center gap-2 tracking-[0.15em] md:tracking-[0.2em] uppercase">
+              <CheckCircle2 className="w-3 h-3 text-[#C9A96E]" /> 
+              Support gratuit
+            </span>
+          </div>
         </div>
+
+
       </section>
 
       {/* Marquee Branding - Service Benefits */}
@@ -397,148 +416,187 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Booking Section - Sophisticated Glassmorphism */}
-      <section className="py-16 md:py-32 bg-[#2D4A1E] relative overflow-hidden">
-        {/* Background Texture */}
-        <div className="absolute inset-0 opacity-10 noise-bg"></div>
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white opacity-[0.03] rounded-full blur-[150px]"></div>
+      <section id="reservations" className="py-24 md:py-40 bg-[#1A1A18] relative overflow-hidden">
+        {/* Artistic Background Elements */}
+        <div className="absolute top-0 right-0 w-full h-full pointer-events-none">
+          <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-[#2D4A1E]/20 rounded-full blur-[120px] animate-pulse"></div>
+          <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#C9A96E]/10 rounded-full blur-[100px]"></div>
+          <div className="absolute inset-0 opacity-[0.02] noise-bg"></div>
+        </div>
 
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
-              <div className="lg:col-span-3 text-white flex flex-col items-center text-center lg:items-start lg:text-left">
-                <span className="section-tag text-white/60 mb-6">Naturopathie & Services</span>
-                <h2 className="text-4xl md:text-7xl font-serif mb-10 leading-tight">
-                  Consultation Naturopathe <br /> <span className="italic text-gradient-gold">Holistique</span> Personnalisée
+          <div className="max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-12 gap-16 items-start">
+              
+              {/* Left Column: Info & Selection */}
+              <div className="lg:col-span-5 text-white">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
+                  <Sparkles className="w-4 h-4 text-[#C9A96E]" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Expérience Exclusive</span>
+                </div>
+                
+                <h2 className="text-5xl md:text-8xl font-serif mb-10 leading-[0.9] tracking-tighter">
+                  Prenez <br />
+                  <span className="italic-serif text-gradient-gold">Rendez-vous</span>
                 </h2>
-                <p className="text-xl text-white/70 font-light mb-16 leading-relaxed">
-                  Bénéficiez d'une expertise naturopathique sur-mesure pour rééquilibrer votre métabolisme, votre peau et votre esprit avec notre approche de naturopathie beauté.
+                
+                <p className="text-xl text-white/60 font-light mb-16 leading-relaxed max-w-md">
+                  Un moment suspendu pour harmoniser votre beauté et votre santé intérieure avec l'expertise de Daniella.
                 </p>
 
-                <div className="space-y-8 w-full">
-                  <div className="flex flex-col items-center sm:flex-row gap-6 group cursor-pointer">
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all group-hover:bg-[#C9A96E]">
-                      <Droplets className="w-7 h-7 text-[#C9A96E] group-hover:text-white" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-serif text-white group-hover:text-gold transition-colors">Diagnostic Capillaire</h4>
-                      <p className="text-sm text-white/50">45 minutes — 60.00€</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex flex-col items-center sm:flex-row gap-6 group cursor-pointer">
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all group-hover:bg-[#C9A96E]">
-                      <Sun className="w-7 h-7 text-[#C9A96E] group-hover:text-white" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-serif text-white group-hover:text-gold transition-colors">Diagnostic de Peau</h4>
-                      <p className="text-sm text-white/50">45 minutes — 85.00€</p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-center sm:flex-row gap-6 group cursor-pointer">
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all group-hover:bg-[#C9A96E]">
-                      <Footprints className="w-7 h-7 text-[#C9A96E] group-hover:text-white" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-serif text-white group-hover:text-gold transition-colors">Bilan Naturopathique</h4>
-                      <p className="text-sm text-white/50">1 heure — 50.00€</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-2 w-full">
-                <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-12 shadow-2xl relative overflow-hidden group text-center lg:text-left">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#C9A96E]/20 rounded-full blur-3xl transition-all duration-700 group-hover:bg-[#C9A96E]/40"></div>
-                  
-                  <h3 className="text-3xl font-serif text-white mb-6">Réserver votre séance</h3>
-                  <p className="text-white/60 mb-10 text-sm font-light leading-relaxed">
-                    Choisissez votre créneau préféré et commencez votre voyage vers un bien-être durable.
-                  </p>
-                  
-                  <div className="space-y-4 mb-10">
-                    <div className="flex justify-between py-3 border-b border-white/10">
-                      <span className="text-xs text-white/40 uppercase tracking-widest">Lieu</span>
-                      <span className="text-xs text-white font-bold uppercase tracking-widest">Valenciennes / Visio</span>
-                    </div>
-                    <div className="flex justify-between py-3 border-b border-white/10">
-                      <span className="text-xs text-white/40 uppercase tracking-widest">Expert</span>
-                      <span className="text-xs text-white font-bold uppercase tracking-widest">Daniella Adabra</span>
-                    </div>
-                  </div>
-
-                  {/* Interactive Mini-Calendar */}
-                  <div className="mb-8">
-                    <div className="flex items-center justify-between mb-4 px-2">
-                      <span className="text-[10px] font-bold text-white uppercase tracking-widest">Mai 2026</span>
-                      <div className="flex gap-4">
-                        <button className="text-white/40 hover:text-white transition-colors"><ChevronLeft className="w-3 h-3" /></button>
-                        <button className="text-white/40 hover:text-white transition-colors"><ChevronRight className="w-3 h-3" /></button>
-                      </div>
-                    </div>
-                    
-                    {/* Days Grid */}
-                    <div className="grid grid-cols-7 gap-2 mb-8">
-                      {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(d => (
-                        <span key={d} className="text-[8px] text-white/20 font-bold text-center mb-2">{d}</span>
-                      ))}
-                      {/* Empty cells for padding if needed, assuming month starts on Friday */}
-                      {[...Array(4)].map((_, i) => <div key={`empty-${i}`} />)}
-                      {days.map(day => (
-                        <button
-                          key={day}
-                          onClick={() => setSelectedDate(day)}
-                          className={`aspect-square rounded-full flex items-center justify-center text-[10px] transition-all ${
-                            selectedDate === day 
-                              ? 'bg-[#C9A96E] text-white shadow-lg shadow-[#C9A96E]/20' 
-                              : 'text-white/60 hover:bg-white/10'
-                          }`}
-                        >
-                          {day}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Time Slots (Conditional) */}
-                    {selectedDate && (
-                      <div className="animate-reveal-up">
-                        <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest block mb-4 text-center">Heures disponibles</span>
-                        <div className="flex flex-wrap justify-center gap-3">
-                          {times.map(time => (
-                            <button
-                              key={time}
-                              onClick={() => setSelectedTime(time)}
-                              className={`px-4 py-2 rounded-lg text-[10px] font-bold transition-all border ${
-                                selectedTime === time
-                                  ? 'bg-white text-[#2D4A1E] border-white'
-                                  : 'border-white/10 text-white/60 hover:border-white/30'
-                              }`}
-                            >
-                              {time}
-                            </button>
-                          ))}
+                <div className="space-y-6">
+                  {[
+                    { icon: Droplets, title: "Diagnostic Capillaire", desc: "Analyse profonde & plan de soin", price: "60€", duration: "45 min" },
+                    { icon: Sun, title: "Diagnostic de Peau", desc: "Expertise holistique visage", price: "85€", duration: "45 min" },
+                    { icon: Footprints, title: "Bilan Naturopathique", desc: "Harmonisation globale", price: "50€", duration: "60 min" }
+                  ].map((service, i) => (
+                    <div key={i} className="group relative p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#C9A96E]/30 transition-all duration-500 cursor-pointer">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-6">
+                          <div className="w-12 h-12 rounded-2xl bg-[#C9A96E]/10 flex items-center justify-center group-hover:bg-[#C9A96E] transition-colors duration-500">
+                            <service.icon className="w-5 h-5 text-[#C9A96E] group-hover:text-white" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-serif text-white group-hover:text-[#C9A96E] transition-colors">{service.title}</h4>
+                            <p className="text-xs text-white/40 uppercase tracking-widest">{service.desc}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-lg font-serif text-[#C9A96E]">{service.price}</div>
+                          <div className="text-[10px] text-white/30 uppercase">{service.duration}</div>
                         </div>
                       </div>
-                    )}
-                  </div>
-
-                  <button 
-                    disabled={!selectedDate || !selectedTime}
-                    className={`w-full py-5 text-sm rounded-full font-bold uppercase tracking-widest transition-all duration-500 shadow-xl ${
-                      selectedDate && selectedTime
-                        ? 'bg-[#C9A96E] text-white shadow-[#C9A96E]/20 hover:scale-[1.02]'
-                        : 'bg-white/5 text-white/20 cursor-not-allowed border border-white/5'
-                    }`}
-                  >
-                    {selectedDate && selectedTime ? `Réserver pour le ${selectedDate} Mai à ${selectedTime}` : 'Choisir un créneau'}
-                  </button>
-                  
-                  <p className="mt-8 text-center text-[10px] text-white/30 uppercase tracking-[0.2em]">
-                    Paiement sécurisé par Stripe ou PayPal
-                  </p>
+                    </div>
+                  ))}
                 </div>
               </div>
+
+              {/* Right Column: Premium Calendar */}
+              <div className="lg:col-span-7">
+                <div className="bg-[#242422] rounded-[3.5rem] p-4 md:p-10 border border-white/5 shadow-2xl relative overflow-hidden">
+                  {/* Glassmorphic Header */}
+                  <div className="flex items-center justify-between mb-10 px-4">
+                    <div>
+                      <h3 className="text-2xl font-serif text-white">Disponibilités</h3>
+                      <p className="text-[10px] text-white/40 uppercase tracking-[0.2em] mt-1">Sélectionnez votre créneau</p>
+                    </div>
+                    <div className="flex items-center gap-6 bg-white/5 rounded-full px-6 py-3 border border-white/10">
+                      <button className="text-white/40 hover:text-white transition-colors"><ChevronLeft className="w-4 h-4" /></button>
+                      <span className="text-xs font-bold text-white uppercase tracking-widest min-w-[100px] text-center">Mai 2026</span>
+                      <button className="text-white/40 hover:text-white transition-colors"><ChevronRight className="w-4 h-4" /></button>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-10">
+                    {/* Calendar Grid */}
+                    <div className="bg-white/[0.02] rounded-[2.5rem] p-6 border border-white/5">
+                      <div className="grid grid-cols-7 gap-1 mb-6">
+                        {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(d => (
+                          <span key={d} className="text-[9px] text-white/20 font-bold text-center py-2">{d}</span>
+                        ))}
+                        {[...Array(firstDay)].map((_, i) => <div key={`empty-${i}`} />)}
+                        {daysArray.map(day => (
+                          <button
+                            key={day}
+                            onClick={() => {
+                              setSelectedDate(day);
+                              setSelectedTime(null);
+                            }}
+                            className={`aspect-square rounded-2xl flex flex-col items-center justify-center transition-all duration-300 relative group ${
+                              selectedDate === day 
+                                ? 'bg-[#C9A96E] text-white shadow-xl shadow-[#C9A96E]/20' 
+                                : 'text-white/60 hover:bg-white/5 hover:text-white'
+                            }`}
+                          >
+                            <span className="text-xs font-medium">{day}</span>
+                            {day % 7 === 0 && selectedDate !== day && (
+                              <span className="absolute bottom-1.5 w-1 h-1 bg-[#C9A96E] rounded-full group-hover:bg-white"></span>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                      
+                      <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-[#C9A96E]"></div>
+                          <span className="text-[9px] text-white/40 uppercase tracking-widest">Disponible</span>
+                        </div>
+                        <span className="text-[9px] text-white/40 uppercase tracking-widest italic">Fuseau : Europe/Paris</span>
+                      </div>
+                    </div>
+
+                    {/* Time Selection */}
+                    <div className="flex flex-col">
+                      {!selectedDate ? (
+                        <div className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-white/[0.02] rounded-[2.5rem] border border-dashed border-white/10">
+                          <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6">
+                            <Sun className="w-8 h-8 text-white/10" />
+                          </div>
+                          <p className="text-sm text-white/40 font-light">Veuillez d'abord sélectionner <br /> une date sur le calendrier</p>
+                        </div>
+                      ) : (
+                        <div className="space-y-8 animate-reveal-up">
+                          <div>
+                            <span className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-widest block mb-5">Matinée</span>
+                            <div className="grid grid-cols-2 gap-3">
+                              {times.matin.map(time => (
+                                <button
+                                  key={time}
+                                  onClick={() => setSelectedTime(time)}
+                                  className={`py-4 rounded-2xl text-xs font-bold transition-all border ${
+                                    selectedTime === time
+                                      ? 'bg-white text-[#1A1A18] border-white shadow-xl'
+                                      : 'bg-white/5 border-white/5 text-white/60 hover:border-white/20'
+                                  }`}
+                                >
+                                  {time}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          <div>
+                            <span className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-widest block mb-5">Après-midi</span>
+                            <div className="grid grid-cols-2 gap-3">
+                              {times.apresMidi.map(time => (
+                                <button
+                                  key={time}
+                                  onClick={() => setSelectedTime(time)}
+                                  className={`py-4 rounded-2xl text-xs font-bold transition-all border ${
+                                    selectedTime === time
+                                      ? 'bg-white text-[#1A1A18] border-white shadow-xl'
+                                      : 'bg-white/5 border-white/5 text-white/60 hover:border-white/20'
+                                  }`}
+                                >
+                                  {time}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="mt-auto pt-10">
+                        <button 
+                          disabled={!selectedDate || !selectedTime}
+                          className={`w-full py-6 rounded-2xl font-bold uppercase tracking-widest transition-all duration-700 flex items-center justify-center gap-3 group relative overflow-hidden ${
+                            selectedDate && selectedTime
+                              ? 'bg-[#C9A96E] text-white shadow-2xl shadow-[#C9A96E]/40 hover:translate-y-[-2px]'
+                              : 'bg-white/5 text-white/20 cursor-not-allowed border border-white/5'
+                          }`}
+                        >
+                          <span className="relative z-10">
+                            {selectedDate && selectedTime ? 'Confirmer la Réservation' : 'Sélectionner un créneau'}
+                          </span>
+                          {selectedDate && selectedTime && <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />}
+                          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
